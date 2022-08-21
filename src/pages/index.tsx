@@ -1,9 +1,6 @@
-import type { NextPageWithLayout } from 'next'
-import { Layout } from '@/layouts/Layout'
-import { HomePage } from '@/pages/Home'
+import type { NextPage } from 'next'
+import { WorksPage } from './works/WorksPage'
 
-const Home: NextPageWithLayout = () => <HomePage />
-
-Home.getLayout = (page) => <Layout>{page}</Layout>
+const Home: NextPage = () => <WorksPage />
 
 export default Home
