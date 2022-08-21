@@ -1,0 +1,23 @@
+import { fetchPosts } from './fetchPosts'
+import { Work } from '@/types/Work'
+
+const fetchWorks = async (tagID = '') => {
+  const apiUrl =
+    'https://ryotanakahara.jp/sys/?rest_route=/wp/v2/posts' + (tagID !== '' ? '?tags=' + tagID : '')
+  try {
+    const data = await fetchPosts(apiUrl)
+    // startMonthが新しい順に並び替え
+    const alignedData = data.sort((a: Work, b: Work) => {
+      if (a.ACF.work_start_month > b.ACF.work_start_month) {
+        return -1
+      } else {
+        return 1
+      }
+    })
+    return alignedData
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export { fetchWorks }

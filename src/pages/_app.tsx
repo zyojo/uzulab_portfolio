@@ -3,12 +3,13 @@ import '@/styles/globals.scss'
 import { useEffect, useState } from 'react'
 import { AppContext } from '@/contexts/AppContext'
 import { BaseLayout } from '@/layouts/Base/Base'
-import { DUMMY_WORKS, EMPTY_WORKS } from '@/lib/stub/dummyWorks'
+import { EMPTY_WORKS } from '@/lib/stub/dummyWorks'
+import { fetchWorks } from '@/repositories/fetchWorks'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [works, setWorks] = useState(EMPTY_WORKS)
-  const handleWorks = () => {
-    setWorks(DUMMY_WORKS)
+  const handleWorks = async () => {
+    setWorks(await fetchWorks())
   }
   useEffect(() => {
     handleWorks()
