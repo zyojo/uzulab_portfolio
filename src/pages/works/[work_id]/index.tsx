@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from 'next'
 import { useContext } from 'react'
-import { WorkPage } from './WorkPage'
+import WorkPage from './WorkPage'
 import { AppContext } from '@/contexts/AppContext'
 
 const Index: NextPageWithLayout = () => {

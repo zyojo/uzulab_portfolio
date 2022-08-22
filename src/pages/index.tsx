@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { WorksPage } from './works/WorksPage'
+import WorksPage from './works/WorksPage'
 
 const Home: NextPage = () => <WorksPage />
 

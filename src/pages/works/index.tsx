@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from 'next'
-import { WorksPage } from './WorksPage'
+import WorksPage from './WorksPage'
 
 const Index: NextPageWithLayout = () => <WorksPage />
 

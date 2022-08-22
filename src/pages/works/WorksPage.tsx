@@ -1,2 +1,4 @@
 import type { NextPageWithLayout } from 'next'
-export const WorksPage: NextPageWithLayout = () => <>test</>
+const WorksPage: NextPageWithLayout = () => <>test</>
+
+export default WorksPage

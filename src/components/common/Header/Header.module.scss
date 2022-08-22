@@ -1,0 +1,31 @@
+.header {
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 56px 0 48px;
+  position: fixed;
+  top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  &_logo {
+    height: 60px;
+    width: 60px;
+    position: relative;
+  }
+  &_links {
+    display: flex;
+    align-items: center;
+    &_link {
+      font-size: 14px;
+      margin-left: 16px;
+      &:last-of-type {
+        display: inline-block;
+        width: 21px;
+        height: 16px;
+        position: relative;
+      }
+    }
+  }
+}

@@ -6,7 +6,9 @@ type Props = {
   works: Work[]
 }
 
-export const WorkPage = (props: Props) => {
+const WorkPage = (props: Props) => {
   const { works } = useContext(AppContext)
   return <>{works && works.map((item, index) => <div key={index}>{item.title.rendered}</div>)}</>
 }
+
+export default WorkPage
