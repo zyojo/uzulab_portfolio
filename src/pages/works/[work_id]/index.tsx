@@ -5,7 +5,7 @@ import { AppContext } from '@/contexts/AppContext'
 
 const Index: NextPageWithLayout = () => {
   const { works } = useContext(AppContext)
-  return <WorkPage works={works} />
+  return <WorkPage />
 }
 
 export default Index

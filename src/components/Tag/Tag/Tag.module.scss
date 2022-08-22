@@ -1,0 +1,13 @@
+@import './../../../styles/variables';
+
+.tag {
+  font-size: 14px;
+  padding: 4px 16px;
+  background-color: $theme-white;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  &[data-selected='false'] {
+    background-color: transparent;
+  }
+}

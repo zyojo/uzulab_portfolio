@@ -1,5 +1,5 @@
 import { fetchPosts } from './fetchPosts'
-import { Work } from '@/types/Work'
+import { WorkType } from '@/types/Work'
 
 const fetchWorks = async (tagID = '') => {
   const apiUrl =
@@ -7,7 +7,7 @@ const fetchWorks = async (tagID = '') => {
   try {
     const data = await fetchPosts(apiUrl)
     // startMonthが新しい順に並び替え
-    const alignedData = data.sort((a: Work, b: Work) => {
+    const alignedData = data.sort((a: WorkType, b: WorkType) => {
       if (a.ACF.work_start_month > b.ACF.work_start_month) {
         return -1
       } else {

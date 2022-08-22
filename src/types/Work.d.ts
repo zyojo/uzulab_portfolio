@@ -1,4 +1,4 @@
-export type Work = {
+export type WorkType = {
   id: number
   date: string
   date_gmt: string
