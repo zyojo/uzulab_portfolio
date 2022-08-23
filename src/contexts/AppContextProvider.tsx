@@ -1,7 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react'
 import { AppContext } from './AppContext'
+import { DUMMY_TAGS, EMPTY_TAGS } from '@/lib/stub/dummyTags'
 import { DUMMY_WORKS, EMPTY_WORKS } from '@/lib/stub/dummyWorks'
-import { Work } from '@/types/Work'
+import { WorkType } from '@/types/Work'
 
 type Props = {
   children: ReactNode
@@ -9,13 +10,18 @@ type Props = {
 
 export const AppContextProvider = ({ children }: Props) => {
   const [works, setWorks] = useState(EMPTY_WORKS)
+  const [tags, setTags] = useState(EMPTY_TAGS)
   const handleWorks = () => {
-    console.log('set')
     setWorks(DUMMY_WORKS)
+  }
+  const handleTags = () => {
+    setTags(DUMMY_TAGS)
   }
   return (
     <>
-      <AppContext.Provider value={{ works, handleWorks }}>{children}</AppContext.Provider>
+      <AppContext.Provider value={{ works, handleWorks, tags, handleTags }}>
+        {children}
+      </AppContext.Provider>
     </>
   )
 }
