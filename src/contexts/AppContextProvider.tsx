@@ -2,7 +2,6 @@ import { ReactNode, useEffect, useState } from 'react'
 import { AppContext } from './AppContext'
 import { DUMMY_TAGS, EMPTY_TAGS } from '@/lib/stub/dummyTags'
 import { DUMMY_WORKS, EMPTY_WORKS } from '@/lib/stub/dummyWorks'
-import { WorkType } from '@/types/Work'
 
 type Props = {
   children: ReactNode

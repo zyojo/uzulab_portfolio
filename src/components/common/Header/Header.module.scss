@@ -1,3 +1,5 @@
+@import './../../../styles/variables';
+
 .header {
   width: 100%;
   left: 50%;
@@ -19,13 +21,29 @@
     display: flex;
     align-items: center;
     &_link {
+      position: relative;
       font-size: 14px;
       margin-left: 16px;
+      &[data-here='true']::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 24px;
+        height: 1px;
+        background-color: $text-black;
+        border-radius: 99px;
+      }
       &:last-of-type {
         display: inline-block;
         width: 21px;
         height: 16px;
         position: relative;
+        margin-left: 20px;
+        &[data-here='true']::after {
+          bottom: -8px;
+        }
       }
     }
   }
