@@ -23,13 +23,16 @@ body {
   color: $text-black;
   font-family: '游ゴシック体', YuGothic, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック',
     'Yu Gothic', sans-serif;
+  font-size: 14px;
+  line-height: 2;
   position: relative;
 }
 html {
   background-color: #faf7f5;
 }
 body {
-  max-width: 900px;
+  max-width: 1022px;
+  padding: 0 32px;
   margin: calc(24px + 60px) auto 0;
   position: relative;
   &::after {

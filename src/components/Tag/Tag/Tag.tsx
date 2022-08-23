@@ -4,7 +4,8 @@ import { SimpleTagType, TagType } from '@/types/Tag'
 type Prop = {
   isAll?: boolean
   tag: TagType | SimpleTagType
-  isSelected: boolean
+  isSelectedStyle: boolean
+  isLabelStyle?: boolean
   handleSelectedID?: (selectedTagID: number) => void
 }
 
@@ -13,8 +14,9 @@ export const Tag = (props: Prop) => {
     <>
       {
         <div
-          className={styles.tag + ' avenir'}
-          data-selected={props.isSelected}
+          className={styles.tag + (props.isLabelStyle ? ' avenir-bold' : ' avenir')}
+          data-selected={props.isSelectedStyle}
+          data-label={props.isLabelStyle}
           onClick={() => {
             const tagID = props.tag.id
             props.handleSelectedID !== undefined && props.handleSelectedID(tagID)

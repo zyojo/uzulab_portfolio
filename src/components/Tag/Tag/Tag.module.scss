@@ -10,4 +10,10 @@
   &[data-selected='false'] {
     background-color: transparent;
   }
+  &[data-label='true'] {
+    font-size: 12px;
+    padding: 2px 12px;
+    margin-left: 8px;
+    background-color: rgba($theme-white, 0.6);
+  }
 }

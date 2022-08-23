@@ -1,0 +1,23 @@
+@import './../../../styles/variables';
+
+.contactLink {
+  display: flex;
+  justify-content: space-between;
+  width: columnWidth(7);
+  padding: 48px 64px 56px;
+  margin-top: 240px;
+  border-radius: $br-md;
+  background-color: rgba(#ded7cf, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+  &_title {
+    font-size: 16px;
+  }
+  &_desc {
+    margin-top: 64px;
+    font-size: 16px;
+  }
+  &:hover {
+    background-color: rgba(#ded7cf, 0.4);
+  }
+}

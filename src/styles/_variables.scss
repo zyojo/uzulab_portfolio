@@ -3,6 +3,16 @@ $text-black: #1d1c1c;
 $border-theme: #ede5e2;
 $theme-white: #fff;
 
+// border-radius
+$br-lg: 24px;
+$br-md: 16px;
+$br-sm: 9px;
+
 // break-point
 $bp-lg: 768px;
 $bp-sm: 450px;
+
+// column-width
+@function columnWidth($columns) {
+  @return calc((100% - (16px * 11)) / 12 * $columns + 16px * ($columns - 1));
+}
