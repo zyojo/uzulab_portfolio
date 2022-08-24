@@ -19,7 +19,7 @@
   &_info {
     flex-grow: 1;
     &_title {
-      font-size: 20px;
+      font-size: 18px;
       margin: 32px 32px 24px auto;
       text-align: right;
     }
@@ -32,7 +32,7 @@
         content: '';
         display: block;
         height: 1px;
-        width: 40%;
+        width: 30%;
         background-color: $theme-gray;
         border-radius: 99px;
         position: absolute;
@@ -40,7 +40,7 @@
         right: unset;
         top: 50%;
         transform: translateY(-50%);
-        transition: width 0.5s ease-out;
+        transition: width 0.3s ease-in-out;
       }
     }
   }
@@ -71,7 +71,7 @@
     .nextWorkLink {
       &_info {
         &_arrow::after {
-          width: calc(40% + 10px);
+          width: calc(50%);
         }
       }
     }
