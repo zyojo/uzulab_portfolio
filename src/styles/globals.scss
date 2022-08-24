@@ -31,7 +31,7 @@ html {
   background-color: #faf7f5;
 }
 body {
-  max-width: 1022px;
+  max-width: #{map-get($body-maxWidth, 'dt')};
   padding: 0 32px;
   margin: calc(24px + 60px) auto 0;
   position: relative;

@@ -12,7 +12,6 @@ export const WorkList = (props: Prop) => {
     <ul className={styles.workList}>
       {props.works &&
         props.works.map((item, index) => {
-          console.log()
           return (
             (props.selectedTagID == 0 || item.tags.includes(props.selectedTagID)) && (
               <Work work={item} key={index} />

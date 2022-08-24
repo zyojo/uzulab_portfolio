@@ -1,11 +1,82 @@
 export const DUMMY_WORKS = [
   {
+    id: 236,
+    date: '2022-08-22T23:04:47',
+    date_gmt: '2022-08-22T14:04:47',
+    guid: { rendered: 'https://ryotanakahara.jp/sys/?p=236' },
+    modified: '2022-08-23T14:47:19',
+    modified_gmt: '2022-08-23T05:47:19',
+    slug: 'million-mall',
+    status: 'publish',
+    type: 'post',
+    link: 'https://ryotanakahara.jp/sys/archives/236',
+    title: { rendered: 'Million Mall' },
+    content: { rendered: '', protected: false },
+    excerpt: { rendered: '', protected: false },
+    author: 1,
+    featured_media: 0,
+    comment_status: 'open',
+    ping_status: 'open',
+    sticky: false,
+    template: '',
+    format: 'standard',
+    meta: [],
+    categories: [1],
+    tags: [12],
+    acf: [],
+    ACF: {
+      work_summary_list:
+        '\u81ea\u793e\u88fd\u54c1\u306e\u8ca9\u58f2\u304b\u3089WEB\u5e83\u544a\u306e\u51fa\u7a3f\u307e\u3067\u3092\u4e00\u8cab\u3057\u3066\u884c\u3048\u308b\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u306eUI\u30c7\u30b6\u30a4\u30f3\u30fb\u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u5b9f\u88c5',
+      work_summary_top:
+        '\u81ea\u793e\u88fd\u54c1\u306e\u8ca9\u58f2\u304b\u3089WEB\u5e83\u544a\u306e\u51fa\u7a3f\u307e\u3067\u3092\u4e00\u8cab\u3057\u3066\u884c\u3048\u308b\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u306eUI\u30c7\u30b6\u30a4\u30f3\u30fb\u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u5b9f\u88c5',
+      work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2022/08/millionmall.jpg',
+      work_start_month: '2021/10',
+      work_end_month: '2022/03',
+      work_responsibility: '',
+      work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
+    },
+    tag_name: ['web'],
+    _links: {
+      self: [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/236' }],
+      collection: [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts' }],
+      about: [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/types/post' }],
+      author: [{ embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/users/1' }],
+      replies: [
+        { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=236' },
+      ],
+      'version-history': [
+        { count: 3, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/236/revisions' },
+      ],
+      'predecessor-version': [
+        { id: 246, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/236/revisions/246' },
+      ],
+      'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=236' }],
+      'wp:term': [
+        {
+          taxonomy: 'category',
+          embeddable: true,
+          href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/categories?post=236',
+        },
+        {
+          taxonomy: 'post_tag',
+          embeddable: true,
+          href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/tags?post=236',
+        },
+      ],
+      curies: [{ name: 'wp', href: 'https://api.w.org/{rel}', templated: true }],
+    },
+  },
+  {
     id: 223,
     date: '2022-08-20T10:47:37',
     date_gmt: '2022-08-20T01:47:37',
     guid: { rendered: 'https://ryotanakahara.jp/sys/?p=223' },
-    modified: '2022-08-20T10:48:59',
-    modified_gmt: '2022-08-20T01:48:59',
+    modified: '2022-08-23T14:47:31',
+    modified_gmt: '2022-08-23T05:47:31',
     slug: 'agrifarm',
     status: 'publish',
     type: 'post',
@@ -25,12 +96,19 @@ export const DUMMY_WORKS = [
     tags: [12],
     acf: [],
     ACF: {
-      work_summary: 'test',
+      work_summary_list:
+        '\u30db\u30fc\u30ea\u30fc\u30d0\u30b8\u30eb\u3092\u683d\u57f9\u30fb\u8ca9\u58f2\u3059\u308b\u5948\u826f\u306e\u8fb2\u5bb6\u306e\u7d39\u4ecb\u30fbEC\u30b5\u30a4\u30c8\u306eUI\u30c7\u30b6\u30a4\u30f3\u3068ECCUBE4\u3092\u5c0e\u5165\u3057\u305f\u5b9f\u88c5',
+      work_summary_top:
+        '\u30db\u30fc\u30ea\u30fc\u30d0\u30b8\u30eb\u3092\u683d\u57f9\u30fb\u8ca9\u58f2\u3059\u308b\u5948\u826f\u306e\u8fb2\u5bb6\u306e\u7d39\u4ecb\u30fbEC\u30b5\u30a4\u30c8\u306eUI\u30c7\u30b6\u30a4\u30f3\u3068ECCUBE4\u3092\u5c0e\u5165\u3057\u305f\u5b9f\u88c5',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2022/08/agrifarm.jpg',
       work_start_month: '2020/11',
       work_end_month: '2021/03',
-      work_application: '',
+      work_responsibility: '',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['web'],
     _links: {
@@ -42,10 +120,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=223' },
       ],
       'version-history': [
-        { count: 2, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/223/revisions' },
+        { count: 4, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/223/revisions' },
       ],
       'predecessor-version': [
-        { id: 226, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/223/revisions/226' },
+        { id: 247, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/223/revisions/247' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=223' }],
       'wp:term': [
@@ -68,8 +146,8 @@ export const DUMMY_WORKS = [
     date: '2022-08-20T10:39:13',
     date_gmt: '2022-08-20T01:39:13',
     guid: { rendered: 'https://ryotanakahara.jp/sys/?p=213' },
-    modified: '2022-08-20T10:48:42',
-    modified_gmt: '2022-08-20T01:48:42',
+    modified: '2022-08-23T14:47:46',
+    modified_gmt: '2022-08-23T05:47:46',
     slug: 'uzulab-portfolio',
     status: 'publish',
     type: 'post',
@@ -89,12 +167,19 @@ export const DUMMY_WORKS = [
     tags: [5, 12],
     acf: [],
     ACF: {
-      work_summary: 'test',
+      work_summary_list:
+        '\u672c\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa\u30b5\u30a4\u30c8\u306e\u30c7\u30b6\u30a4\u30f3\u3068\u5b9f\u88c5',
+      work_summary_top:
+        '\u672c\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa\u30b5\u30a4\u30c8\u306e\u30c7\u30b6\u30a4\u30f3\u3068\u5b9f\u88c5',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2022/08/uzulab.jpg',
       work_start_month: '2022/07',
       work_end_month: '2022/08',
-      work_application: '',
+      work_responsibility: '',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['logo', 'web'],
     _links: {
@@ -106,10 +191,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=213' },
       ],
       'version-history': [
-        { count: 2, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/213/revisions' },
+        { count: 4, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/213/revisions' },
       ],
       'predecessor-version': [
-        { id: 216, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/213/revisions/216' },
+        { id: 248, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/213/revisions/248' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=213' }],
       'wp:term': [
@@ -132,8 +217,8 @@ export const DUMMY_WORKS = [
     date: '2021-08-26T19:48:48',
     date_gmt: '2021-08-26T10:48:48',
     guid: { rendered: 'https://ryotanakahara.jp/?p=107' },
-    modified: '2022-08-20T10:49:28',
-    modified_gmt: '2022-08-20T01:49:28',
+    modified: '2022-08-23T14:30:03',
+    modified_gmt: '2022-08-23T05:30:03',
     slug: 'logomark-of-danish-farm',
     status: 'publish',
     type: 'post',
@@ -161,14 +246,20 @@ export const DUMMY_WORKS = [
     tags: [5],
     acf: [],
     ACF: {
-      work_summary:
-        '\u30c7\u30f3\u30de\u30fc\u30af\u306eRingsted\u306b\u3042\u308b\u6b74\u53f2\u3042\u308b\u8fb2\u5bb6Havreholmg\u00e5rd\u306e\u30ed\u30b4\u30de\u30fc\u30af',
+      work_summary_list:
+        '\u30c7\u30f3\u30de\u30fc\u30af\u30fbRingsted\u306e\u6b74\u53f2\u7684\u5efa\u9020\u7269\u306e\u4fdd\u5b58\u3068\u4fee\u5fa9\u306b\u53d6\u308a\u7d44\u3080\u8fb2\u5bb6\u306e\u30ed\u30b4\u30de\u30fc\u30af',
+      work_summary_top:
+        '\u30c7\u30f3\u30de\u30fc\u30af\u30fbRingsted\u306e\u6b74\u53f2\u7684\u5efa\u9020\u7269\u306e\u4fdd\u5b58\u3068\u4fee\u5fa9\u306b\u53d6\u308a\u7d44\u3080\u8fb2\u5bb6\u306e\u30ed\u30b4\u30de\u30fc\u30af',
       work_start_month: '2019/03',
       work_end_month: '2019/03',
-      work_application: '',
+      work_responsibility: '',
       work_order: '1',
       work_img:
         'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/havreholmgaardLogo-scaled.jpg',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['logo'],
     _links: {
@@ -180,10 +271,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=107' },
       ],
       'version-history': [
-        { count: 22, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/107/revisions' },
+        { count: 24, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/107/revisions' },
       ],
       'predecessor-version': [
-        { id: 229, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/107/revisions/229' },
+        { id: 245, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/107/revisions/245' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=107' }],
       'wp:term': [
@@ -206,8 +297,8 @@ export const DUMMY_WORKS = [
     date: '2021-08-26T17:05:04',
     date_gmt: '2021-08-26T08:05:04',
     guid: { rendered: 'https://ryotanakahara.jp/?p=96' },
-    modified: '2022-08-20T10:49:15',
-    modified_gmt: '2022-08-20T01:49:15',
+    modified: '2022-08-23T14:48:13',
+    modified_gmt: '2022-08-23T05:48:13',
     slug: 'shuncan',
     status: 'publish',
     type: 'post',
@@ -235,13 +326,19 @@ export const DUMMY_WORKS = [
     tags: [5, 12],
     acf: [],
     ACF: {
-      work_summary:
+      work_summary_list:
+        '\u63a8\u3057\u306eyoutube\u52d5\u753b\u306e\u30b9\u30ad\u306a\u30b7\u30fc\u30f3\u3092\u7c21\u5358\u306b\u5207\u308a\u629c\u3044\u3066\u52d5\u753b\u3092\u4f5c\u6210\u3057\u3001\u9b45\u529b\u3092\u5171\u6709\u3067\u304d\u308b\u30b5\u30fc\u30d3\u30b9',
+      work_summary_top:
         '\u63a8\u3057\u306eyoutube\u52d5\u753b\u306e\u30b9\u30ad\u306a\u30b7\u30fc\u30f3\u3092\u7c21\u5358\u306b\u5207\u308a\u629c\u3044\u3066\u52d5\u753b\u3092\u4f5c\u6210\u3057\u3001\u9b45\u529b\u3092\u5171\u6709\u3067\u304d\u308b\u30b5\u30fc\u30d3\u30b9',
       work_start_month: '2021/01',
       work_end_month: '2021/04',
-      work_application: '',
+      work_responsibility: '',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/shuncan.jpg',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['logo', 'web'],
     _links: {
@@ -253,10 +350,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=96' },
       ],
       'version-history': [
-        { count: 13, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/96/revisions' },
+        { count: 14, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/96/revisions' },
       ],
       'predecessor-version': [
-        { id: 220, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/96/revisions/220' },
+        { id: 249, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/96/revisions/249' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=96' }],
       'wp:term': [
@@ -279,8 +376,8 @@ export const DUMMY_WORKS = [
     date: '2021-08-25T15:01:18',
     date_gmt: '2021-08-25T06:01:18',
     guid: { rendered: 'https://ryotanakahara.jp/?p=87' },
-    modified: '2022-08-20T10:49:42',
-    modified_gmt: '2022-08-20T01:49:42',
+    modified: '2022-08-23T14:48:24',
+    modified_gmt: '2022-08-23T05:48:24',
     slug: '%e3%81%9d%e3%81%ae%e4%bb%96%e3%81%ae%e3%83%ad%e3%82%b4',
     status: 'publish',
     type: 'post',
@@ -308,12 +405,17 @@ export const DUMMY_WORKS = [
     tags: [5],
     acf: [],
     ACF: {
-      work_summary: '\u305d\u306e\u4ed6\u306b\u88fd\u4f5c\u3057\u305f\u30ed\u30b4',
+      work_summary_list: '\u305d\u306e\u4ed6\u306b\u88fd\u4f5c\u3057\u305f\u30ed\u30b4',
+      work_summary_top: '\u305d\u306e\u4ed6\u306b\u88fd\u4f5c\u3057\u305f\u30ed\u30b4',
       work_start_month: '2016/11',
       work_end_month: '2016/11',
-      work_application: '',
+      work_responsibility: '',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/actinsecret.jpg',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['logo'],
     _links: {
@@ -325,10 +427,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=87' },
       ],
       'version-history': [
-        { count: 21, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/87/revisions' },
+        { count: 22, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/87/revisions' },
       ],
       'predecessor-version': [
-        { id: 230, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/87/revisions/230' },
+        { id: 250, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/87/revisions/250' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=87' }],
       'wp:term': [
@@ -351,8 +453,8 @@ export const DUMMY_WORKS = [
     date: '2021-08-19T20:40:32',
     date_gmt: '2021-08-19T11:40:32',
     guid: { rendered: 'https://ryotanakahara.jp/?p=71' },
-    modified: '2022-08-20T10:50:21',
-    modified_gmt: '2022-08-20T01:50:21',
+    modified: '2022-08-23T14:48:41',
+    modified_gmt: '2022-08-23T05:48:41',
     slug: 'timepack',
     status: 'publish',
     type: 'post',
@@ -380,14 +482,20 @@ export const DUMMY_WORKS = [
     tags: [13, 5],
     acf: [],
     ACF: {
-      work_summary:
+      work_summary_list:
+        '\u30ab\u30ec\u30f3\u30c0\u30fc\u30a2\u30d7\u30ea\u3068\u9023\u643a\u3057\u3001\u30c1\u30fc\u30e0\u30e1\u30f3\u30d0\u30fc\u5168\u54e1\u306e\u7a7a\u3044\u3066\u3044\u308b\u6642\u9593\u3092\u62bd\u51fa\u3057\u3066\u3042\u3063\u3068\u3044\u3046\u9593\u306b\u30df\u30fc\u30c6\u30a3\u30f3\u30b0\u3092\u8abf\u6574\u3067\u304d\u308b\u30a2\u30d7\u30ea',
+      work_summary_top:
         '\u30ab\u30ec\u30f3\u30c0\u30fc\u30a2\u30d7\u30ea\u3068\u9023\u643a\u3057\u3001\u30c1\u30fc\u30e0\u30e1\u30f3\u30d0\u30fc\u5168\u54e1\u306e\u7a7a\u3044\u3066\u3044\u308b\u6642\u9593\u3092\u62bd\u51fa\u3057\u3066\u3042\u3063\u3068\u3044\u3046\u9593\u306b\u30df\u30fc\u30c6\u30a3\u30f3\u30b0\u3092\u8abf\u6574\u3067\u304d\u308b\u30a2\u30d7\u30ea',
       work_start_month: '2018/09',
       work_end_month: '2019/01',
-      work_application:
+      work_responsibility:
         '\u62c5\u5f53\u7b87\u6240<br />\r\n\u30ec\u30a4\u30a2\u30a6\u30c8\u8a2d\u8a08(70%) \u30d3\u30b8\u30e5\u30a2\u30eb\u30c7\u30b6\u30a4\u30f3(100%) \u30ed\u30b4\u30c7\u30b6\u30a4\u30f3(100%) \u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u958b\u767a(5%)',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/timepack.jpg',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['app', 'logo'],
     _links: {
@@ -399,10 +507,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=71' },
       ],
       'version-history': [
-        { count: 12, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/71/revisions' },
+        { count: 13, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/71/revisions' },
       ],
       'predecessor-version': [
-        { id: 228, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/71/revisions/228' },
+        { id: 251, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/71/revisions/251' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=71' }],
       'wp:term': [
@@ -425,8 +533,8 @@ export const DUMMY_WORKS = [
     date: '2020-11-27T18:33:26',
     date_gmt: '2020-11-27T09:33:26',
     guid: { rendered: 'https://ryotanakahara.jp/?p=53' },
-    modified: '2022-08-20T14:42:33',
-    modified_gmt: '2022-08-20T05:42:33',
+    modified: '2022-08-23T14:50:56',
+    modified_gmt: '2022-08-23T05:50:56',
     slug: 'obeca-app-ui-logo',
     status: 'publish',
     type: 'post',
@@ -456,12 +564,18 @@ export const DUMMY_WORKS = [
     ACF: {
       work_start_month: '2018/04',
       work_end_month: '2018/07',
-      work_application:
+      work_responsibility:
         '\u62c5\u5f53\u7b87\u6240<br />\r\n\u30ec\u30a4\u30a2\u30a6\u30c8\u8a2d\u8a08(30%) \u30d3\u30b8\u30e5\u30a2\u30eb\u30c7\u30b6\u30a4\u30f3(100%) \u30ed\u30b4\u30c7\u30b6\u30a4\u30f3(100%) \u6620\u50cf\u5236\u4f5c(100%)',
-      work_summary:
+      work_summary_list:
+        '\u30a2\u30f3\u30b1\u30fc\u30c8\u306e\u56de\u7b54\u3084\u5b9f\u751f\u6d3b\u306e\u4e2d\u3067\u306e\u30bf\u30b9\u30af\u3092\u3053\u306a\u3059\u3068\u3001Amazon\u30dd\u30a4\u30f3\u30c8\u306a\u3069\u306b\u4ea4\u63db\u53ef\u80fd\u306a\u30dd\u30a4\u30f3\u30c8\u304c\u3082\u3089\u3048\u308b\u304a\u3053\u3065\u304b\u3044\u30a2\u30d7\u30ea',
+      work_summary_top:
         '\u30a2\u30f3\u30b1\u30fc\u30c8\u306e\u56de\u7b54\u3084\u5b9f\u751f\u6d3b\u306e\u4e2d\u3067\u306e\u30bf\u30b9\u30af\u3092\u3053\u306a\u3059\u3068\u3001Amazon\u30dd\u30a4\u30f3\u30c8\u306a\u3069\u306b\u4ea4\u63db\u53ef\u80fd\u306a\u30dd\u30a4\u30f3\u30c8\u304c\u3082\u3089\u3048\u308b\u304a\u3053\u3065\u304b\u3044\u30a2\u30d7\u30ea',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2020/11/obeca.jpg',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['logo', 'video'],
     _links: {
@@ -473,10 +587,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=53' },
       ],
       'version-history': [
-        { count: 31, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/53/revisions' },
+        { count: 32, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/53/revisions' },
       ],
       'predecessor-version': [
-        { id: 232, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/53/revisions/232' },
+        { id: 252, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/53/revisions/252' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=53' }],
       'wp:term': [
@@ -499,8 +613,8 @@ export const DUMMY_WORKS = [
     date: '2018-12-13T00:16:41',
     date_gmt: '2018-12-12T15:16:41',
     guid: { rendered: 'http://ryotanakahara.jp/?p=1' },
-    modified: '2022-08-20T14:42:53',
-    modified_gmt: '2022-08-20T05:42:53',
+    modified: '2022-08-23T14:51:32',
+    modified_gmt: '2022-08-23T05:51:32',
     slug: 'hello-world',
     status: 'publish',
     type: 'post',
@@ -530,12 +644,18 @@ export const DUMMY_WORKS = [
     ACF: {
       work_start_month: '2016/12',
       work_end_month: '2016/12',
-      work_application:
+      work_responsibility:
         '\u500b\u4eba\u5236\u4f5c<br />\r\n\u30b5\u30f3\u30b9\u30bf\u30fc\u6587\u5177\u4e3b\u50ac\u30fb\u6587\u623f\u5177\u30a2\u30a4\u30c7\u30a2\u30b3\u30f3\u30c6\u30b9\u30c8\u5fdc\u52df\u4f5c\u54c1',
-      work_summary:
+      work_summary_list:
+        '\u76f4\u63a5\u306e\u66f8\u304d\u8fbc\u307f\u306f\u3057\u305f\u304f\u306a\u3044\u304c\u3001\u672c\u3092\u8aad\u3093\u3067\u3044\u308b\u3068\u304d\u306b\u611f\u3058\u305f\u3053\u3068\u3092\u8a18\u9332\u3057\u3066\u304a\u304d\u305f\u3044\u3053\u3068\u3092\u6587\u7ae0\u306e\u4e0a\u306b\u8a18\u9332\u3059\u308b\u4ed8\u7b8b',
+      work_summary_top:
         '\u76f4\u63a5\u306e\u66f8\u304d\u8fbc\u307f\u306f\u3057\u305f\u304f\u306a\u3044\u304c\u3001\u672c\u3092\u8aad\u3093\u3067\u3044\u308b\u3068\u304d\u306b\u611f\u3058\u305f\u3053\u3068\u3092\u8a18\u9332\u3057\u3066\u304a\u304d\u305f\u3044\u3053\u3068\u3092\u6587\u7ae0\u306e\u4e0a\u306b\u8a18\u9332\u3059\u308b\u4ed8\u7b8b',
       work_img: 'https://ryotanakahara.jp/sys/wp-content/uploads/2018/12/roku1.jpg',
       work_order: '',
+      work_header_pc:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30b0\u30eb\u30fc\u30d7-318.jpg',
+      work_header_sp:
+        'https://ryotanakahara.jp/sys/wp-content/uploads/2021/08/\u30af\u3099\u30eb\u30fc\u30d5\u309a-320.jpg',
     },
     tag_name: ['product'],
     _links: {
@@ -547,10 +667,10 @@ export const DUMMY_WORKS = [
         { embeddable: true, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/comments?post=1' },
       ],
       'version-history': [
-        { count: 19, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/1/revisions' },
+        { count: 21, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/1/revisions' },
       ],
       'predecessor-version': [
-        { id: 233, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/1/revisions/233' },
+        { id: 254, href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/posts/1/revisions/254' },
       ],
       'wp:attachment': [{ href: 'https://ryotanakahara.jp/sys/wp-json/wp/v2/media?parent=1' }],
       'wp:term': [
@@ -596,127 +716,14 @@ export const EMPTY_WORKS = [
     tags: [0],
     acf: [],
     ACF: {
-      work_summary: '',
       work_img: '',
+      work_summary_list: '',
+      work_summary_top: '',
+      work_header_pc: '',
+      work_header_sp: '',
       work_start_month: '',
       work_end_month: '',
-      work_application: '',
-      work_order: '',
-    },
-    tag_name: [''],
-    _links: {
-      self: [{ href: '' }],
-      collection: [{ href: '' }],
-      about: [{ href: '' }],
-      author: [{ embeddable: true, href: '' }],
-      replies: [{ embeddable: true, href: '' }],
-      'version-history': [{ count: 0, href: '' }],
-      'predecessor-version': [{ id: 0, href: '' }],
-      'wp:attachment': [{ href: '' }],
-      'wp:term': [
-        {
-          taxonomy: '',
-          embeddable: true,
-          href: '',
-        },
-        {
-          taxonomy: '',
-          embeddable: true,
-          href: '',
-        },
-      ],
-      curies: [{ name: '', href: '', templated: true }],
-    },
-  },
-  {
-    id: 0,
-    date: '',
-    date_gmt: '',
-    guid: { rendered: '' },
-    modified: '',
-    modified_gmt: '',
-    slug: '',
-    status: '',
-    type: '',
-    link: '',
-    title: { rendered: '' },
-    content: { rendered: '', protected: false },
-    excerpt: { rendered: '', protected: false },
-    author: 1,
-    featured_media: 0,
-    comment_status: '',
-    ping_status: '',
-    sticky: false,
-    template: '',
-    format: '',
-    meta: [],
-    categories: [0],
-    tags: [0],
-    acf: [],
-    ACF: {
-      work_summary: '',
-      work_img: '',
-      work_start_month: '',
-      work_end_month: '',
-      work_application: '',
-      work_order: '',
-    },
-    tag_name: [''],
-    _links: {
-      self: [{ href: '' }],
-      collection: [{ href: '' }],
-      about: [{ href: '' }],
-      author: [{ embeddable: true, href: '' }],
-      replies: [{ embeddable: true, href: '' }],
-      'version-history': [{ count: 0, href: '' }],
-      'predecessor-version': [{ id: 0, href: '' }],
-      'wp:attachment': [{ href: '' }],
-      'wp:term': [
-        {
-          taxonomy: '',
-          embeddable: true,
-          href: '',
-        },
-        {
-          taxonomy: '',
-          embeddable: true,
-          href: '',
-        },
-      ],
-      curies: [{ name: '', href: '', templated: true }],
-    },
-  },
-  {
-    id: 0,
-    date: '',
-    date_gmt: '',
-    guid: { rendered: '' },
-    modified: '',
-    modified_gmt: '',
-    slug: '',
-    status: '',
-    type: '',
-    link: '',
-    title: { rendered: '' },
-    content: { rendered: '', protected: false },
-    excerpt: { rendered: '', protected: false },
-    author: 1,
-    featured_media: 0,
-    comment_status: '',
-    ping_status: '',
-    sticky: false,
-    template: '',
-    format: '',
-    meta: [],
-    categories: [0],
-    tags: [0],
-    acf: [],
-    ACF: {
-      work_summary: '',
-      work_img: '',
-      work_start_month: '',
-      work_end_month: '',
-      work_application: '',
+      work_responsibility: '',
       work_order: '',
     },
     tag_name: [''],

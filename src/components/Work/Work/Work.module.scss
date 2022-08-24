@@ -3,7 +3,7 @@
 .work {
   display: block;
   // padding: 16px 16px 64px;
-  background-color: rgba($color: $theme-white, $alpha: 0.4);
+  background-color: $content-bg-white;
   border-radius: $br-md;
   cursor: pointer;
   transition: background-color 0.3s ease-out;
@@ -35,41 +35,41 @@
     }
   }
   &:nth-of-type(4n + 1) {
-    width: columnWidth(6);
-    margin-right: calc((100% - columnWidth(11)) / 2 + columnWidth(5) + 32px);
-    margin-left: calc((100% - columnWidth(11)) / 2);
+    width: columnWidth(6, 'dt');
+    margin-right: calc((100% - #{columnWidth(11, 'dt')}) / 2 + #{columnWidth(5, 'dt')} + 32px);
+    margin-left: calc((100% - #{columnWidth(11, 'dt')}) / 2);
   }
   &:nth-of-type(4n + 2) {
-    width: columnWidth(5);
-    margin-right: calc((100% - columnWidth(11)) / 2);
-    margin-left: calc((100% - columnWidth(11)) / 2 + columnWidth(6) + 32px);
+    width: columnWidth(5, 'dt');
+    margin-right: calc((100% - #{columnWidth(11, 'dt')}) / 2);
+    margin-left: calc((100% - #{columnWidth(11, 'dt')}) / 2 + #{columnWidth(6, 'dt')} + 32px);
     margin-bottom: 160px;
     margin-top: -320px;
   }
   &:nth-of-type(4n + 3) {
-    width: columnWidth(5);
-    margin-right: calc((100% - columnWidth(11)) / 2 + columnWidth(6) + 32px);
-    margin-left: calc((100% - columnWidth(11)) / 2);
+    width: columnWidth(5, 'dt');
+    margin-right: calc((100% - #{columnWidth(11, 'dt')}) / 2 + #{columnWidth(6, 'dt')} + 32px);
+    margin-left: calc((100% - #{columnWidth(11, 'dt')}) / 2);
   }
   &:nth-of-type(4n) {
-    width: columnWidth(6);
-    margin-right: calc((100% - columnWidth(11)) / 2);
-    margin-left: calc((100% - columnWidth(11)) / 2 + columnWidth(5) + 32px);
+    width: columnWidth(6, 'dt');
+    margin-right: calc((100% - #{columnWidth(11, 'dt')}) / 2);
+    margin-left: calc((100% - #{columnWidth(11, 'dt')}) / 2 + #{columnWidth(5, 'dt')} + 32px);
     margin-bottom: 200px;
     margin-top: -360px;
   }
   &:nth-of-type(1) {
-    width: columnWidth(7);
-    margin-right: calc(columnWidth(5) + 16px);
+    width: columnWidth(7, 'dt');
+    margin-right: calc(#{columnWidth(5, 'dt')} + 16px);
     margin-left: 0;
   }
   &:nth-of-type(2) {
-    width: columnWidth(5);
+    width: columnWidth(5, 'dt');
     margin-right: 0;
-    margin-left: calc(columnWidth(7) + 16px);
+    margin-left: calc(#{columnWidth(7, 'dt')} + 16px);
   }
   &:hover {
-    background-color: rgba($color: $theme-white, $alpha: 0.7);
+    background-color: $content-bg-white-hover;
   }
   &_container {
     display: block;

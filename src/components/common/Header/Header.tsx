@@ -7,7 +7,6 @@ import HEADER_LOGO from '@/image/uzulab.svg'
 
 export const Header = () => {
   const router = useRouter()
-  console.log(router.pathname)
   return (
     <header className={styles.header}>
       <Link href='/works'>

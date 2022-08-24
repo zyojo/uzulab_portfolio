@@ -3,9 +3,9 @@
 .contactLink {
   display: flex;
   justify-content: space-between;
-  width: columnWidth(7);
+  width: columnWidth(7, 'dt');
   padding: 48px 64px 56px;
-  margin-top: 240px;
+  margin-top: 224px;
   border-radius: $br-md;
   background-color: rgba(#ded7cf, 0.2);
   cursor: pointer;

@@ -1,0 +1,114 @@
+@import './../../../styles/variables';
+.workPage {
+  &_top {
+    position: relative;
+    left: calc((#{map-get($body-maxWidth, 'dt')} - 64px - (100vw - 144px)) / 2);
+    width: calc(100vw - 144px);
+    overflow: hidden;
+    border-radius: $br-lg;
+    background-color: $content-bg-white;
+    padding-bottom: 80px;
+    margin-bottom: 120px;
+    &_img {
+      height: 500px;
+      position: relative;
+      margin-bottom: 64px;
+    }
+    &_info {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 calc((64px + (100vw - 144px) - #{map-get($body-maxWidth, 'dt')}) / 2);
+      &_left {
+        width: calc(columnWidth(4, 'dt') - 16px);
+        &_title {
+          font-size: 34px;
+          line-height: 1.2;
+          margin-bottom: 16px;
+        }
+        &_details {
+          &_tags {
+            margin-bottom: 48px;
+          }
+          &_data {
+            display: flex;
+            padding-bottom: 8px;
+            margin-top: 8px;
+            border-bottom: dotted $border-theme 2px;
+            div {
+              &:nth-of-type(1) {
+                width: 56px;
+                margin-right: 24px;
+              }
+              &:nth-of-type(2) {
+                width: calc(100% - 80px);
+              }
+            }
+          }
+        }
+      }
+      &_right {
+        line-height: 2.5;
+        width: columnWidth(8, 'dt');
+      }
+    }
+  }
+  &_content {
+    width: columnWidth(10, 'dt');
+    margin: 0 auto;
+    padding: 80px 0 96px;
+    background-color: $content-bg-white;
+    border-radius: $br-md;
+    &_container {
+      margin-bottom: 140px;
+      h1,
+      p {
+        width: columnWidth(8, 'dt');
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 18px;
+        margin-top: 80px;
+        & + p {
+          margin-top: 40px;
+        }
+        &:first-of-type {
+          margin-top: 0;
+        }
+      }
+      p {
+        font-size: 14px;
+        line-height: 2.5;
+        margin-top: 80px;
+        & + p {
+          margin-top: 40px;
+        }
+      }
+      figure {
+        margin: 80px 0 0;
+        img {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 16 / 9;
+        }
+        & + div,
+        & + figure {
+          margin: 32px 0 0;
+        }
+      }
+      div {
+        margin: 80px 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        figure {
+          margin: 0;
+          width: calc((100% - 16px) / 2);
+        }
+        & + div,
+        & + figure {
+          margin: 32px 0 0;
+        }
+      }
+    }
+  }
+}

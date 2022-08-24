@@ -24,11 +24,15 @@ export type WorkType = {
   tags: number[]
   acf: never[]
   ACF: {
-    work_summary: string
+    work_img: string
+    work_summary_list: string
+    work_summary_top: string
+    work_header_pc: string
+    work_header_sp: string
     work_img: string
     work_start_month: string
     work_end_month: string
-    work_application: string
+    work_responsibility: string
     work_order: string
   }
   tag_name: string[]

@@ -2,6 +2,9 @@
 $text-black: #1d1c1c;
 $border-theme: #ede5e2;
 $theme-white: #fff;
+$theme-gray: #c7c0b7;
+$content-bg-white: rgba(#fff, 0.4);
+$content-bg-white-hover: rgba(#fff, 0.7);
 
 // border-radius
 $br-lg: 24px;
@@ -9,10 +12,36 @@ $br-md: 16px;
 $br-sm: 9px;
 
 // break-point
+$bp-xl: 1022px;
 $bp-lg: 768px;
 $bp-sm: 450px;
+$breakpoint: (
+  sp: 'screen and (max-width: 450px)',
+  tb: 'screen and (max-width: 768px)',
+  pc: 'screen and (max-width: 1022px)',
+  dt: 'screen and (min-width: 1022px)',
+);
+
+@mixin media-query($bp) {
+  @media #{map-get($breakpoint, $bp)} {
+    @content;
+  }
+}
 
 // column-width
-@function columnWidth($columns) {
-  @return calc((100% - (16px * 11)) / 12 * $columns + 16px * ($columns - 1));
+$body-maxWidth: (
+  sp: 100vw,
+  tb: 100vw,
+  pc: 100vw,
+  dt: 1022px,
+);
+$column-gap: (
+  sp: 16px,
+  tb: 16px,
+  pc: 16px,
+  dt: 16px,
+);
+@function columnWidth($columns, $media) {
+  $mainWidth: #{map-get($body-maxWidth, $media)};
+  @return calc(($mainWidth - (16px * 11)) / 12 * $columns + 16px * ($columns - 1));
 }

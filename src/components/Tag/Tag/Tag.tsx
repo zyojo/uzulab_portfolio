@@ -7,6 +7,7 @@ type Prop = {
   isSelectedStyle: boolean
   isLabelStyle?: boolean
   handleSelectedID?: (selectedTagID: number) => void
+  styles?: {}
 }
 
 export const Tag = (props: Prop) => {
@@ -21,6 +22,7 @@ export const Tag = (props: Prop) => {
             const tagID = props.tag.id
             props.handleSelectedID !== undefined && props.handleSelectedID(tagID)
           }}
+          style={props.styles}
         >
           {props.isAll ? 'all' : props.tag !== undefined && props.tag.name}
         </div>

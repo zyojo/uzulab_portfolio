@@ -31,7 +31,13 @@ export const Work = (props: Prop) => {
                   const tagObj = tags.find((tag) => tag.id == item)
                   return (
                     tagObj !== undefined && (
-                      <Tag tag={tagObj} key={index} isSelectedStyle={true} isLabelStyle={true} />
+                      <Tag
+                        tag={tagObj}
+                        key={index}
+                        isSelectedStyle={true}
+                        isLabelStyle={true}
+                        styles={{ marginLeft: '8px' }}
+                      />
                     )
                   )
                 })}
@@ -48,7 +54,7 @@ export const Work = (props: Prop) => {
                 props.work.ACF.work_end_month,
               )}
             </div>
-            <div className={styles.work_info_desc}>{props.work.ACF.work_summary}</div>
+            <div className={styles.work_info_desc}>{props.work.ACF.work_summary_list}</div>
           </div>
         </a>
       </Link>
