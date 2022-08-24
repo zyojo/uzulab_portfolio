@@ -1,0 +1,27 @@
+@import './../../../styles/variables';
+
+.skillItem {
+  width: calc(#{columnWidth(3, 'dt')} + 64px);
+  padding: 48px 32px;
+  border-radius: $br-md;
+  background-color: $content-bg-white;
+  &_img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 24px;
+  }
+  &_title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  &_desc {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  &_skill {
+    font-size: 12px;
+    color: $theme-gray;
+  }
+}

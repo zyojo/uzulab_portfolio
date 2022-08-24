@@ -1,0 +1,17 @@
+@import './../../../styles/variables';
+.workflowImg {
+  display: flex;
+  justify-content: center;
+  &_item {
+    font-size: 14px;
+    font-weight: bold;
+    width: 152px;
+    height: 152px;
+    line-height: 152px;
+    margin-left: -24px;
+    text-align: center;
+    border-radius: 999px;
+    border: solid $border-theme 1px;
+    background-color: rgba(#fff, 0.4);
+  }
+}

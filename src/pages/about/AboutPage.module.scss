@@ -1,0 +1,53 @@
+@import './../../styles/variables';
+.about {
+  &_top {
+    width: calc(columnWidth(6, 'dt') + 64px * 2);
+    margin: calc(132px + 80px) auto 96px;
+    border-radius: $br-md;
+    background-color: $content-bg-white;
+    padding: 160px 64px 72px;
+    &_img {
+      width: 264px;
+      height: 264px;
+      margin: calc(-132px - 160px) auto 32px;
+    }
+    &_title {
+      text-align: center;
+      font-size: 26px;
+    }
+    &_subtitle {
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    &_desc {
+      font-size: 14px;
+      line-height: calc(32 / 14);
+    }
+  }
+  &_skills {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 160px;
+  }
+  &_flow {
+    width: columnWidth(10, 'dt');
+    margin: 0 auto;
+    border-radius: $br-md;
+    background-color: $content-bg-white;
+    padding: 96px 0;
+    &_title {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 48px;
+    }
+    &_desc {
+      text-align: center;
+      font-size: 14px;
+      line-height: 2.5;
+      margin-bottom: 96px;
+    }
+  }
+}
