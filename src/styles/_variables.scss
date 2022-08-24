@@ -42,6 +42,6 @@ $column-gap: (
   dt: 16px,
 );
 @function columnWidth($columns, $media) {
-  $mainWidth: #{map-get($body-maxWidth, $media)};
+  $mainWidth: calc(#{map-get($body-maxWidth, $media)} - 64px); // padding分を考慮
   @return calc(($mainWidth - (16px * 11)) / 12 * $columns + 16px * ($columns - 1));
 }
