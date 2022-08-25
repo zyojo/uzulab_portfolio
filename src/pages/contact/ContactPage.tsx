@@ -18,10 +18,6 @@ const ContactPage: NextPageWithLayout = () => {
     form.name.length == 0 || form.customer_email.length == 0 || form.message.length == 0
       ? setFilled(false)
       : setFilled(true)
-    console.log(filled)
-    console.log(form.name)
-    console.log(form.customer_email)
-    console.log(form.message)
   }, [form.name, form.customer_email, form.message])
 
   return (

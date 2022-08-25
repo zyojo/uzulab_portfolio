@@ -5,21 +5,21 @@ import { AppContext } from '@/contexts/AppContext'
 import { BaseLayout } from '@/layouts/Base/Base'
 import { EMPTY_TAGS } from '@/lib/stub/dummyTags'
 import { EMPTY_WORKS } from '@/lib/stub/dummyWorks'
-import { fetchTags } from '@/repositories/fetchTags'
-import { fetchWorks } from '@/repositories/fetchWorks'
+import { handleTags } from '@/repositories/handleTags'
+import { handleWorks } from '@/repositories/handleWorks'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [works, setWorks] = useState(EMPTY_WORKS)
   const [tags, setTags] = useState(EMPTY_TAGS)
-  const handleWorks = async () => {
-    setWorks(await fetchWorks())
+  const fetchWorks = async () => {
+    setWorks(await handleWorks())
   }
-  const handleTags = async () => {
-    setTags(await fetchTags())
+  const fetchTags = async () => {
+    setTags(await handleTags())
   }
   useEffect(() => {
-    handleWorks()
-    handleTags()
+    fetchWorks()
+    fetchTags()
   }, [])
   return (
     <AppContext.Provider value={{ works, tags, handleWorks, handleTags }}>

@@ -1,7 +1,7 @@
 import { fetchPosts } from './fetchPosts'
 import { WorkType } from '@/types/Work'
 
-const fetchWorks = async (tagID = '') => {
+const handleWorks = async (tagID = '') => {
   const apiUrl =
     'https://ryotanakahara.jp/sys/?rest_route=/wp/v2/posts' + (tagID !== '' ? '?tags=' + tagID : '')
   try {
@@ -20,4 +20,4 @@ const fetchWorks = async (tagID = '') => {
   }
 }
 
-export { fetchWorks }
+export { handleWorks }

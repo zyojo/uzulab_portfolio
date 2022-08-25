@@ -5,7 +5,7 @@
   justify-content: space-between;
   flex-direction: row-reverse;
   width: calc(#{columnWidth(6, 'dt')} - 8px);
-  margin-left: calc(#{columnWidth(5, 'dt')} + #{map-get($column-gap, 'dt')} + 8px);
+  margin-left: calc(#{columnWidth(5, 'dt')} + #{map-get($column-gutter, 'dt')} + 8px);
   margin-right: auto;
   border-radius: $br-md;
   background-color: rgba($theme-white, 0.6);
@@ -46,7 +46,7 @@
   }
   &[data-isprev='true'] {
     flex-direction: row;
-    margin-left: calc((#{columnWidth(1, 'dt')} + #{map-get($column-gap, 'dt')}) * -1);
+    margin-left: calc((#{columnWidth(1, 'dt')} + #{map-get($column-gutter, 'dt')}) * -1);
     margin-right: auto;
     .nextWorkLink {
       &_info {

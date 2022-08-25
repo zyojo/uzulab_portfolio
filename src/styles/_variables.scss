@@ -18,10 +18,10 @@ $bp-xl: 1022px;
 $bp-lg: 768px;
 $bp-sm: 450px;
 $breakpoint: (
-  sp: 'screen and (max-width: 450px)',
-  tb: 'screen and (max-width: 768px)',
-  pc: 'screen and (max-width: 1022px)',
-  dt: 'screen and (min-width: 1022px)',
+  sp: 'screen and (max-width: #{$bp-sm})',
+  tb: 'screen and (max-width: #{$bp-lg})',
+  pc: 'screen and (max-width: #{$bp-xl})',
+  dt: 'screen and (min-width: #{$bp-xl})',
 );
 
 @mixin media-query($bp) {
@@ -35,15 +35,23 @@ $body-maxWidth: (
   sp: 100vw,
   tb: 100vw,
   pc: 100vw,
-  dt: 1022px,
+  dt: $bp-xl,
 );
-$column-gap: (
+$column-gutter: (
   sp: 16px,
   tb: 16px,
   pc: 16px,
   dt: 16px,
 );
+$column-margin: (
+  sp: 140px,
+  tb: 140px,
+  pc: 140px,
+  dt: 140px,
+);
 @function columnWidth($columns, $media) {
   $mainWidth: calc(#{map-get($body-maxWidth, $media)} - 64px); // padding分を考慮
-  @return calc(($mainWidth - (16px * 11)) / 12 * $columns + 16px * ($columns - 1));
+  @return calc(
+    ($mainWidth - (#{map-get($column-gutter, $media)} * 11)) / 12 * $columns + 16px * ($columns - 1)
+  );
 }

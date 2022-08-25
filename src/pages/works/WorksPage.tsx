@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from 'next'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './WorksPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { TagList } from '@/components/Tag/TagList/TagList'
@@ -12,9 +12,6 @@ const WorksPage: NextPageWithLayout = () => {
   const handleSelectedID = (selectedTagID: number) => {
     setSelectedTagID(selectedTagID)
   }
-  useEffect(() => {
-    console.log(selectedTagID)
-  }, [selectedTagID])
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { fetchPosts } from './fetchPosts'
 
-const fetchTags = async () => {
+const handleTags = async () => {
   const apiUrl = 'https://ryotanakahara.jp/sys/?rest_route=/wp/v2/tags/'
   try {
     let data = await fetchPosts(apiUrl)
@@ -12,4 +12,4 @@ const fetchTags = async () => {
   }
 }
 
-export { fetchTags }
+export { handleTags }
