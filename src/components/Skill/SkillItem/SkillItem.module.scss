@@ -5,11 +5,15 @@
   border-radius: $br-md;
   background-color: $content-bg-white;
   width: calc(#{columnWidth(3, 'dt')} + 64px);
+  margin-bottom: 32px;
   @include media-query('pc') {
     width: calc(#{columnWidth(3, 'pc')} + 64px);
   }
+  @media screen and (max-width: 1020px) {
+    width: calc(#{columnWidth(4, 'pc')} + 64px);
+  }
   @include media-query('tb') {
-    width: calc(#{columnWidth(3, 'tb')} + 64px);
+    width: columnWidth(6, 'tb');
   }
   @include media-query('sp') {
     width: columnWidth(10, 'sp');
@@ -32,5 +36,13 @@
   &_skill {
     font-size: 12px;
     color: $theme-gray;
+  }
+  &:nth-of-type(2) {
+    margin-top: 80px;
+    margin-left: calc(map-get($column-gutter, 'dt') * 2);
+    margin-right: calc(map-get($column-gutter, 'dt') * 2);
+    @media screen and (max-width: 1020px) {
+      margin-top: 0;
+    }
   }
 }

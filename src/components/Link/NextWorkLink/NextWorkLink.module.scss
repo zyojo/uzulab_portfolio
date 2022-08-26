@@ -50,6 +50,7 @@
     &_title {
       font-size: 18px;
       word-break: break-all;
+      transition: color 0.7s ease-out;
     }
     &_arrow {
       text-align: right;
@@ -113,9 +114,14 @@
         -o-filter: grayscale(0%);
         filter: grayscale(0%);
       }
-      &_info_arrow::after {
-        left: 56px;
-        right: 40px;
+      &_info {
+        &_title {
+          color: $text-brown-hover;
+        }
+        &_arrow::after {
+          left: 56px;
+          right: 40px;
+        }
       }
 
       &[data-isprev='true'] {

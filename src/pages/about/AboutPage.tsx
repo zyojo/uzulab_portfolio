@@ -1,14 +1,17 @@
 import type { NextPageWithLayout } from 'next'
 import Image from 'next/image'
+import { useContext } from 'react'
 import styles from './AboutPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { SkillItem } from '@/components/Skill/SkillItem/SkillItem'
 import { WorkflowImg } from '@/components/Workflow/WorkflowImg/WorkflowImg'
-import { WorkflowTab } from '@/components/Workflow/WorkflowTab/WorkflowTab'
+import { WorkflowTab } from '@/components/Workflow/WorkflowTab/WorkflowTab/WorkflowTab'
+import { AppContext } from '@/contexts/AppContext'
 import PROFILE_IMG from '@/image/zyojo.png'
 import { SKILLS_DATA, WORKFLOW_DATA } from '@/lib/constants'
 
 const AboutPage: NextPageWithLayout = () => {
+  const { isMobile } = useContext(AppContext)
   return (
     <div className={styles.about}>
       <div className={styles.about_top}>
@@ -27,14 +30,18 @@ const AboutPage: NextPageWithLayout = () => {
       </div>
       <div className={styles.about_skills}>
         {SKILLS_DATA.map((item, index) => (
-          <SkillItem skill={item} key={index} style={index == 1 ? { margin: '80px 0 0' } : {}} />
+          <SkillItem skill={item} key={index} />
         ))}
       </div>
       <div className={styles.about_flow}>
         <div className={styles.about_flow_title}>制作の流れ</div>
         <div className={styles.about_flow_desc}>
-          デザインは、頭の中に存在する理想を明確な「かたち」へと作り上げていくプロセスです。
-          <br />
+          デザインは、
+          <span className={styles.about_flow_desc_bold}>
+            頭の中に存在する理想を明確な「かたち」へと作り上げていくプロセス
+          </span>
+          です。
+          {!isMobile && <br />}
           対話を重ねながら目的を掘り下げ、成果物の解像度を上げていきます。
         </div>
         <WorkflowImg flows={WORKFLOW_DATA} style={{ marginBottom: '104px' }} />

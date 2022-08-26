@@ -5,7 +5,7 @@
   background-color: $content-bg-white;
   border-radius: $br-md;
   cursor: pointer;
-  transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out, color 0.7s ease-out;
   &_thumb {
     width: 100%;
     border-radius: $br-sm;
@@ -157,6 +157,7 @@
   }
   &:hover {
     background-color: $content-bg-white-hover;
+    color: $text-black-hover;
   }
   &_container {
     display: block;

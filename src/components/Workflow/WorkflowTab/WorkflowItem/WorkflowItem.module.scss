@@ -1,0 +1,84 @@
+@import './../../../../styles/variables';
+.workflowItem {
+  padding: 32px 16px;
+  border-top: solid 1px $border-theme;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease-out;
+  &_title {
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    &_order {
+      font-size: 13px;
+      color: $theme-gray;
+      margin-right: 24px;
+      line-height: 30px;
+    }
+    &::before,
+    ::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 1px;
+      background-color: $theme-gray;
+      border-radius: 99px;
+      right: 12px;
+      top: 50%;
+    }
+    &::before {
+      transform: translateY(-50%) rotate(90deg);
+      transition: transform 0.2s ease-in-out;
+    }
+    &::after {
+      transform: translateY(-50%);
+    }
+  }
+  &_content {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    &_inner {
+      margin-top: 32px;
+      padding: 0 24px 0 52px;
+      &_imgs {
+        display: flex;
+        height: 180px;
+        &_img {
+          position: relative;
+          height: 100%;
+          aspect-ratio: 3/2;
+          margin-right: 16px;
+          border-radius: $br-sm;
+          overflow: hidden;
+        }
+      }
+      &_desc {
+        margin-top: 16px;
+      }
+    }
+  }
+  &[data-selected='true'] {
+    .workflowItem {
+      &_title::before {
+        transform: translateY(-50%);
+      }
+      &_content {
+        color: $text-black;
+        height: auto;
+        opacity: 1;
+        &_inner {
+          margin-top: 32px;
+          padding: 0 24px 0 52px;
+        }
+      }
+    }
+  }
+  &:hover {
+    color: $text-brown-hover;
+    background-color: rgba(#fff, 0.3);
+  }
+}

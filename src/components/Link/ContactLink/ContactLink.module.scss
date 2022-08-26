@@ -8,7 +8,7 @@
   border-radius: $br-md;
   background-color: rgba(#ded7cf, 0.2);
   cursor: pointer;
-  transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out, color 0.7s ease-out;
   width: columnWidth(7, 'dt');
   @include media-query('pc') {
     width: columnWidth(6, 'pc');
@@ -40,6 +40,7 @@
     }
   }
   &:hover {
+    color: $text-brown-hover;
     background-color: rgba(#ded7cf, 0.4);
   }
 }

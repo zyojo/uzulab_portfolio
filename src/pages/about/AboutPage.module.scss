@@ -66,7 +66,17 @@
       text-align: center;
       font-size: 14px;
       line-height: 2.5;
-      margin-bottom: 96px;
+      margin: 0 auto 96px;
+      @include media-query('tb') {
+        width: columnWidth(10, 'tb');
+        text-align: left;
+      }
+      @include media-query('sp') {
+        width: columnWidth(10, 'sp');
+      }
+      &_bold {
+        font-weight: bold;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-@import './../../../styles/variables';
+@import './../../../../styles/variables';
 .workflowTab {
   width: columnWidth(8, 'dt');
   @include media-query('pc') {
@@ -55,20 +55,22 @@
       overflow: hidden;
       opacity: 0;
       transition: all 0.4s ease-in-out;
-      &_imgs {
-        display: flex;
-        height: 180px;
-        &_img {
-          position: relative;
-          height: 100%;
-          aspect-ratio: 3/2;
-          margin-right: 16px;
-          border-radius: $br-sm;
-          overflow: hidden;
+      &_inner {
+        &_imgs {
+          display: flex;
+          height: 180px;
+          &_img {
+            position: relative;
+            height: 100%;
+            aspect-ratio: 3/2;
+            margin-right: 16px;
+            border-radius: $br-sm;
+            overflow: hidden;
+          }
         }
-      }
-      &_desc {
-        margin-top: 16px;
+        &_desc {
+          margin-top: 16px;
+        }
       }
     }
     &[data-selected='true'] {
@@ -78,14 +80,14 @@
         }
         &_content {
           color: $text-black;
-          height: 376px;
+          height: auto;
           padding: 32px 24px 0 52px;
           opacity: 1;
         }
       }
     }
     &:hover {
-      color: $text-black-hover;
+      color: $text-brown-hover;
       background-color: rgba(#fff, 0.3);
     }
   }

@@ -1,4 +1,7 @@
 @import './../../../styles/variables';
 
 .workList {
+  @include media-query('sp') {
+    padding: 0 #{map-get($column-margin, 'sp')};
+  }
 }
