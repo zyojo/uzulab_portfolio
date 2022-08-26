@@ -48,7 +48,7 @@ export const Work = (props: Prop) => {
             <div className={styles.work_info_title + ' avenir-bold'}>
               {props.work.title.rendered}
             </div>
-            <div className={styles.work_info_date + ' avenir-italic'}>
+            <div className={styles.work_info_duration + ' avenir-italic'}>
               {translateWorkDuration(
                 props.work.ACF.work_start_month,
                 props.work.ACF.work_end_month,

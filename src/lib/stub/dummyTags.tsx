@@ -69,7 +69,7 @@ export const DUMMY_TAGS = [
   },
   {
     id: 12,
-    count: 3,
+    count: 4,
     description: '',
     link: 'https://ryotanakahara.jp/sys/archives/tag/web',
     name: 'web',

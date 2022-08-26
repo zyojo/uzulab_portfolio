@@ -2,45 +2,96 @@
 .workPage {
   &_top {
     position: relative;
-    left: calc((#{map-get($body-maxWidth, 'dt')} - 64px - (100vw - 144px)) / 2);
+    left: calc((100vw - 72px * 2 - #{columnWidth(12, 'dt')}) / -2);
     width: calc(100vw - 144px);
     overflow: hidden;
     border-radius: $br-lg;
     background-color: $content-bg-white;
     padding-bottom: 80px;
     margin-bottom: 120px;
+    @include media-query('pc') {
+      left: calc((100vw - 32px * 2 - #{columnWidth(12, 'pc')}) / -2);
+      width: calc(100vw - 64px);
+    }
+    @include media-query('tb') {
+      left: calc((100vw - 16px * 2 - #{columnWidth(12, 'tb')}) / -2);
+      width: calc(100vw - 32px);
+    }
+    @include media-query('sp') {
+      width: 100vw;
+      border-radius: 0 0 $br-lg $br-lg;
+      margin-top: -104px;
+    }
     &_img {
-      height: 500px;
       position: relative;
       margin-bottom: 64px;
+      height: 500px;
+      @include media-query('tb') {
+        height: 400px;
+        margin-bottom: 40px;
+      }
+      @include media-query('sp') {
+        height: auto;
+        aspect-ratio: 1/1;
+      }
     }
     &_info {
       display: flex;
       justify-content: space-between;
-      padding: 0 calc((64px + (100vw - 144px) - #{map-get($body-maxWidth, 'dt')}) / 2);
+      margin: 0 auto;
+      width: columnWidth(12, 'dt');
+      @include media-query('pc') {
+        width: columnWidth(12, 'pc');
+      }
+      @include media-query('tb') {
+        width: columnWidth(12, 'tb');
+        flex-direction: column;
+        padding: 0 24px;
+      }
       &_left {
         width: calc(columnWidth(4, 'dt') - 16px);
+        @include media-query('pc') {
+          width: calc(columnWidth(4, 'pc') - 16px);
+        }
+        @include media-query('tb') {
+          width: 100%;
+        }
         &_title {
           font-size: 34px;
           line-height: 1.2;
           margin-bottom: 16px;
+          word-break: break-all;
         }
         &_details {
+          @include media-query('tb') {
+            display: flex;
+            justify-content: space-between;
+          }
           &_tags {
             margin-bottom: 48px;
+            @include media-query('tb') {
+              margin-bottom: 0;
+              width: calc(columnWidth(4, 'tb') - 24px);
+            }
           }
           &_data {
-            display: flex;
-            padding-bottom: 8px;
-            margin-top: 8px;
-            border-bottom: dotted $border-theme 2px;
-            div {
-              &:nth-of-type(1) {
-                width: 56px;
-                margin-right: 24px;
-              }
-              &:nth-of-type(2) {
-                width: calc(100% - 80px);
+            @include media-query('tb') {
+              width: calc(columnWidth(8, 'tb') - 24px);
+              margin-bottom: 72px;
+            }
+            &_item {
+              display: flex;
+              padding-bottom: 8px;
+              margin-top: 8px;
+              border-bottom: dotted $border-theme 2px;
+              div {
+                &:nth-of-type(1) {
+                  width: 56px;
+                  margin-right: 24px;
+                }
+                &:nth-of-type(2) {
+                  width: calc(100% - 80px);
+                }
               }
             }
           }
@@ -49,11 +100,26 @@
       &_right {
         line-height: 2.5;
         width: columnWidth(8, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(8, 'pc');
+        }
+        @include media-query('tb') {
+          width: 100%;
+        }
       }
     }
   }
   &_content {
     width: columnWidth(10, 'dt');
+    @include media-query('pc') {
+      width: columnWidth(10, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(10, 'tb');
+    }
+    @include media-query('sp') {
+      width: columnWidth(12, 'sp');
+    }
     margin: 0 auto;
     padding: 80px 0 96px;
     background-color: $content-bg-white;
@@ -64,6 +130,15 @@
       p {
         width: columnWidth(8, 'dt');
         margin: 0 auto;
+        @include media-query('pc') {
+          width: columnWidth(8, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(8, 'tb');
+        }
+        @include media-query('sp') {
+          width: calc(100% - 64px);
+        }
       }
       h1 {
         font-size: 18px;

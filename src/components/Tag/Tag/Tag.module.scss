@@ -7,6 +7,16 @@
   border-radius: 999px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  @include media-query('tb') {
+    font-size: 13px;
+    padding: 2px 12px;
+  }
+  @include media-query('sp') {
+    margin-right: -6px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
   &[data-selected='false'] {
     background-color: transparent;
   }

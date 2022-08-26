@@ -1,10 +1,19 @@
 @import './../../../styles/variables';
 
 .skillItem {
-  width: calc(#{columnWidth(3, 'dt')} + 64px);
   padding: 48px 32px;
   border-radius: $br-md;
   background-color: $content-bg-white;
+  width: calc(#{columnWidth(3, 'dt')} + 64px);
+  @include media-query('pc') {
+    width: calc(#{columnWidth(3, 'pc')} + 64px);
+  }
+  @include media-query('tb') {
+    width: calc(#{columnWidth(3, 'tb')} + 64px);
+  }
+  @include media-query('sp') {
+    width: columnWidth(10, 'sp');
+  }
   &_img {
     width: 100px;
     height: 100px;

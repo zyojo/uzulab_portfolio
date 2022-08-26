@@ -3,19 +3,41 @@
 .contactLink {
   display: flex;
   justify-content: space-between;
-  width: columnWidth(7, 'dt');
   padding: 48px 64px 56px;
   margin-top: 224px;
   border-radius: $br-md;
   background-color: rgba(#ded7cf, 0.2);
   cursor: pointer;
   transition: background-color 0.3s ease-out;
+  width: columnWidth(7, 'dt');
+  @include media-query('pc') {
+    width: columnWidth(6, 'pc');
+  }
+  @include media-query('tb') {
+    width: columnWidth(7, 'tb');
+    margin: 160px 0 0 auto;
+    padding: 40px 24px 48px;
+  }
+  @include media-query('sp') {
+    margin: 120px 16px 0 auto;
+    width: columnWidth(10, 'sp');
+    padding: 40px 24px 48px 32px;
+  }
   &_title {
     font-size: 16px;
+    @include media-query('sp') {
+      font-size: 14px;
+    }
   }
   &_desc {
     margin-top: 64px;
     font-size: 16px;
+    @include media-query('tb') {
+      font-size: 14px;
+    }
+    @include media-query('sp') {
+      font-size: 13px;
+    }
   }
   &:hover {
     background-color: rgba(#ded7cf, 0.4);

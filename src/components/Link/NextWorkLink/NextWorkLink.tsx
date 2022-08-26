@@ -20,10 +20,10 @@ export const NextWorkLink = (props: Props) => {
               <Image src={props.work.ACF.work_img} alt={props.work.title.rendered} layout='fill' />
             </div>
             <div className={styles.nextWorkLink_info}>
-              <div className={styles.nextWorkLink_info_title + ' avenir'}>
+              <div className={styles.nextWorkLink_info_title + ' avenir-bold'}>
                 {props.work.title.rendered}
               </div>
-              <div className={styles.nextWorkLink_info_arrow + ' avenir'}>
+              <div className={styles.nextWorkLink_info_arrow + ' avenir-bold'}>
                 {props.isPrev ? 'prev' : 'next'}
               </div>
             </div>

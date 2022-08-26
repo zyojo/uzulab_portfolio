@@ -1,10 +1,19 @@
 @import './../../styles/variables';
 .contact {
-  width: columnWidth(8, 'dt');
   background-color: $content-bg-white;
   border-radius: $br-md;
-  padding: 80px 0 96px;
+  padding: 80px 32px 96px;
   margin: 0 auto;
+  width: columnWidth(8, 'dt');
+  @include media-query('pc') {
+    width: columnWidth(10, 'pc');
+  }
+  @include media-query('tb') {
+    width: columnWidth(10, 'tb');
+  }
+  @include media-query('sp') {
+    width: columnWidth(12, 'sp');
+  }
   &_title {
     font-size: 16px;
     font-weight: bold;
@@ -19,8 +28,17 @@
     text-align: center;
   }
   &_form {
-    width: columnWidth(6, 'dt');
     margin: 0 auto;
+    width: columnWidth(6, 'dt');
+    @include media-query('pc') {
+      width: columnWidth(8, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(8, 'tb');
+    }
+    @include media-query('sp') {
+      width: columnWidth(10, 'sp');
+    }
     &_item {
       margin-bottom: 24px;
       label {
@@ -45,6 +63,9 @@
         padding: 16px;
         font-size: 16px;
         transition: all 0.6s ease-in-out;
+        @include media-query('tb') {
+          font-size: 14px;
+        }
         &::placeholder {
           color: $theme-gray;
         }

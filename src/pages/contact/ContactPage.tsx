@@ -1,6 +1,7 @@
 import type { NextPageWithLayout } from 'next'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './ContactPage.module.scss'
+import { AppContext } from '@/contexts/AppContext'
 import { handleSubmit } from '@/repositories/handleSubmit'
 
 const ContactPage: NextPageWithLayout = () => {
@@ -10,6 +11,7 @@ const ContactPage: NextPageWithLayout = () => {
     customer_email: '',
     message: '',
   })
+  const { isMobile } = useContext(AppContext)
   const [disabled, setDisabled] = useState(false)
   const [sent, setSent] = useState(false)
   const [filled, setFilled] = useState(false)
@@ -26,14 +28,14 @@ const ContactPage: NextPageWithLayout = () => {
       {sent ? (
         <div className={styles.contact_complete}>
           お客様のメールアドレスに間違いがなければ、送信完了メールが届きます。
-          <br />
+          {!isMobile && <br />}
           お問合せいただきありがとうございました。
         </div>
       ) : (
         <>
           <div className={styles.contact_desc}>
             ご相談・お問い合わせは以下のフォームからご連絡ください。
-            <br />
+            {!isMobile && <br />}
             2～3営業日以内にメールにてご返信いたします。
           </div>
           <form className={styles.contact_form}>

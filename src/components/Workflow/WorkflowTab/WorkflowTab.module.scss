@@ -1,6 +1,15 @@
 @import './../../../styles/variables';
 .workflowTab {
   width: columnWidth(8, 'dt');
+  @include media-query('pc') {
+    width: columnWidth(8, 'pc');
+  }
+  @include media-query('tb') {
+    width: columnWidth(8, 'tb');
+  }
+  @include media-query('sp') {
+    width: columnWidth(12, 'sp');
+  }
   margin: 0 auto;
   border-bottom: solid 1px $border-theme;
   &_item {

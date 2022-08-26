@@ -9,9 +9,13 @@ export const AppContext = React.createContext({
   tags: EMPTY_TAGS,
   handleWorks: () => {},
   handleTags: () => {},
+  windowWidth: 1441,
+  isMobile: false,
 } as {
   works: WorkType[]
   tags: TagType[]
   handleWorks: () => void
   handleTags: () => void
+  windowWidth: number
+  isMobile: boolean
 })

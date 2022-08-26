@@ -9,7 +9,7 @@ import { AppContext } from '@/contexts/AppContext'
 import { translateWorkDuration } from '@/lib/functions'
 
 const WorkPage = () => {
-  const { works, tags } = useContext(AppContext)
+  const { works, tags, isMobile } = useContext(AppContext)
   const router = useRouter()
   const { work_id } = router.query
   const work = works.find((work) => String(work.id) == work_id)
@@ -35,7 +35,7 @@ const WorkPage = () => {
             <div className={styles.workPage_top_info_left_details}>
               <div className={styles.workPage_top_info_left_details_tags}>
                 {work?.tags.map((item, index) => {
-                  const tagObj = tags.find((tag) => tag.id == item)
+                  const tagObj: any = tags.find((tag) => tag.id == item)
                   return (
                     tagObj !== undefined && (
                       <Tag
@@ -43,21 +43,28 @@ const WorkPage = () => {
                         key={index}
                         isSelectedStyle={true}
                         isLabelStyle={true}
-                        styles={{ marginRight: '8px', backgroundColor: '#fff', cursor: 'default' }}
+                        styles={{
+                          marginRight: '8px',
+                          marginBottom: '8px',
+                          backgroundColor: '#fff',
+                          cursor: 'default',
+                        }}
                       />
                     )
                   )
                 })}
               </div>
               <div className={styles.workPage_top_info_left_details_data}>
-                <div>作業期間</div>
-                <div className='avenir'>
-                  {translateWorkDuration(work?.ACF.work_start_month, work?.ACF.work_end_month)}
+                <div className={styles.workPage_top_info_left_details_data_item}>
+                  <div>作業期間</div>
+                  <div className='avenir'>
+                    {translateWorkDuration(work?.ACF.work_start_month, work?.ACF.work_end_month)}
+                  </div>
                 </div>
-              </div>
-              <div className={styles.workPage_top_info_left_details_data}>
-                <div>担当箇所</div>
-                <div>{work?.ACF.work_responsibility}</div>
+                <div className={styles.workPage_top_info_left_details_data_item}>
+                  <div>担当箇所</div>
+                  <div>{work?.ACF.work_responsibility}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -85,7 +92,13 @@ const WorkPage = () => {
             link={'/works/' + works[workOrder - 1].id}
             work={works[workOrder - 1]}
             isPrev={true}
-            styles={workOrder + 1 < works.length ? { marginTop: '-96px' } : {}}
+            styles={
+              workOrder + 1 < works.length
+                ? isMobile
+                  ? { marginTop: '-176px' }
+                  : { marginTop: '-96px' }
+                : {}
+            }
           />
         )}
       </div>
