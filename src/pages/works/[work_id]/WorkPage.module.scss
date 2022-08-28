@@ -61,6 +61,10 @@
           line-height: 1.2;
           margin-bottom: 16px;
           word-break: break-all;
+          @include media-query('sp') {
+            font-size: 26px;
+            margin-bottom: 24px;
+          }
         }
         &_details {
           @include media-query('tb') {
@@ -69,6 +73,7 @@
           }
           &_tags {
             margin-bottom: 48px;
+            padding-top: 8px;
             @include media-query('tb') {
               margin-bottom: 0;
               width: calc(columnWidth(4, 'tb') - 24px);
@@ -106,11 +111,16 @@
         @include media-query('tb') {
           width: 100%;
         }
+        @include media-query('sp') {
+          font-size: 13px;
+          line-height: 2.2;
+        }
       }
     }
   }
   &_content {
     width: columnWidth(10, 'dt');
+    padding: 80px 0 96px;
     @include media-query('pc') {
       width: columnWidth(10, 'pc');
     }
@@ -119,9 +129,9 @@
     }
     @include media-query('sp') {
       width: columnWidth(12, 'sp');
+      padding: 40px 0 56px;
     }
     margin: 0 auto;
-    padding: 80px 0 96px;
     background-color: $content-bg-white;
     border-radius: $br-md;
     &_container {
@@ -143,8 +153,15 @@
       h1 {
         font-size: 18px;
         margin-top: 80px;
+        @include media-query('sp') {
+          font-size: 16px;
+          margin-top: 40px;
+        }
         & + p {
           margin-top: 40px;
+          @include media-query('sp') {
+            margin-top: 24px;
+          }
         }
         &:first-of-type {
           margin-top: 0;
@@ -154,20 +171,32 @@
         font-size: 14px;
         line-height: 2.5;
         margin-top: 80px;
+        @include media-query('sp') {
+          font-size: 12px;
+          line-height: 2.2;
+          margin-top: 40px;
+        }
         & + p {
           margin-top: 40px;
         }
       }
       figure {
         margin: 80px 0 0;
+        @include media-query('sp') {
+          margin: 40px 0 0;
+        }
         img {
           width: 100%;
           height: auto;
           aspect-ratio: 16 / 9;
+          vertical-align: top;
         }
         & + div,
         & + figure {
           margin: 32px 0 0;
+          @include media-query('sp') {
+            margin: 16px 0 0;
+          }
         }
       }
       div {
@@ -175,6 +204,9 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        @include media-query('sp') {
+          margin: 40px 0 0;
+        }
         figure {
           margin: 0;
           width: calc((100% - 16px) / 2);
@@ -182,6 +214,9 @@
         & + div,
         & + figure {
           margin: 32px 0 0;
+          @include media-query('sp') {
+            margin: 32px 0 0;
+          }
         }
       }
     }

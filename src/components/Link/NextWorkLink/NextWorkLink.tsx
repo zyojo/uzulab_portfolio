@@ -17,11 +17,11 @@ export const NextWorkLink = (props: Props) => {
         <Link href={props.link}>
           <a className={styles.nextWorkLink} data-isprev={props.isPrev} style={props.styles}>
             <div className={styles.nextWorkLink_img}>
-              <Image src={props.work.ACF.work_img} alt={props.work.title.rendered} layout='fill' />
+              <Image src={props.work.thumbnail.url} alt={props.work.title} layout='fill' />
             </div>
             <div className={styles.nextWorkLink_info}>
               <div className={styles.nextWorkLink_info_title + ' avenir-bold'}>
-                {props.work.title.rendered}
+                {props.work.title}
               </div>
               <div className={styles.nextWorkLink_info_arrow + ' avenir-bold'}>
                 {props.isPrev ? 'prev' : 'next'}

@@ -13,7 +13,8 @@ export const WorkList = (props: Prop) => {
       {props.works &&
         props.works.map((item, index) => {
           return (
-            (props.selectedTagID == 0 || item.tags.includes(props.selectedTagID)) && (
+            (props.selectedTagID == 0 ||
+              item.tags.map((tag) => tag.id).includes(String(props.selectedTagID))) && (
               <Work work={item} key={index} />
             )
           )

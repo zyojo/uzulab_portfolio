@@ -20,8 +20,8 @@ const WorkPage = () => {
         <div className={styles.workPage_top_img}>
           {work !== undefined && (
             <Image
-              src={work.ACF.work_header_pc}
-              alt={work.title.rendered}
+              src={isMobile ? work.header_sp.url : work.header_pc.url}
+              alt={work.title}
               layout='fill'
               objectFit='cover'
             />
@@ -30,12 +30,12 @@ const WorkPage = () => {
         <div className={styles.workPage_top_info}>
           <div className={styles.workPage_top_info_left}>
             <div className={styles.workPage_top_info_left_title + ' avenir-bold'}>
-              {work?.title.rendered}
+              {work?.title}
             </div>
             <div className={styles.workPage_top_info_left_details}>
               <div className={styles.workPage_top_info_left_details_tags}>
                 {work?.tags.map((item, index) => {
-                  const tagObj: any = tags.find((tag) => tag.id == item)
+                  const tagObj: any = tags.find((tag) => tag.id == item.id)
                   return (
                     tagObj !== undefined && (
                       <Tag
@@ -58,12 +58,12 @@ const WorkPage = () => {
                 <div className={styles.workPage_top_info_left_details_data_item}>
                   <div>作業期間</div>
                   <div className='avenir'>
-                    {translateWorkDuration(work?.ACF.work_start_month, work?.ACF.work_end_month)}
+                    {translateWorkDuration(work?.start_date, work?.end_date)}
                   </div>
                 </div>
                 <div className={styles.workPage_top_info_left_details_data_item}>
                   <div>担当箇所</div>
-                  <div>{work?.ACF.work_responsibility}</div>
+                  <div>{work?.responsibility}</div>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@ const WorkPage = () => {
           {work !== undefined && (
             <div
               className={styles.workPage_top_info_right}
-              dangerouslySetInnerHTML={{ __html: work?.ACF.work_summary_top }}
+              dangerouslySetInnerHTML={{ __html: work?.summary_top }}
             ></div>
           )}
         </div>
@@ -80,7 +80,7 @@ const WorkPage = () => {
         {work !== undefined && (
           <section
             className={styles.workPage_content_container}
-            dangerouslySetInnerHTML={{ __html: work?.content.rendered }} // WPのフォーマットを配置
+            dangerouslySetInnerHTML={{ __html: work?.content }} // WPのフォーマットを配置
           ></section>
         )}
 

@@ -17,6 +17,12 @@
       margin-left: unset;
       margin-bottom: -24px;
     }
+    @include media-query('tb') {
+      font-size: 12px;
+      width: 120px;
+      height: 120px;
+      line-height: 120px;
+    }
   }
   @include media-query('tb') {
     align-items: center;

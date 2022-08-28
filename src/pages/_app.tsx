@@ -14,10 +14,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [windowWidth, setWindowWidth] = useState(1441)
   const [isMobile, setIsMobile] = useState(false)
   const fetchWorks = async () => {
-    setWorks(await handleWorks())
+    const data = await handleWorks()
+    setWorks(data.contents)
   }
   const fetchTags = async () => {
-    setTags(await handleTags())
+    const data = await handleTags()
+    setTags(data.contents)
   }
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth)

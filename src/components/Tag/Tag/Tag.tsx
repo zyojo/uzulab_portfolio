@@ -6,7 +6,7 @@ type Prop = {
   tag: TagType | SimpleTagType
   isSelectedStyle: boolean
   isLabelStyle?: boolean
-  handleSelectedID?: (selectedTagID: number) => void
+  handleSelectedID?: (selectedTagID: string) => void
   styles?: {}
 }
 

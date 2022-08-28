@@ -2,6 +2,7 @@
 
 .work {
   display: block;
+  color: $text-black-hover;
   background-color: $content-bg-white;
   border-radius: $br-md;
   cursor: pointer;
@@ -55,6 +56,10 @@
       @include media-query('tb') {
         font-size: 13px;
         line-height: 2;
+      }
+      @include media-query('sp') {
+        margin-top: 8px;
+        font-size: 12px;
       }
     }
   }
@@ -157,7 +162,7 @@
   }
   &:hover {
     background-color: $content-bg-white-hover;
-    color: $text-black-hover;
+    color: $text-black;
   }
   &_container {
     display: block;

@@ -19,16 +19,12 @@ export const Work = (props: Prop) => {
         <a className={styles.work_container}>
           <div className={styles.work_thumb}>
             <>
-              {props.work.ACF.work_img !== '' && (
-                <Image
-                  src={props.work.ACF.work_img}
-                  alt={props.work.title.rendered}
-                  layout='fill'
-                />
+              {props.work.thumbnail.url !== '' && (
+                <Image src={props.work.thumbnail.url} alt={props.work.title} layout='fill' />
               )}
               <div className={styles.work_thumb_tags}>
                 {props.work.tags.map((item, index) => {
-                  const tagObj = tags.find((tag) => tag.id == item)
+                  const tagObj = tags.find((tag) => tag.id == item.id)
                   return (
                     tagObj !== undefined && (
                       <Tag
@@ -45,16 +41,11 @@ export const Work = (props: Prop) => {
             </>
           </div>
           <div className={styles.work_info}>
-            <div className={styles.work_info_title + ' avenir-bold'}>
-              {props.work.title.rendered}
-            </div>
+            <div className={styles.work_info_title + ' avenir-bold'}>{props.work.title}</div>
             <div className={styles.work_info_duration + ' avenir-italic'}>
-              {translateWorkDuration(
-                props.work.ACF.work_start_month,
-                props.work.ACF.work_end_month,
-              )}
+              {translateWorkDuration(props.work.start_date, props.work.end_date)}
             </div>
-            <div className={styles.work_info_desc}>{props.work.ACF.work_summary_list}</div>
+            <div className={styles.work_info_desc}>{props.work.summary_list}</div>
           </div>
         </a>
       </Link>

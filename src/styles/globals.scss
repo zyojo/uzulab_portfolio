@@ -26,9 +26,9 @@ body {
   font-size: 14px;
   line-height: 2;
   position: relative;
-}
-html {
-  background-color: #faf7f5;
+  @include media-query('sp') {
+    font-size: 12px;
+  }
 }
 body {
   max-width: #{map-get($body-maxWidth, 'dt')};

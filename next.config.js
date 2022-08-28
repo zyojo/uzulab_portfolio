@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['ryotanakahara.jp'],
+    domains: ['ryotanakahara.jp', 'images.microcms-assets.io'],
   },
 }
 

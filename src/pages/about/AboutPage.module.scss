@@ -19,19 +19,32 @@
       width: 264px;
       height: 264px;
       margin: calc(-132px - 160px) auto 32px;
+      @include media-query('sp') {
+        margin: calc(-132px - 160px) auto 24px;
+      }
     }
     &_title {
       text-align: center;
       font-size: 26px;
+      @include media-query('sp') {
+        font-size: 20px;
+      }
     }
     &_subtitle {
       text-align: center;
       font-size: 16px;
       margin-bottom: 40px;
+      @include media-query('sp') {
+        font-size: 13px;
+        margin-bottom: 32px;
+      }
     }
     &_desc {
       font-size: 14px;
       line-height: calc(32 / 14);
+      @include media-query('sp') {
+        font-size: 13px;
+      }
     }
   }
   &_skills {
@@ -61,6 +74,9 @@
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 48px;
+      @include media-query('sp') {
+        margin-bottom: 32px;
+      }
     }
     &_desc {
       text-align: center;
@@ -73,6 +89,9 @@
       }
       @include media-query('sp') {
         width: columnWidth(10, 'sp');
+        line-height: 2;
+        margin: 0 auto 32px;
+        font-size: 12px;
       }
       &_bold {
         font-weight: bold;

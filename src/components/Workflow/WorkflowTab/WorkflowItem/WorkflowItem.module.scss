@@ -10,11 +10,18 @@
     font-size: 15px;
     font-weight: bold;
     position: relative;
+    line-height: 30px;
+    @include media-query('sp') {
+      font-size: 13px;
+    }
     &_order {
       font-size: 13px;
       color: $theme-gray;
       margin-right: 24px;
       line-height: 30px;
+      @include media-query('sp') {
+        font-size: 11px;
+      }
     }
     &::before,
     ::after {
@@ -44,9 +51,17 @@
     &_inner {
       margin-top: 32px;
       padding: 0 24px 0 52px;
+      @include media-query('tb') {
+        margin-top: 16px;
+        padding: 0;
+      }
       &_imgs {
         display: flex;
         height: 180px;
+        overflow: scroll;
+        @include media-query('tb') {
+          height: 150px;
+        }
         &_img {
           position: relative;
           height: 100%;
@@ -54,6 +69,7 @@
           margin-right: 16px;
           border-radius: $br-sm;
           overflow: hidden;
+          flex-shrink: 0;
         }
       }
       &_desc {
@@ -73,6 +89,10 @@
         &_inner {
           margin-top: 32px;
           padding: 0 24px 0 52px;
+          @include media-query('tb') {
+            margin-top: 16px;
+            padding: 0;
+          }
         }
       }
     }
