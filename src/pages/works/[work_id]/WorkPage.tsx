@@ -6,7 +6,7 @@ import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { AppContext } from '@/contexts/AppContext'
-import { translateWorkDuration } from '@/lib/functions'
+import { translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
 
 const WorkPage = () => {
   const { works, tags, isMobile } = useContext(AppContext)
@@ -80,7 +80,7 @@ const WorkPage = () => {
         {work !== undefined && (
           <section
             className={styles.workPage_content_container}
-            dangerouslySetInnerHTML={{ __html: work?.content }} // WPのフォーマットを配置
+            dangerouslySetInnerHTML={{ __html: translateEmbeddedEditor(work?.contents) }} // microCMSのフォーマットを配置
           ></section>
         )}
 

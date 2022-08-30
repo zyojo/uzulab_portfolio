@@ -25,3 +25,16 @@ export const translateWorkDuration: any = (startDate: string, endDate: string) =
   }
   return outputMonth
 }
+
+export const translateDivs = (content: string) => {
+  return content.replaceAll('%div%', '<div>').replaceAll('%/div%', '</div>')
+}
+export const translateEmbeddedEditor = (contents: { richEditor: string; HTML: string }[]) => {
+  let combinedHTML = ''
+  contents.map((item) => {
+    combinedHTML +=
+      (item.richEditor !== undefined ? item.richEditor : '') +
+      (item.HTML !== undefined ? item.HTML : '')
+  })
+  return combinedHTML
+}

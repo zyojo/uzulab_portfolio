@@ -13,7 +13,7 @@ export const TagList = (props: Prop) => {
     <div className={styles.tagList}>
       <Tag
         isAll={true}
-        tag={{ id: 0, name: 'all' }}
+        tag={{ id: '0', name: 'all' }}
         isSelectedStyle={props.selectedTagID == 0}
         handleSelectedID={() => {
           props.handleSelectedID(0)
@@ -24,9 +24,9 @@ export const TagList = (props: Prop) => {
           <Tag
             tag={item}
             key={index}
-            isSelectedStyle={props.selectedTagID == item.id}
+            isSelectedStyle={props.selectedTagID == Number(item.id)}
             handleSelectedID={() => {
-              props.handleSelectedID(item.id)
+              props.handleSelectedID(Number(item.id))
             }}
           />
         ))}

@@ -33,6 +33,5 @@ export type WorkType = {
   start_date: string
   end_date: string
   responsibility?: string
-  order?: number
-  content: string
+  contents: []
 }

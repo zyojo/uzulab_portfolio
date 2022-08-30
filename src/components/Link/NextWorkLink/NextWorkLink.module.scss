@@ -28,11 +28,11 @@
     height: 144px;
     aspect-ratio: 3/2;
     position: relative;
-    -webkit-filter: grayscale(90%) contrast(0.97) opacity(0.7);
-    -moz-filter: grayscale(90%) contrast(0.97) opacity(0.7);
-    -ms-filter: grayscale(90%) contrast(0.97) opacity(0.7);
-    -o-filter: grayscale(90%) contrast(0.97) opacity(0.7);
-    filter: grayscale(90%) contrast(0.97) opacity(0.7);
+    -webkit-filter: sepia(0.3) contrast(0.97) opacity(0.8);
+    -moz-filter: sepia(0.3) contrast(0.97) opacity(0.8);
+    -ms-filter: sepia(0.3) contrast(0.97) opacity(0.8);
+    -o-filter: sepia(0.3) contrast(0.97) opacity(0.8);
+    filter: sepia(0.3) contrast(0.97) opacity(0.8);
     transition: filter 0.4s ease-out;
     @include media-query('tb') {
       height: auto;
@@ -105,14 +105,14 @@
     }
   }
   &:hover {
-    background-color: rgba($theme-white, 0.8);
+    background-color: sepia(0) contrast(1) opacity(1);
     .nextWorkLink {
       &_img {
-        -webkit-filter: grayscale(0%);
-        -moz-filter: grayscale(0%);
-        -ms-filter: grayscale(0%);
-        -o-filter: grayscale(0%);
-        filter: grayscale(0%);
+        -webkit-filter: sepia(0%);
+        -moz-filter: sepia(0%);
+        -ms-filter: sepia(0%);
+        -o-filter: sepia(0%);
+        filter: sepia(0%);
       }
       &_info {
         &_title {
