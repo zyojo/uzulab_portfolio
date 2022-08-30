@@ -33,5 +33,9 @@ export type WorkType = {
   start_date: string
   end_date: string
   responsibility?: string
-  contents: []
+  contents: {
+    fieldId: string
+    richEditor?: string
+    HTML?: string
+  }[]
 }

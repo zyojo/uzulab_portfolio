@@ -80,7 +80,7 @@ const WorkPage = () => {
         {work !== undefined && (
           <section
             className={styles.workPage_content_container}
-            dangerouslySetInnerHTML={{ __html: translateEmbeddedEditor(work?.contents) }} // microCMSのフォーマットを配置
+            dangerouslySetInnerHTML={{ __html: translateEmbeddedEditor(work.contents) }} // microCMSのフォーマットを配置
           ></section>
         )}
 

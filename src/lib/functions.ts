@@ -29,7 +29,9 @@ export const translateWorkDuration: any = (startDate: string, endDate: string) =
 export const translateDivs = (content: string) => {
   return content.replaceAll('%div%', '<div>').replaceAll('%/div%', '</div>')
 }
-export const translateEmbeddedEditor = (contents: { richEditor: string; HTML: string }[]) => {
+export const translateEmbeddedEditor = (
+  contents: { richEditor?: string | undefined; HTML?: string | undefined }[],
+) => {
   let combinedHTML = ''
   contents.map((item) => {
     combinedHTML +=
