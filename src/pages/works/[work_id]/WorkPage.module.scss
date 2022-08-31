@@ -214,15 +214,12 @@
           width: calc((100% - 16px) / 2);
         }
         & + img {
-          margin: 32px calc((#{columnWidth(1, 'dt')} + #{map-get($column-gutter, 'dt')}) * -1) 0;
+          margin: 32px 0 0;
           @include media-query('pc') {
-            margin: 32px calc((#{columnWidth(1, 'pc')} + #{map-get($column-gutter, 'pc')}) * -1) 0;
-          }
-          @include media-query('tb') {
-            margin: 32px calc((#{columnWidth(1, 'tb')} + #{map-get($column-gutter, 'tb')}) * -1) 0;
+            margin: 32px 0 0;
           }
           @include media-query('sp') {
-            margin: 16px calc((#{columnWidth(1, 'sp')} + #{map-get($column-gutter, 'sp')}) * -1) 0;
+            margin: 16px 0 0;
           }
         }
         & + div {
