@@ -5,11 +5,12 @@ import { WorkType } from '@/types/Work'
 type Prop = {
   works: WorkType[]
   selectedTagID: string
+  isLoading: boolean
 }
 
 export const WorkList = (props: Prop) => {
   return (
-    <ul className={styles.workList}>
+    <ul className={styles.workList} data-loading={props.isLoading}>
       {props.works &&
         props.works.map((item, index) => {
           return (
