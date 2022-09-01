@@ -21,6 +21,8 @@
       margin: calc(-132px - 160px) auto 32px;
       @include media-query('sp') {
         margin: calc(-132px - 160px) auto 24px;
+        width: 208px;
+        height: 208px;
       }
     }
     &_title {
