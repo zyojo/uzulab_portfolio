@@ -8,8 +8,8 @@ import { AppContext } from '@/contexts/AppContext'
 
 const WorksPage: NextPageWithLayout = () => {
   const { works, tags } = useContext(AppContext)
-  const [selectedTagID, setSelectedTagID] = useState(0)
-  const handleSelectedID = (selectedTagID: number) => {
+  const [selectedTagID, setSelectedTagID] = useState('all')
+  const handleSelectedID = (selectedTagID: string) => {
     setSelectedTagID(selectedTagID)
   }
 

@@ -7,6 +7,7 @@
   border-radius: 999px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  color: $text-black;
   @include media-query('tb') {
     font-size: 13px;
     padding: 2px 12px;
@@ -24,6 +25,6 @@
     display: inline-block;
     font-size: 12px;
     padding: 2px 12px;
-    background-color: rgba($theme-white, 0.6);
+    background-color: rgba($theme-white, 0.8);
   }
 }

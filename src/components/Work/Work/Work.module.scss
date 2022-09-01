@@ -14,6 +14,14 @@
     aspect-ratio: 3 / 2;
     position: relative;
     margin-bottom: 32px;
+    img {
+      transition: 0.3s ease-out;
+      filter: saturate(0.6) opacity(0.9);
+      @include media-query('sp') {
+        margin-bottom: 24px;
+        filter: saturate(1) opacity(1);
+      }
+    }
     @include media-query('tb') {
       margin-bottom: 24px;
     }
@@ -163,6 +171,11 @@
   &:hover {
     background-color: $content-bg-white-hover;
     color: $text-black;
+    .work_thumb {
+      img {
+        filter: saturate(1) opacity(1);
+      }
+    }
   }
   &_container {
     display: block;

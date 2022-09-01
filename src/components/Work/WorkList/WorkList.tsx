@@ -4,7 +4,7 @@ import { WorkType } from '@/types/Work'
 
 type Prop = {
   works: WorkType[]
-  selectedTagID: number
+  selectedTagID: string
 }
 
 export const WorkList = (props: Prop) => {
@@ -13,7 +13,7 @@ export const WorkList = (props: Prop) => {
       {props.works &&
         props.works.map((item, index) => {
           return (
-            (props.selectedTagID == 0 ||
+            (props.selectedTagID == 'all' ||
               item.tags.map((tag) => tag.id).includes(String(props.selectedTagID))) && (
               <Work work={item} key={index} />
             )

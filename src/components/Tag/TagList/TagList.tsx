@@ -4,8 +4,8 @@ import { TagType } from '@/types/Tag'
 
 type Prop = {
   tags: TagType[]
-  selectedTagID: number
-  handleSelectedID: (selectedTagID: number) => void
+  selectedTagID: string
+  handleSelectedID: (selectedTagID: string) => void
 }
 
 export const TagList = (props: Prop) => {
@@ -14,9 +14,9 @@ export const TagList = (props: Prop) => {
       <Tag
         isAll={true}
         tag={{ id: '0', name: 'all' }}
-        isSelectedStyle={props.selectedTagID == 0}
+        isSelectedStyle={props.selectedTagID == 'all'}
         handleSelectedID={() => {
-          props.handleSelectedID(0)
+          props.handleSelectedID('all')
         }}
       />
       {props.tags &&
@@ -24,9 +24,10 @@ export const TagList = (props: Prop) => {
           <Tag
             tag={item}
             key={index}
-            isSelectedStyle={props.selectedTagID == Number(item.id)}
+            isSelectedStyle={props.selectedTagID == item.id}
             handleSelectedID={() => {
-              props.handleSelectedID(Number(item.id))
+              console.log(item.id)
+              props.handleSelectedID(item.id)
             }}
           />
         ))}
