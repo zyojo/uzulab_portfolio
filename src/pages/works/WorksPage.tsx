@@ -14,10 +14,10 @@ const WorksPage: NextPageWithLayout = () => {
     setIsLoading(true)
     setTimeout(() => {
       setSelectedTagID(selectedTagID)
-    }, 500)
+    }, 300)
     setTimeout(() => {
       setIsLoading(false)
-    }, 1000)
+    }, 800)
   }
   useEffect(() => {
     setIsLoading(false)
