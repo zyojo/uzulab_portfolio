@@ -13,7 +13,9 @@
       width: calc(columnWidth(6, 'tb') + 64px * 2);
     }
     @include media-query('sp') {
+      padding: 160px 40px 64px;
       width: columnWidth(12, 'sp');
+      margin: calc(132px + 80px) auto 80px;
     }
     &_img {
       width: 264px;
@@ -46,6 +48,7 @@
       line-height: calc(32 / 14);
       @include media-query('sp') {
         font-size: 13px;
+        margin-top: 24px;
       }
     }
   }
@@ -55,6 +58,9 @@
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 160px;
+    @include media-query('sp') {
+      margin-bottom: 104px;
+    }
   }
   &_flow {
     margin: 0 auto;

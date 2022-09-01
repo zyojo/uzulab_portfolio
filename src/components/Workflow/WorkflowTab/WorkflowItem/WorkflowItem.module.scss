@@ -74,6 +74,9 @@
       }
       &_desc {
         margin-top: 16px;
+        @include media-query('sp') {
+          margin-top: 24px;
+        }
       }
     }
   }

@@ -21,6 +21,8 @@
       width: 100vw;
       border-radius: 0 0 $br-lg $br-lg;
       margin-top: -104px;
+      padding-bottom: 72px;
+      margin-bottom: 88px;
     }
     &_img {
       position: relative;
@@ -83,6 +85,9 @@
             @include media-query('tb') {
               width: calc(columnWidth(8, 'tb') - 24px);
               margin-bottom: 72px;
+            }
+            @include media-query('sp') {
+              margin-bottom: 40px;
             }
             &_item {
               display: flex;
@@ -180,6 +185,9 @@
           margin-top: 40px;
         }
       }
+      a {
+        border-bottom: dotted 1px $text-black;
+      }
       img {
         margin: 80px 0 0;
         width: 100%;
@@ -212,6 +220,9 @@
         img {
           margin: 0;
           width: calc((100% - 16px) / 2);
+          @include media-query('sp') {
+            width: calc((100% - 8px) / 2);
+          }
         }
         & + img {
           margin: 32px 0 0;
