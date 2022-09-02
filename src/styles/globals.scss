@@ -35,23 +35,6 @@ body {
   padding: 0 #{map-get($column-margin, 'dt')};
   margin: calc(24px + 60px) auto 0;
   position: relative;
-  &::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgb(250, 247, 245);
-    background: linear-gradient(
-      138deg,
-      rgba(250, 247, 245, 1) 0%,
-      rgba(249, 243, 239, 1) 50%,
-      rgba(247, 238, 233, 1) 64%,
-      rgba(250, 247, 245, 1) 100%
-    );
-    z-index: -1;
-  }
   @include media-query('pc') {
     max-width: #{map-get($body-maxWidth, 'pc')};
     padding: 0 #{map-get($column-margin, 'pc')};

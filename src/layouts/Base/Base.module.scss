@@ -1,0 +1,32 @@
+.base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  &_container {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+  }
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(250, 247, 245);
+    background: linear-gradient(
+      138deg,
+      rgb(250, 247, 245) 0%,
+      rgb(249, 243, 239) 50%,
+      rgb(247, 238, 233) 64%,
+      rgb(250, 247, 245) 100%
+    );
+    z-index: -1;
+  }
+}

@@ -5,8 +5,8 @@ import { useContext } from 'react'
 import styles from './Header.module.scss'
 import { AppContext } from '@/contexts/AppContext'
 import CONTACT_ICON from '@/image/contact_icon.svg'
-import HEADER_LOGO from '@/image/uzulab.svg'
-import HEADER_LOGO_LINE from '@/image/uzulab_h.svg'
+import HEADER_LOGO_LINE from '@/image/uzulab_h_w.svg'
+import HEADER_LOGO from '@/image/uzulab_w.svg'
 
 export const Header = () => {
   const router = useRouter()

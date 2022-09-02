@@ -3,6 +3,7 @@
 .header {
   width: 100%;
   left: 50%;
+  color: $text-black-reverse;
   transform: translateX(-50%);
   position: fixed;
   top: 24px;
@@ -12,6 +13,7 @@
   height: 60px;
   z-index: 5;
   padding: 0 56px 0 48px;
+  mix-blend-mode: exclusion;
   &[data-is-mobile='true'] {
     height: 40px;
   }
@@ -43,7 +45,7 @@
         transform: translateX(-50%);
         width: 24px;
         height: 1px;
-        background-color: $text-black;
+        background-color: $text-black-reverse;
         border-radius: 99px;
       }
       &_container {
