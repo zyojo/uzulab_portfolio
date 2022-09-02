@@ -19,7 +19,7 @@
     margin-bottom: 32px;
     img {
       transition: 0.3s ease-out;
-      filter: saturate(0.6) opacity(0.9);
+      filter: saturate(0.8) opacity(0.9);
       @include media-query('sp') {
         margin-bottom: 24px;
         filter: saturate(1) opacity(1);
