@@ -70,10 +70,10 @@ const WorkPage = () => {
             </div>
           </div>
           {work !== undefined && (
-            <div
-              className={styles.workPage_top_info_right}
-              dangerouslySetInnerHTML={{ __html: work?.summary_top }}
-            ></div>
+            <div className={styles.workPage_top_info_right}>
+              <div className={styles.workPage_top_info_right_subtitle}>{work.summary_list}</div>
+              <div dangerouslySetInnerHTML={{ __html: work?.summary_top }}></div>
+            </div>
           )}
         </div>
       </div>
