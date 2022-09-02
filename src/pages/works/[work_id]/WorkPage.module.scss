@@ -108,6 +108,9 @@
         }
       }
       &_right {
+        a {
+          border-bottom: dotted 1px $text-black;
+        }
         line-height: 2.5;
         width: columnWidth(8, 'dt');
         @include media-query('pc') {
