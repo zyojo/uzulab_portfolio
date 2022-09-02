@@ -1,4 +1,5 @@
 import EXPERIMENT_ICON from '@/image/experiment_icon.svg'
+import FAVICON from '@/image/favicon.ico'
 import FLOW_IMG1 from '@/image/flow1.jpg'
 import FLOW_IMG2 from '@/image/flow2.jpg'
 import FLOW_IMG3 from '@/image/flow3.jpg'
@@ -6,6 +7,7 @@ import FLOW_IMG4 from '@/image/flow4.jpg'
 import FLOW_IMG5 from '@/image/flow5.jpg'
 import WEB_ICON from '@/image/pc_icon.svg'
 import GRAPHIC_ICON from '@/image/stationary_icon.svg'
+import OGP from '@/image/uzulab_ogp.png'
 
 export const SKILLS_DATA = [
   {
@@ -60,3 +62,11 @@ export const WORKFLOW_DATA = [
     desc: '公開後の更新や、Google Analyticsによる効果測定による改善の提案などを行います。WordPressなどのCMSからご自身で更新される場合にもご要望があれば、更新マニュアルの作成や、レクチャーを行います。',
   },
 ]
+
+export const metaData = {
+  title: 'uzulab',
+  description: 'uzulab portfolio',
+  favicon: FAVICON,
+  url: 'https://uzulab-portfolio.vercel.app',
+  ogp: OGP,
+}

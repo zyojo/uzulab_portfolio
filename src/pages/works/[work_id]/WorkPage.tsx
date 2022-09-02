@@ -24,6 +24,7 @@ const WorkPage = () => {
               alt={work.title}
               layout='fill'
               objectFit='cover'
+              quality={100}
             />
           )}
         </div>
