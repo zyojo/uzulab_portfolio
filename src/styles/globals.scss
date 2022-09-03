@@ -120,6 +120,15 @@ li {
   transform: translateZ(0);
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
+  & + span {
+    img {
+      transition: all 0.3s ease-out;
+      opacity: 0;
+      &[data-loaded='true'] {
+        opacity: 1;
+      }
+    }
+  }
 }
 @-webkit-keyframes load8 {
   0% {

@@ -28,11 +28,11 @@
     height: 144px;
     aspect-ratio: 3/2;
     position: relative;
-    -webkit-filter: saturate(0.7) contrast(0.97) opacity(0.8);
-    -moz-filter: saturate(0.7) contrast(0.97) opacity(0.8);
-    -ms-filter: saturate(0.7) contrast(0.97) opacity(0.8);
-    -o-filter: saturate(0.7) contrast(0.97) opacity(0.8);
-    filter: saturate(0.7) contrast(0.97) opacity(0.8);
+    -webkit-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    -moz-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    -ms-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    -o-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    filter: saturate(0.8) contrast(0.97) opacity(0.8);
     transition: filter 0.4s ease-out;
     @include media-query('tb') {
       height: auto;
@@ -51,8 +51,17 @@
       font-size: 18px;
       word-break: break-all;
       transition: color 0.7s ease-out;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      @include media-query('tb') {
+        margin-bottom: 16px;
+      }
       @include media-query('sp') {
         font-size: 16px;
+        margin-bottom: 8px;
       }
     }
     &_arrow {
@@ -67,7 +76,7 @@
         background-color: $border-theme;
         border-radius: 99px;
         position: absolute;
-        left: 104px;
+        left: 40px;
         right: 40px;
         top: 50%;
         transform: translateY(-50%);
@@ -99,10 +108,6 @@
         }
         &_arrow {
           text-align: left;
-          &::after {
-            left: 40px;
-            right: 32px;
-          }
         }
       }
     }
@@ -122,17 +127,14 @@
           color: $text-brown-hover;
         }
         &_arrow::after {
-          left: 56px;
+          left: 80px;
           right: 40px;
-        }
-      }
-
-      &[data-isprev='true'] {
-        .nextWorkLink_info_arrow::after {
-          left: 40px;
-          right: 56px;
         }
       }
     }
   }
+}
+.nextWorkLink:hover[data-isprev='true'] .nextWorkLink_info_arrow::after {
+  left: 40px;
+  right: 80px;
 }
