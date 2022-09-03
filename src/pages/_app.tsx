@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import '@/styles/globals.scss'
 import { useEffect, useState } from 'react'
 import { AppContext } from '@/contexts/AppContext'
+import { usePageView } from '@/hooks/usePageView'
 import { BaseLayout } from '@/layouts/Base/Base'
 import { EMPTY_TAGS } from '@/lib/stub/dummyTags'
 import { EMPTY_WORKS } from '@/lib/stub/dummyWorks'
@@ -25,6 +26,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     setWindowWidth(window.innerWidth)
     window.innerWidth <= 450 ? setIsMobile(true) : setIsMobile(false)
   }
+  usePageView()
   useEffect(() => {
     fetchWorks()
     fetchTags()

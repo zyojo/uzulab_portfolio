@@ -6,7 +6,7 @@ import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { AppContext } from '@/contexts/AppContext'
-import { translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
+import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
 
 const WorkPage = () => {
   const { works, tags, isMobile } = useContext(AppContext)
@@ -14,11 +14,7 @@ const WorkPage = () => {
   const { work_id } = router.query
   const work = works.find((work) => String(work.id) == work_id)
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
-  const setLoadFlg = (e: any) => {
-    if (e.target.srcset) {
-      e.target.dataset.loaded = 'true'
-    }
-  }
+
   return (
     <div className={styles.workPage}>
       <div className={styles.workPage_top}>
