@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { AppContext } from '@/contexts/AppContext'
-import { translateWorkDuration } from '@/lib/functions'
+import { setLoadFlg, translateWorkDuration } from '@/lib/functions'
 import { WorkType } from '@/types/Work'
 
 type Prop = {
@@ -20,7 +20,15 @@ export const Work = (props: Prop) => {
           <div className={styles.work_thumb}>
             <>
               {props.work.thumbnail.url !== '' && (
-                <Image src={props.work.thumbnail.url} alt={props.work.title} layout='fill' />
+                <>
+                  <div className='loader'></div>
+                  <Image
+                    src={props.work.thumbnail.url}
+                    alt={props.work.title}
+                    layout='fill'
+                    onLoad={setLoadFlg}
+                  />
+                </>
               )}
               <div className={styles.work_thumb_tags}>
                 {props.work.tags.map((item, index) => {

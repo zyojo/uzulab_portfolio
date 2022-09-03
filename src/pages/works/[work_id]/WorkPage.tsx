@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styles from './WorkPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
@@ -14,10 +14,16 @@ const WorkPage = () => {
   const { work_id } = router.query
   const work = works.find((work) => String(work.id) == work_id)
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
+  const setLoadFlg = (e: any) => {
+    if (e.target.srcset) {
+      e.target.dataset.loaded = 'true'
+    }
+  }
   return (
-    <>
+    <div className={styles.workPage}>
       <div className={styles.workPage_top}>
         <div className={styles.workPage_top_img}>
+          <div className='loader'></div>
           {work !== undefined && (
             <Image
               src={isMobile ? work.header_sp.url : work.header_pc.url}
@@ -25,6 +31,8 @@ const WorkPage = () => {
               layout='fill'
               objectFit='cover'
               quality={100}
+              loading='eager'
+              onLoad={setLoadFlg}
             />
           )}
         </div>
@@ -104,7 +112,7 @@ const WorkPage = () => {
         )}
       </div>
       <ContactLink />
-    </>
+    </div>
   )
 }
 

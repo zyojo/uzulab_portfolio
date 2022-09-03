@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image'
 import { useRef, useState } from 'react'
 import styles from './WorkflowItem.module.scss'
+import { setLoadFlg } from '@/lib/functions'
 
 type Props = {
   flow: {
@@ -45,7 +46,8 @@ export const WorkflowItem = (props: Props) => {
               {props.flow.imgs.map((img, imgIndex) => {
                 return (
                   <div className={styles.workflowItem_content_inner_imgs_img} key={imgIndex}>
-                    <Image src={img} alt={props.flow.title} layout='fill' />
+                    <div className='loader'></div>
+                    <Image src={img} alt={props.flow.title} layout='fill' onLoad={setLoadFlg} />
                   </div>
                 )
               })}

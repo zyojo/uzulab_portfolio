@@ -26,5 +26,8 @@
     font-size: 12px;
     padding: 2px 12px;
     background-color: rgba($theme-white, 0.8);
+    @include media-query('sp') {
+      padding: 0px 10px;
+    }
   }
 }

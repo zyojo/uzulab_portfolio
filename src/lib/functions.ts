@@ -40,3 +40,8 @@ export const translateEmbeddedEditor = (
   })
   return combinedHTML
 }
+export const setLoadFlg = (e: any) => {
+  if (e.target.srcset) {
+    e.target.dataset.loaded = 'true'
+  }
+}
