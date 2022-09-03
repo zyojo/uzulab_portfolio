@@ -1,10 +1,10 @@
 @import './../../../styles/variables';
 
 .workList {
-  transition: opacity 0.2s ease-out;
-  opacity: 1;
-  &[data-loading='true'] {
-    opacity: 0;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  &[data-load='true'] {
+    opacity: 1;
   }
   @include media-query('sp') {
     padding: 0 #{map-get($column-margin, 'sp')};

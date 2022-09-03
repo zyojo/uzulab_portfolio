@@ -48,7 +48,6 @@
       line-height: calc(32 / 14);
       @include media-query('sp') {
         font-size: 13px;
-        margin-top: 24px;
       }
     }
   }

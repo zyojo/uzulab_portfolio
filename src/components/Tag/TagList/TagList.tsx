@@ -10,7 +10,7 @@ type Prop = {
 
 export const TagList = (props: Prop) => {
   return (
-    <div className={styles.tagList}>
+    <div className={styles.tagList} data-loading={props.tags.length > 1}>
       <Tag
         isAll={true}
         tag={{ id: '0', name: 'all' }}

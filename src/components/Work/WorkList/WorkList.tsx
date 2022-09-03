@@ -10,7 +10,7 @@ type Prop = {
 
 export const WorkList = (props: Prop) => {
   return (
-    <ul className={styles.workList} data-loading={props.isLoading}>
+    <ul className={styles.workList} data-load={props.works.length > 1}>
       {props.works &&
         props.works.map((item, index) => {
           return (

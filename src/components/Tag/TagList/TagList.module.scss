@@ -5,6 +5,11 @@
   justify-content: center;
   margin-top: 8px;
   margin-bottom: 80px;
+  transition: all 0.3s ease-out;
+  opacity: 0;
+  &[data-loading='true'] {
+    opacity: 1;
+  }
   @include media-query('sp') {
     margin-top: 0;
     margin-bottom: 48px;
