@@ -1,6 +1,7 @@
 @import './../../../styles/variables';
 
 .header {
+  mix-blend-mode: exclusion;
   width: 100%;
   left: 50%;
   transform: translateX(-50%);

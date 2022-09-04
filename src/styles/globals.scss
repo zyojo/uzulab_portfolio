@@ -31,9 +31,6 @@ body {
   }
 }
 body {
-  max-width: #{map-get($body-maxWidth, 'dt')};
-  padding: 0 #{map-get($column-margin, 'dt')};
-  margin: calc(24px + 60px) auto 0;
   position: relative;
   &::after {
     content: '';
@@ -62,19 +59,6 @@ body {
         rgba(250, 244, 240, 1) 100%
       );
     }
-  }
-  @include media-query('pc') {
-    max-width: #{map-get($body-maxWidth, 'pc')};
-    padding: 0 #{map-get($column-margin, 'pc')};
-  }
-  @include media-query('tb') {
-    max-width: #{map-get($body-maxWidth, 'tb')};
-    padding: 0 #{map-get($column-margin, 'tb')};
-  }
-  @include media-query('sp') {
-    max-width: #{map-get($body-maxWidth, 'sp')};
-    padding: 0;
-    margin: 104px auto 0;
   }
 }
 p {

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { ReactElement } from 'react'
+import styles from './Base.module.scss'
 import { Footer } from '@/components/common/Footer/Footer'
 import { Header } from '@/components/common/Header/Header'
 import { metaData } from '@/lib/constants'
@@ -40,8 +41,8 @@ export const BaseLayout = ({ children }: LayoutProps) => {
           }}
         />
       </Head>
-      <main>
-        <Header />
+      <Header />
+      <main className={styles.main}>
         {children}
         <Footer />
       </main>
