@@ -51,6 +51,17 @@ body {
       rgba(250, 247, 245, 1) 100%
     );
     z-index: -1;
+    @include media-query('sp') {
+      background: rgb(249, 243, 240);
+      background: linear-gradient(
+        138deg,
+        rgba(249, 243, 240, 1) 0%,
+        rgba(251, 245, 240, 1) 47%,
+        rgba(247, 237, 229, 1) 65%,
+        rgba(250, 243, 236, 1) 79%,
+        rgba(250, 244, 240, 1) 100%
+      );
+    }
   }
   @include media-query('pc') {
     max-width: #{map-get($body-maxWidth, 'pc')};
