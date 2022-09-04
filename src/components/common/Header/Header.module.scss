@@ -5,6 +5,7 @@
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
+  color: $text-black-reverse;
   position: fixed;
   top: 24px;
   display: flex;
@@ -44,7 +45,7 @@
         transform: translateX(-50%);
         width: 24px;
         height: 1px;
-        background-color: $text-black;
+        background-color: $text-black-reverse;
         border-radius: 99px;
       }
       &_container {
