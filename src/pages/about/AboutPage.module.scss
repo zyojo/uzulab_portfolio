@@ -75,6 +75,7 @@
     }
     @include media-query('sp') {
       width: 100vw;
+      margin-left: calc(#{map-get($column-margin, 'sp') * -1});
     }
     &_title {
       text-align: center;
