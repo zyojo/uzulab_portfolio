@@ -6,7 +6,4 @@
   &[data-load='true'] {
     opacity: 1;
   }
-  @include media-query('sp') {
-    padding: 0 #{map-get($column-margin, 'sp')};
-  }
 }

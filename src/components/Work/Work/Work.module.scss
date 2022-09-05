@@ -12,14 +12,13 @@
   }
   &_thumb {
     width: 100%;
-    border-radius: $br-sm;
-    overflow: hidden;
     aspect-ratio: 3 / 2;
     position: relative;
     margin-bottom: 32px;
     img {
       transition: 0.3s ease-out;
       filter: saturate(0.8) opacity(0.9);
+      border-radius: $br-sm;
       @include media-query('sp') {
         margin-bottom: 24px;
         filter: saturate(1) opacity(1);
@@ -75,6 +74,7 @@
     }
   }
   &:nth-of-type(2n + 1) {
+    // ３番目以降の左側
     margin-right: auto;
     margin-left: normalWorksMargin('dt');
     @include media-query('pc') {
@@ -85,6 +85,7 @@
     }
   }
   &:nth-of-type(2n) {
+    // ３番目以降の右側
     margin-right: normalWorksMargin('dt');
     margin-left: auto;
     @include media-query('pc') {

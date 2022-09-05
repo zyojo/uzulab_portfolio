@@ -2,25 +2,26 @@
 .workPage {
   &_top {
     position: relative;
-    left: calc((100vw - 72px * 2 - #{columnWidth(12, 'dt')}) / -2);
-    width: calc(100vw - 144px);
+    width: calc(100vw - #{map-get($work-top-margin, 'dt')} * 2);
     overflow: hidden;
     border-radius: $br-lg;
     background-color: $content-bg-white;
     padding-bottom: 80px;
     margin-bottom: 120px;
+    margin-left: calc((100vw - #{mainWidth('dt')}) / -2 + #{map-get($work-top-margin, 'dt')});
     @include media-query('pc') {
-      left: calc((100vw - 32px * 2 - #{columnWidth(12, 'pc')}) / -2);
-      width: calc(100vw - 64px);
+      width: calc(100vw - #{map-get($work-top-margin, 'pc')} * 2);
+      margin-left: calc((100vw - #{mainWidth('pc')}) / -2 + #{map-get($work-top-margin, 'pc')});
     }
     @include media-query('tb') {
-      left: calc((100vw - 16px * 2 - #{columnWidth(12, 'tb')}) / -2);
-      width: calc(100vw - 32px);
+      width: calc(100vw - #{map-get($work-top-margin, 'tb')} * 2);
+      margin-left: calc((100vw - #{mainWidth('tb')}) / -2 + #{map-get($work-top-margin, 'tb')});
     }
     @include media-query('sp') {
       width: 100vw;
       border-radius: 0 0 $br-lg $br-lg;
       margin-top: -104px;
+      margin-left: calc(#{map-get($column-margin, 'sp') * -1});
       padding-bottom: 72px;
       margin-bottom: 88px;
     }

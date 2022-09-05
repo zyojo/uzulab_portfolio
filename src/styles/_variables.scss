@@ -45,17 +45,26 @@ $column-margin: (
   pc: 32px,
   dt: 140px,
 );
+// 12columns + 11column-gutters + 2column-margins
 $body-maxWidth: (
   sp: 100vw,
   tb: 100vw,
-  pc: calc(100vw - #{map-get($column-margin, 'pc')} * 2),
+  pc: 95vw,
   dt: $bp-xl,
 );
+// work-top-margin < column-margin
+$work-top-margin: (
+  sp: 0px,
+  tb: 16px,
+  pc: 32px,
+  dt: 72px,
+);
 @function mainWidth($media) {
-  // padding分を考慮
+  // 12columns + 11column-gutters
   @return calc(#{map-get($body-maxWidth, $media)} - (#{map-get($column-margin, $media)} * 2));
 }
 @function columnWidth($columns, $media) {
+  // n columns + (n-1) column-gutters
   @return calc(
     (#{mainWidth($media)} - (#{map-get($column-gutter, $media)} * 11)) / 12 * #{$columns} + #{map-get(
         $column-gutter,
@@ -64,9 +73,5 @@ $body-maxWidth: (
   );
 }
 @function normalWorksMargin($media) {
-  @return (
-    calc(
-      (#{mainWidth($media)} - #{columnWidth(11, $media)} - #{map-get($column-gutter, $media)}) / 2
-    )
-  );
+  @return (calc(#{columnWidth(1, $media)} / 2));
 }

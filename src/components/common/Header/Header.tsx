@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import styles from './Header.module.scss'
 import { AppContext } from '@/contexts/AppContext'
-import CONTACT_ICON from '@/image/contact_icon.svg'
+import CONTACT_ICON from '@/image/contact_icon_w.svg'
 import HEADER_LOGO_LINE from '@/image/uzulab_h_w.svg'
 import HEADER_LOGO from '@/image/uzulab_w.svg'
 
