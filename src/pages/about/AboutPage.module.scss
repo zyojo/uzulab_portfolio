@@ -99,7 +99,7 @@
         }
       }
       @include media-query('sp') {
-        width: columnWidth(10, 'sp');
+        width: columnWidth(12, 'sp');
         line-height: 2;
         margin: 0 auto 32px;
         font-size: 12px;
