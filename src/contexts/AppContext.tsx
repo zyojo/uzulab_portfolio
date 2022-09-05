@@ -11,6 +11,8 @@ export const AppContext = React.createContext({
   handleTags: () => {},
   windowWidth: 1441,
   isMobile: false,
+  hasChangedEvent: false,
+  handleChangeEvent: () => {},
 } as {
   works: WorkType[]
   tags: TagType[]
@@ -18,4 +20,6 @@ export const AppContext = React.createContext({
   handleTags: () => void
   windowWidth: number
   isMobile: boolean
+  hasChangedEvent: boolean
+  handleChangeEvent: () => void
 })

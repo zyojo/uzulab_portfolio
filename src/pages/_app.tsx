@@ -14,6 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [tags, setTags] = useState(EMPTY_TAGS)
   const [windowWidth, setWindowWidth] = useState(1441)
   const [isMobile, setIsMobile] = useState(false)
+  const [hasChangedEvent, setHasChangedEvent] = useState(false)
   const fetchWorks = async () => {
     const data = await handleWorks()
     setWorks(data.contents)
@@ -26,6 +27,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     setWindowWidth(window.innerWidth)
     window.innerWidth <= 450 ? setIsMobile(true) : setIsMobile(false)
   }
+  const handleChangeEvent = () => {
+    setHasChangedEvent(true)
+  }
   usePageView()
   useEffect(() => {
     fetchWorks()
@@ -36,7 +40,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <AppContext.Provider value={{ works, tags, handleWorks, handleTags, windowWidth, isMobile }}>
+    <AppContext.Provider
+      value={{
+        works,
+        tags,
+        handleWorks,
+        handleTags,
+        windowWidth,
+        isMobile,
+        hasChangedEvent,
+        handleChangeEvent,
+      }}
+    >
       <BaseLayout>
         <Component {...pageProps} />
       </BaseLayout>

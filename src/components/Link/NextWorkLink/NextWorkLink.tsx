@@ -14,7 +14,7 @@ export const NextWorkLink = (props: Props) => {
   return (
     <>
       {
-        <Link href={props.link}>
+        <Link href={props.link} scroll={true}>
           <a className={styles.nextWorkLink} data-isprev={props.isPrev} style={props.styles}>
             <div className={styles.nextWorkLink_img}>
               <Image src={props.work.thumbnail.url} alt={props.work.title} layout='fill' />
