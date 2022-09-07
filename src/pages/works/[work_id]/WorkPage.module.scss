@@ -37,6 +37,9 @@
         height: auto;
         aspect-ratio: 1/1;
       }
+      img {
+        border-radius: 0 0 $br-lg $br-lg;
+      }
     }
     &_info {
       display: flex;

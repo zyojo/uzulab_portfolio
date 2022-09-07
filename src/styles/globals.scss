@@ -48,7 +48,7 @@ body {
       rgba(250, 247, 245, 1) 100%
     );
     z-index: -1;
-    @include media-query('sp') {
+    @include media-query('tb') {
       background: rgb(249, 243, 240);
       background: linear-gradient(
         138deg,
