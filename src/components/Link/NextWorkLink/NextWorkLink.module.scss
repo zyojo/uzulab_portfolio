@@ -35,6 +35,11 @@
     filter: saturate(0.8) contrast(0.97) opacity(0.8);
     transition: filter 0.4s ease-out;
     @include media-query('tb') {
+      -webkit-filter: saturate(1) contrast(1) opacity(1);
+      -moz-filter: saturate(1) contrast(1) opacity(1);
+      -ms-filter: saturate(1) contrast(1) opacity(1);
+      -o-filter: saturate(1) contrast(1) opacity(1);
+      filter: saturate(1) contrast(1) opacity(1);
       height: auto;
     }
   }
@@ -116,10 +121,10 @@
     background-color: rgba($color: $theme-white, $alpha: 0.8);
     .nextWorkLink {
       &_img {
-        -webkit-filter: saturate(0%);
-        -moz-filter: saturate(0%);
-        -ms-filter: saturate(0%);
-        -o-filter: saturate(0%);
+        -webkit-filter: saturate(1) contrast(1) opacity(1);
+        -moz-filter: saturate(1) contrast(1) opacity(1);
+        -ms-filter: saturate(1) contrast(1) opacity(1);
+        -o-filter: saturate(1) contrast(1) opacity(1);
         filter: saturate(1) contrast(1) opacity(1);
       }
       &_info {

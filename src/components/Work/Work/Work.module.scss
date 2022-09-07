@@ -19,9 +19,11 @@
       transition: 0.3s ease-out;
       filter: saturate(0.8) opacity(0.9);
       border-radius: $br-sm;
+      @include media-query('tb') {
+        filter: saturate(1) opacity(1);
+      }
       @include media-query('sp') {
         margin-bottom: 24px;
-        filter: saturate(1) opacity(1);
       }
     }
     @include media-query('tb') {

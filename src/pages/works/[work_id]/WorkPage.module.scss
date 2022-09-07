@@ -38,7 +38,7 @@
         aspect-ratio: 1/1;
       }
       img {
-        border-radius: 0 0 $br-lg $br-lg;
+        border-radius: $br-lg $br-lg 0 0;
       }
     }
     &_info {
