@@ -2,8 +2,10 @@
 
 .work {
   display: block;
-  color: $text-black-hover;
+  // color: $text-black-hover;
   background-color: $content-bg-white;
+  color: $text-black;
+  // background-color: $content-bg-white-hover;
   border-radius: $br-md;
   cursor: pointer;
   transition: background-color 0.3s ease-out, color 0.7s ease-out;
@@ -17,7 +19,7 @@
     margin-bottom: 32px;
     img {
       transition: 0.3s ease-out;
-      filter: saturate(0.8) opacity(0.9);
+      filter: saturate(0.9) opacity(0.95);
       border-radius: $br-sm;
       @include media-query('tb') {
         filter: saturate(1) opacity(1);
