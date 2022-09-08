@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
-import { AppContext } from '@/contexts/AppContext'
 import { setLoadFlg, translateWorkDuration } from '@/lib/functions'
+import { AppContext } from '@/providers/AppContext'
 import { WorkType } from '@/types/Work'
 
 type Prop = {

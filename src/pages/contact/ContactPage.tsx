@@ -1,7 +1,7 @@
 import type { NextPageWithLayout } from 'next'
 import { useContext, useEffect, useState } from 'react'
 import styles from './ContactPage.module.scss'
-import { AppContext } from '@/contexts/AppContext'
+import { AppContext } from '@/providers/AppContext'
 import { handleSubmit } from '@/repositories/handleSubmit'
 
 const ContactPage: NextPageWithLayout = () => {

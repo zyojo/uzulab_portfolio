@@ -5,8 +5,8 @@ import styles from './WorkPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
 import { Tag } from '@/components/Tag/Tag/Tag'
-import { AppContext } from '@/contexts/AppContext'
 import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
+import { AppContext } from '@/providers/AppContext'
 
 const WorkPage = () => {
   const { works, tags, isMobile } = useContext(AppContext)

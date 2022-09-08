@@ -47,7 +47,13 @@ export const WorkflowItem = (props: Props) => {
                 return (
                   <div className={styles.workflowItem_content_inner_imgs_img} key={imgIndex}>
                     <div className='loader'></div>
-                    <Image src={img} alt={props.flow.title} layout='fill' onLoad={setLoadFlg} />
+                    <Image
+                      src={img}
+                      alt={props.flow.title}
+                      layout='fill'
+                      onLoad={setLoadFlg}
+                      style={{ zIndex: 2 }}
+                    />
                   </div>
                 )
               })}

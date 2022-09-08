@@ -26,7 +26,6 @@ export const TagList = (props: Prop) => {
             key={index}
             isSelectedStyle={props.selectedTagID == item.id}
             handleSelectedID={() => {
-              console.log(item.id)
               props.handleSelectedID(item.id)
             }}
           />

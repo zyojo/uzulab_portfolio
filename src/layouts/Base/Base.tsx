@@ -4,8 +4,8 @@ import { ReactElement, useContext, useRef } from 'react'
 import styles from './Base.module.scss'
 import { Footer } from '@/components/common/Footer/Footer'
 import { Header } from '@/components/common/Header/Header'
-import { AppContext } from '@/contexts/AppContext'
 import { metaData } from '@/lib/constants'
+import { AppContext } from '@/providers/AppContext'
 
 type LayoutProps = Required<{
   readonly children: ReactElement
@@ -16,7 +16,6 @@ export const BaseLayout = ({ children }: LayoutProps) => {
   const router = useRouter()
   const mainRef = useRef<HTMLDivElement>(null)
   const handleChangeRoute = () => {
-    console.log('changed')
     handleChangeEvent()
     mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }

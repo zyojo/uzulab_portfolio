@@ -6,9 +6,9 @@ import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { SkillItem } from '@/components/Skill/SkillItem/SkillItem'
 import { WorkflowImg } from '@/components/Workflow/WorkflowImg/WorkflowImg'
 import { WorkflowTab } from '@/components/Workflow/WorkflowTab/WorkflowTab/WorkflowTab'
-import { AppContext } from '@/contexts/AppContext'
 import PROFILE_IMG from '@/image/zyojo.png'
 import { SKILLS_DATA, WORKFLOW_DATA } from '@/lib/constants'
+import { AppContext } from '@/providers/AppContext'
 
 const AboutPage: NextPageWithLayout = () => {
   const { isMobile } = useContext(AppContext)

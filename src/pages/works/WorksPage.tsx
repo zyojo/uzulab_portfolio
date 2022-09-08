@@ -4,7 +4,7 @@ import styles from './WorksPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { TagList } from '@/components/Tag/TagList/TagList'
 import { WorkList } from '@/components/Work/WorkList/WorkList'
-import { AppContext } from '@/contexts/AppContext'
+import { AppContext } from '@/providers/AppContext'
 
 const WorksPage: NextPageWithLayout = () => {
   const { works, tags } = useContext(AppContext)
