@@ -15,7 +15,7 @@ export const Work = (props: Prop) => {
   const { tags } = useContext(AppContext)
   return (
     <li className={styles.work}>
-      <Link href={'/works/' + props.work.id}>
+      <Link href={'/works/' + props.work.urn}>
         <a className={styles.work_container}>
           <div className={styles.work_thumb}>
             <>

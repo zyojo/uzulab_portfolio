@@ -12,7 +12,7 @@ const WorkPage = () => {
   const { works, tags, isMobile } = useContext(AppContext)
   const router = useRouter()
   const { work_id } = router.query
-  const work = works.find((work) => String(work.id) == work_id)
+  const work = works.find((work) => String(work.urn) == work_id)
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
 
   return (
@@ -90,11 +90,11 @@ const WorkPage = () => {
         )}
 
         {workOrder !== undefined && workOrder + 1 < works.length && (
-          <NextWorkLink link={'/works/' + works[workOrder + 1].id} work={works[workOrder + 1]} />
+          <NextWorkLink link={'/works/' + works[workOrder + 1].urn} work={works[workOrder + 1]} />
         )}
         {workOrder !== undefined && workOrder - 1 >= 0 && (
           <NextWorkLink
-            link={'/works/' + works[workOrder - 1].id}
+            link={'/works/' + works[workOrder - 1].urn}
             work={works[workOrder - 1]}
             isPrev={true}
             styles={
