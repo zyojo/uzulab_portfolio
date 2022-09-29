@@ -8,6 +8,7 @@ export const DUMMY_WORKS: WorkType[] = [
     publishedAt: '2022-08-30T14:42:47.029Z',
     revisedAt: '2022-08-30T15:57:14.975Z',
     title: 'JuuQ',
+    urn: 'juuq',
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/057cd450480a431eb547eaa556b1afbd/havreholmgaardLogo.jpg',
       height: 600,
@@ -62,6 +63,7 @@ export const DUMMY_WORKS: WorkType[] = [
     publishedAt: '2022-08-27T05:15:57.496Z',
     revisedAt: '2022-08-30T04:36:15.011Z',
     title: 'uzulab portfolio',
+    urn: 'uzulab',
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/716c0b4f839e4592bfb057ea478e08b9/uzulab.jpg',
       height: 600,
@@ -114,6 +116,7 @@ export const DUMMY_WORKS: WorkType[] = [
     publishedAt: '2022-08-27T02:59:09.285Z',
     revisedAt: '2022-08-30T16:59:29.466Z',
     title: 'havreholmgård',
+    urn: 'havreholmgaard',
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/057cd450480a431eb547eaa556b1afbd/havreholmgaardLogo.jpg',
       height: 600,
@@ -173,6 +176,7 @@ export const DUMMY_WORKS: WorkType[] = [
     publishedAt: '2022-08-27T05:50:14.962Z',
     revisedAt: '2022-08-30T15:56:23.968Z',
     title: 'Million Mall',
+    urn: 'million_mall',
     thumbnail: {
       url: 'https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/edc2b2b641404af0bb5f880e78818465/millionmall.jpg',
       height: 600,
@@ -233,6 +237,7 @@ export const EMPTY_WORKS: WorkType[] = [
     publishedAt: '',
     revisedAt: '',
     title: '',
+    urn: '',
     thumbnail: {
       url: '',
       height: 600,
