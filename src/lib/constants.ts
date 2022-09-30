@@ -65,7 +65,8 @@ export const WORKFLOW_DATA = [
 
 export const metaData = {
   title: 'uzulab',
-  description: 'UI/UX Designer, WEB Developer',
+  description:
+    'Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。',
   favicon: FAVICON,
   url: 'https://uzulab-portfolio.vercel.app',
   ogp: OGP,
