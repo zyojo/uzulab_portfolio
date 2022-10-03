@@ -17,7 +17,7 @@ export const SkillItem = (props: Prop) => {
       <div className={styles.skillItem_img}>
         <Image src={props.skill.image} alt={props.skill.title} />
       </div>
-      <div className={styles.skillItem_title}>{props.skill.title}</div>
+      <h3 className={styles.skillItem_title}>{props.skill.title}</h3>
       <div className={styles.skillItem_desc}>{props.skill.desc}</div>
       <div className={styles.skillItem_skill + ' avenir-bold'}>{props.skill.skill}</div>
     </div>

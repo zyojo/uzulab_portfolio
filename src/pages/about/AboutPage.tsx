@@ -13,12 +13,12 @@ import { AppContext } from '@/providers/AppContext'
 const AboutPage: NextPageWithLayout = () => {
   const { isMobile } = useContext(AppContext)
   return (
-    <div className={styles.about}>
-      <div className={styles.about_top}>
+    <article className={styles.about}>
+      <section className={styles.about_top}>
         <div className={styles.about_top_img}>
           <Image src={PROFILE_IMG} alt='RyotaNakahara' />
         </div>
-        <div className={styles.about_top_title + ' avenir-italic'}>Ryota Nakahara</div>
+        <h1 className={styles.about_top_title + ' avenir-italic'}>Ryota Nakahara</h1>
         <div className={styles.about_top_subtitle + ' avenir-italic'}>
           UI/UX Designer, WEB Developer
         </div>
@@ -27,14 +27,14 @@ const AboutPage: NextPageWithLayout = () => {
           <br />
           Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。
         </div>
-      </div>
-      <div className={styles.about_skills}>
+      </section>
+      <section className={styles.about_skills}>
         {SKILLS_DATA.map((item, index) => (
           <SkillItem skill={item} key={index} />
         ))}
-      </div>
-      <div className={styles.about_flow}>
-        <div className={styles.about_flow_title}>制作の流れ</div>
+      </section>
+      <section className={styles.about_flow}>
+        <h2 className={styles.about_flow_title}>制作の流れ</h2>
         <div className={styles.about_flow_desc}>
           デザインは、
           <span className={styles.about_flow_desc_bold}>
@@ -46,9 +46,11 @@ const AboutPage: NextPageWithLayout = () => {
         </div>
         <WorkflowImg flows={WORKFLOW_DATA} style={{ marginBottom: '104px' }} />
         <WorkflowTab flows={WORKFLOW_DATA} style={{}} />
-      </div>
-      <ContactLink />
-    </div>
+      </section>
+      <aside>
+        <ContactLink />
+      </aside>
+    </article>
   )
 }
 

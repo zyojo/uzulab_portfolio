@@ -33,7 +33,7 @@ export const WorkflowItem = (props: Props) => {
         <div className={styles.workflowItem_title_order + ' avenir'}>
           {props.flow.index} / {props.length}
         </div>
-        <div>{props.flow.title}</div>
+        <h3 className={styles.workflowItem_title_title}>{props.flow.title}</h3>
       </div>
       <div
         className={styles.workflowItem_content}

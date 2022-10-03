@@ -23,8 +23,8 @@ const ContactPage: NextPageWithLayout = () => {
   }, [form.name, form.customer_email, form.message])
 
   return (
-    <div className={styles.contact}>
-      <div className={styles.contact_title}>お問い合わせ{sent && '完了'}</div>
+    <section className={styles.contact}>
+      <h1 className={styles.contact_title}>お問い合わせ{sent && '完了'}</h1>
       {sent ? (
         <div className={styles.contact_complete}>
           お客様のメールアドレスに間違いがなければ、送信完了メールが届きます。
@@ -127,7 +127,7 @@ const ContactPage: NextPageWithLayout = () => {
           </form>
         </>
       )}
-    </div>
+    </section>
   )
 }
 export default ContactPage

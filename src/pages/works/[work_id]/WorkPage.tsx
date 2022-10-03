@@ -16,8 +16,8 @@ const WorkPage = () => {
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
 
   return (
-    <div className={styles.workPage}>
-      <div className={styles.workPage_top}>
+    <article className={styles.workPage}>
+      <section className={styles.workPage_top}>
         <div className={styles.workPage_top_img}>
           <div className='loader'></div>
           {work !== undefined && (
@@ -34,9 +34,7 @@ const WorkPage = () => {
         </div>
         <div className={styles.workPage_top_info}>
           <div className={styles.workPage_top_info_left}>
-            <div className={styles.workPage_top_info_left_title + ' avenir-bold'}>
-              {work?.title}
-            </div>
+            <h1 className={styles.workPage_top_info_left_title + ' avenir-bold'}>{work?.title}</h1>
             <div className={styles.workPage_top_info_left_details}>
               <div className={styles.workPage_top_info_left_details_tags}>
                 {work?.tags.map((item, index) => {
@@ -80,8 +78,8 @@ const WorkPage = () => {
             </div>
           )}
         </div>
-      </div>
-      <div className={styles.workPage_content}>
+      </section>
+      <section className={styles.workPage_content}>
         {work !== undefined && (
           <section
             className={styles.workPage_content_container}
@@ -106,9 +104,11 @@ const WorkPage = () => {
             }
           />
         )}
-      </div>
-      <ContactLink />
-    </div>
+      </section>
+      <aside>
+        <ContactLink />
+      </aside>
+    </article>
   )
 }
 
