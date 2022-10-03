@@ -4,24 +4,37 @@ import styles from './WorksPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { TagList } from '@/components/Tag/TagList/TagList'
 import { WorkList } from '@/components/Work/WorkList/WorkList'
-import { AppContext } from '@/contexts/AppContext'
+import { AppContext } from '@/providers/AppContext'
 
 const WorksPage: NextPageWithLayout = () => {
   const { works, tags } = useContext(AppContext)
-  const [selectedTagID, setSelectedTagID] = useState(0)
-  const handleSelectedID = (selectedTagID: number) => {
-    setSelectedTagID(selectedTagID)
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedTagID, setSelectedTagID] = useState('all')
+  const handleSelectedID = (selectedTagID: string) => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setSelectedTagID(selectedTagID)
+    }, 300)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 800)
   }
   useEffect(() => {
-    console.log(selectedTagID)
-  }, [selectedTagID])
+    setIsLoading(false)
+  }, [])
 
   return (
-    <>
-      <TagList tags={tags} selectedTagID={selectedTagID} handleSelectedID={handleSelectedID} />
-      <WorkList works={works} selectedTagID={selectedTagID} />
-      <ContactLink />
-    </>
+    <article>
+      <section>
+        <TagList tags={tags} selectedTagID={selectedTagID} handleSelectedID={handleSelectedID} />
+      </section>
+      <section>
+        <WorkList works={works} isLoading={isLoading} selectedTagID={selectedTagID} />
+      </section>
+      <aside>
+        <ContactLink />
+      </aside>
+    </article>
   )
 }
 

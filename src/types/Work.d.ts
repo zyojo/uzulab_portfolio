@@ -1,58 +1,42 @@
 export type WorkType = {
-  id: number
-  date: string
-  date_gmt: string
-  guid: { rendered: string }
-  modified: string
-  modified_gmt: string
-  slug: string
-  status: string
-  type: string
-  link: string
-  title: { rendered: string }
-  content: { rendered: string; protected: boolean }
-  excerpt: { rendered: string; protected: boolean }
-  author: number
-  featured_media: number
-  comment_status: string
-  ping_status: string
-  sticky: boolean
-  template: string
-  format: string
-  meta: never[]
-  categories: number[]
-  tags: number[]
-  acf: never[]
-  ACF: {
-    work_img: string
-    work_summary_list: string
-    work_summary_top: string
-    work_header_pc: string
-    work_header_sp: string
-    work_img: string
-    work_start_month: string
-    work_end_month: string
-    work_responsibility: string
-    work_order: string
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  title: string
+  urn: string
+  thumbnail: {
+    url: string
+    height: number
+    width: number
   }
-  tag_name: string[]
-  _links: {
-    self: { href: string }[]
-    collection: { href: string }[]
-    about: { href: string }[]
-    author: { embeddable: boolean; href: string }[]
-    replies: {
-      embeddable: boolean
-      href: string
-    }[]
-    'version-history': { count: number; href: string }[]
-    'predecessor-version': { id: number; href: string }[]
-    'wp:attachment': { href: string }[]
-    'wp:term': {
-      taxonomy: string
-      embeddable: boolean
-      href: string
-    }[]
-    curies: { name: string; href: string; templated: boolean }[]
+  tags: {
+    id: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+    revisedAt: string
+    name: string
+  }[]
+  summary_list: string
+  summary_top: string
+  header_pc: {
+    url: string
+    height: number
+    width: number
   }
+  header_sp: {
+    url: string
+    height: number
+    width: number
+  }
+  start_date: string
+  end_date: string
+  responsibility?: string
+  contents: {
+    fieldId: string
+    richEditor?: string
+    HTML?: string
+  }[]
 }

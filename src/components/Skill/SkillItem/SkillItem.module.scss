@@ -1,10 +1,24 @@
 @import './../../../styles/variables';
 
 .skillItem {
-  width: calc(#{columnWidth(3, 'dt')} + 64px);
   padding: 48px 32px;
   border-radius: $br-md;
   background-color: $content-bg-white;
+  width: calc(#{columnWidth(3, 'dt')} + 64px);
+  margin-bottom: 32px;
+  @include media-query('pc') {
+    width: calc(#{columnWidth(3, 'pc')} + 64px);
+  }
+  @media screen and (max-width: 1020px) {
+    width: calc(#{columnWidth(4, 'pc')} + 64px);
+  }
+  @include media-query('tb') {
+    width: columnWidth(6, 'tb');
+  }
+  @include media-query('sp') {
+    width: columnWidth(10, 'sp');
+    padding: 40px 32px 48px;
+  }
   &_img {
     width: 100px;
     height: 100px;
@@ -15,13 +29,30 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 16px;
+    @include media-query('sp') {
+      font-size: 14px;
+    }
   }
   &_desc {
     font-size: 14px;
     margin-bottom: 16px;
+    @include media-query('sp') {
+      font-size: 12px;
+    }
   }
   &_skill {
     font-size: 12px;
     color: $theme-gray;
+    @include media-query('sp') {
+      font-size: 10px;
+    }
+  }
+  &:nth-of-type(2) {
+    margin-top: 80px;
+    margin-left: calc(map-get($column-gutter, 'dt') * 2);
+    margin-right: calc(map-get($column-gutter, 'dt') * 2);
+    @media screen and (max-width: 1020px) {
+      margin-top: 0;
+    }
   }
 }

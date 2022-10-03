@@ -1,6 +1,8 @@
 // color
 $text-black: #1d1c1c;
-$text-black-hover: #989186;
+$text-black-reverse: #e2e3e3;
+$text-black-hover: #5c5a53;
+$text-brown-hover: #786b5a;
 $border-theme: #ede5e2;
 $theme-white: #fff;
 $theme-gray: #c7c0b7;
@@ -10,41 +12,67 @@ $content-bg-white: rgba(#fff, 0.65);
 $content-bg-white-hover: rgba(#fff, 0.9);
 
 // border-radius
-$br-lg: 24px;
-$br-md: 16px;
 $br-sm: 9px;
+$br-md: 16px;
+$br-lg: 24px;
 
 // break-point
-$bp-xl: 1022px;
-$bp-lg: 768px;
 $bp-sm: 450px;
+$bp-lg: 850px;
+$bp-xl: 1440px;
 $breakpoint: (
-  sp: 'screen and (max-width: 450px)',
-  tb: 'screen and (max-width: 768px)',
-  pc: 'screen and (max-width: 1022px)',
-  dt: 'screen and (min-width: 1022px)',
+  sp: 'screen and (max-width: #{$bp-sm})',
+  tb: 'screen and (max-width: #{$bp-lg})',
+  pc: 'screen and (max-width: #{$bp-xl})',
+  dt: 'screen and (min-width: 1441px)',
 );
 
-@mixin media-query($bp) {
-  @media #{map-get($breakpoint, $bp)} {
+@mixin media-query($media) {
+  @media #{map-get($breakpoint, $media)} {
     @content;
   }
 }
 
 // column-width
-$body-maxWidth: (
-  sp: 100vw,
-  tb: 100vw,
-  pc: 100vw,
-  dt: 1022px,
-);
-$column-gap: (
-  sp: 16px,
+$column-gutter: (
+  sp: 8px,
   tb: 16px,
   pc: 16px,
   dt: 16px,
 );
+$column-margin: (
+  sp: 16px,
+  tb: 16px,
+  pc: 32px,
+  dt: 140px,
+);
+// 12columns + 11column-gutters + 2column-margins
+$body-maxWidth: (
+  sp: 100vw,
+  tb: 100vw,
+  pc: 95vw,
+  dt: $bp-xl,
+);
+// work-top-margin < column-margin
+$work-top-margin: (
+  sp: 0px,
+  tb: 16px,
+  pc: 32px,
+  dt: 72px,
+);
+@function mainWidth($media) {
+  // 12columns + 11column-gutters
+  @return calc(#{map-get($body-maxWidth, $media)} - (#{map-get($column-margin, $media)} * 2));
+}
 @function columnWidth($columns, $media) {
-  $mainWidth: calc(#{map-get($body-maxWidth, $media)} - 64px); // padding分を考慮
-  @return calc(($mainWidth - (16px * 11)) / 12 * $columns + 16px * ($columns - 1));
+  // n columns + (n-1) column-gutters
+  @return calc(
+    (#{mainWidth($media)} - (#{map-get($column-gutter, $media)} * 11)) / 12 * #{$columns} + #{map-get(
+        $column-gutter,
+        $media
+      )} * (#{$columns} - 1)
+  );
+}
+@function normalWorksMargin($media) {
+  @return (calc(#{columnWidth(1, $media)} / 2));
 }

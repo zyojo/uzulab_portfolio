@@ -16,6 +16,15 @@
     url('../fonts/AvenirNext-Medium-06.ttf') format('truetype');
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
 html,
 body {
   padding: 0;
@@ -26,14 +35,11 @@ body {
   font-size: 14px;
   line-height: 2;
   position: relative;
-}
-html {
-  background-color: #faf7f5;
+  @include media-query('sp') {
+    font-size: 12px;
+  }
 }
 body {
-  max-width: #{map-get($body-maxWidth, 'dt')};
-  padding: 0 32px;
-  margin: calc(24px + 60px) auto 0;
   position: relative;
   &::after {
     content: '';
@@ -51,9 +57,22 @@ body {
       rgba(250, 247, 245, 1) 100%
     );
     z-index: -1;
+    @include media-query('tb') {
+      background: rgb(249, 243, 240);
+      background: linear-gradient(
+        138deg,
+        rgba(249, 243, 240, 1) 0%,
+        rgba(251, 245, 240, 1) 47%,
+        rgba(247, 237, 229, 1) 65%,
+        rgba(250, 243, 236, 1) 79%,
+        rgba(250, 244, 240, 1) 100%
+      );
+    }
   }
 }
-
+p {
+  margin: 0;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -82,4 +101,56 @@ li {
 }
 
 @media (prefers-color-scheme: dark) {
+}
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+.loader {
+  position: absolute;
+  left: calc(50% - 5em);
+  top: calc(50% - 10em);
+  margin: 60px auto;
+  font-size: 10px;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.3);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.3);
+  border-left: 1.1em solid #ffffff;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+  & + span {
+    img {
+      transition: all 0.3s ease-out;
+      opacity: 0;
+      &[data-loaded='true'] {
+        opacity: 1;
+      }
+    }
+  }
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

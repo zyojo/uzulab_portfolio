@@ -1,21 +1,24 @@
 import type { NextPageWithLayout } from 'next'
 import Image from 'next/image'
+import { useContext } from 'react'
 import styles from './AboutPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { SkillItem } from '@/components/Skill/SkillItem/SkillItem'
 import { WorkflowImg } from '@/components/Workflow/WorkflowImg/WorkflowImg'
-import { WorkflowTab } from '@/components/Workflow/WorkflowTab/WorkflowTab'
+import { WorkflowTab } from '@/components/Workflow/WorkflowTab/WorkflowTab/WorkflowTab'
 import PROFILE_IMG from '@/image/zyojo.png'
 import { SKILLS_DATA, WORKFLOW_DATA } from '@/lib/constants'
+import { AppContext } from '@/providers/AppContext'
 
 const AboutPage: NextPageWithLayout = () => {
+  const { isMobile } = useContext(AppContext)
   return (
-    <div className={styles.about}>
-      <div className={styles.about_top}>
+    <article className={styles.about}>
+      <section className={styles.about_top}>
         <div className={styles.about_top_img}>
           <Image src={PROFILE_IMG} alt='RyotaNakahara' />
         </div>
-        <div className={styles.about_top_title + ' avenir-italic'}>Ryota Nakahara</div>
+        <h1 className={styles.about_top_title + ' avenir-italic'}>Ryota Nakahara</h1>
         <div className={styles.about_top_subtitle + ' avenir-italic'}>
           UI/UX Designer, WEB Developer
         </div>
@@ -24,24 +27,30 @@ const AboutPage: NextPageWithLayout = () => {
           <br />
           Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。
         </div>
-      </div>
-      <div className={styles.about_skills}>
+      </section>
+      <section className={styles.about_skills}>
         {SKILLS_DATA.map((item, index) => (
-          <SkillItem skill={item} key={index} style={index == 1 ? { margin: '80px 0 0' } : {}} />
+          <SkillItem skill={item} key={index} />
         ))}
-      </div>
-      <div className={styles.about_flow}>
-        <div className={styles.about_flow_title}>制作の流れ</div>
+      </section>
+      <section className={styles.about_flow}>
+        <h2 className={styles.about_flow_title}>制作の流れ</h2>
         <div className={styles.about_flow_desc}>
-          デザインは、頭の中に存在する理想を明確な「かたち」へと作り上げていくプロセスです。
-          <br />
+          デザインは、
+          <span className={styles.about_flow_desc_bold}>
+            頭の中に存在する理想を明確な「かたち」へと作り上げていくプロセス
+          </span>
+          です。
+          {!isMobile && <br />}
           対話を重ねながら目的を掘り下げ、成果物の解像度を上げていきます。
         </div>
         <WorkflowImg flows={WORKFLOW_DATA} style={{ marginBottom: '104px' }} />
         <WorkflowTab flows={WORKFLOW_DATA} style={{}} />
-      </div>
-      <ContactLink />
-    </div>
+      </section>
+      <aside>
+        <ContactLink />
+      </aside>
+    </article>
   )
 }
 

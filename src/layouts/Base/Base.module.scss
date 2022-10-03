@@ -1,0 +1,29 @@
+@import '../../styles/variables';
+.main {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: scroll;
+  max-width: #{map-get($body-maxWidth, 'dt')};
+  padding: calc(24px + 60px) #{map-get($column-margin, 'dt')} 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none; /*Google Chrome、Safari、Microsoft Edge対応のスクロールバー非表示コード*/
+  }
+  @include media-query('pc') {
+    max-width: #{map-get($body-maxWidth, 'pc')};
+    padding: calc(24px + 60px) #{map-get($column-margin, 'pc')} 0;
+  }
+  @include media-query('tb') {
+    max-width: #{map-get($body-maxWidth, 'tb')};
+    padding: calc(24px + 60px) #{map-get($column-margin, 'tb')} 0;
+  }
+  @include media-query('sp') {
+    max-width: #{map-get($body-maxWidth, 'sp')};
+    padding: 104px #{map-get($column-margin, 'sp')} 0;
+  }
+}

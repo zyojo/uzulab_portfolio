@@ -1,22 +1,13 @@
 export type TagType = {
-  id: number
-  count: number
-  description: string
-  link: string
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
   name: string
-  slug: string
-  taxonomy: string
-  meta: never[]
-  _links: {
-    self: { href: string }[]
-    collection: { href: string }[]
-    about: { href: string }[]
-    'wp:post_type': { href: string }[]
-    curies: { name: string; href: string; templated: boolean }[]
-  }
 }
 
 export type SimpleTagType = {
-  id: number
+  id: string
   name: string
 }

@@ -4,76 +4,142 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row-reverse;
-  width: calc(#{columnWidth(6, 'dt')} - 8px);
-  margin-left: calc(#{columnWidth(5, 'dt')} + #{map-get($column-gap, 'dt')} + 8px);
   margin-right: auto;
   border-radius: $br-md;
-  background-color: rgba($theme-white, 0.6);
+  background-color: rgba($theme-white, 1);
   transition: background-color 0.3s ease-out;
   overflow: hidden;
+  width: calc(#{columnWidth(6, 'dt')} - 8px);
+  margin-left: calc(#{columnWidth(5, 'dt')} + #{map-get($column-gutter, 'dt')} + 8px);
+  @include media-query('pc') {
+    width: calc(#{columnWidth(6, 'pc')} - 8px);
+    margin-left: calc(#{columnWidth(5, 'pc')} + #{map-get($column-gutter, 'pc')} + 8px);
+  }
+  @include media-query('tb') {
+    flex-direction: column;
+    width: calc(#{columnWidth(6, 'tb')} - 8px);
+    margin-left: calc(#{columnWidth(5, 'tb')} + #{map-get($column-gutter, 'tb')} + 8px);
+  }
+  @include media-query('sp') {
+    width: calc(#{columnWidth(6, 'sp')} + 8px);
+    margin-left: calc(#{columnWidth(6, 'sp')} + #{map-get($column-gutter, 'sp')});
+  }
   &_img {
-    height: 155px;
+    height: 144px;
     aspect-ratio: 3/2;
     position: relative;
+    -webkit-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    -moz-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    -ms-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    -o-filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    filter: saturate(0.8) contrast(0.97) opacity(0.8);
+    transition: filter 0.4s ease-out;
+    @include media-query('tb') {
+      -webkit-filter: saturate(1) contrast(1) opacity(1);
+      -moz-filter: saturate(1) contrast(1) opacity(1);
+      -ms-filter: saturate(1) contrast(1) opacity(1);
+      -o-filter: saturate(1) contrast(1) opacity(1);
+      filter: saturate(1) contrast(1) opacity(1);
+      height: auto;
+    }
   }
   &_info {
     flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 32px 40px 24px;
+    @include media-query('sp') {
+      padding: 16px 24px 16px;
+    }
     &_title {
       font-size: 18px;
-      margin: 32px 32px 24px auto;
-      text-align: right;
+      word-break: break-all;
+      transition: color 0.7s ease-out;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      @include media-query('tb') {
+        margin-bottom: 16px;
+      }
+      @include media-query('sp') {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
     }
     &_arrow {
-      margin-right: auto;
-      margin-left: 56px;
+      text-align: right;
       color: $theme-gray;
       position: relative;
       &::after {
         content: '';
         display: block;
         height: 1px;
-        width: 30%;
-        background-color: $theme-gray;
+        width: auto;
+        background-color: $border-theme;
         border-radius: 99px;
         position: absolute;
         left: 40px;
-        right: unset;
+        right: 40px;
         top: 50%;
         transform: translateY(-50%);
-        transition: width 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        @include media-query('tb') {
+          left: 32px;
+        }
       }
     }
   }
   &[data-isprev='true'] {
     flex-direction: row;
-    margin-left: calc((#{columnWidth(1, 'dt')} + #{map-get($column-gap, 'dt')}) * -1);
+    margin-left: calc((#{columnWidth(1, 'dt')} + #{map-get($column-gutter, 'dt')}) * -1);
+    @include media-query('pc') {
+      margin-left: calc((#{columnWidth(1, 'pc')} + #{map-get($column-gutter, 'pc')}) * -1);
+    }
+    @include media-query('tb') {
+      flex-direction: column;
+      margin-left: calc((#{columnWidth(1, 'tb')} + #{map-get($column-gutter, 'tb')}) * -1);
+    }
+    @include media-query('sp') {
+      margin-left: calc(-8px);
+    }
     margin-right: auto;
     .nextWorkLink {
       &_info {
         &_title {
-          margin: 32px auto 24px 32px;
-          text-align: left;
+          text-align: right;
         }
         &_arrow {
-          text-align: right;
-          margin-left: auto;
-          margin-right: 56px;
-          &::after {
-            right: 40px;
-            left: unset;
-          }
+          text-align: left;
         }
       }
     }
   }
   &:hover {
-    background-color: rgba($theme-white, 0.8);
+    background-color: rgba($color: $theme-white, $alpha: 0.8);
     .nextWorkLink {
+      &_img {
+        -webkit-filter: saturate(1) contrast(1) opacity(1);
+        -moz-filter: saturate(1) contrast(1) opacity(1);
+        -ms-filter: saturate(1) contrast(1) opacity(1);
+        -o-filter: saturate(1) contrast(1) opacity(1);
+        filter: saturate(1) contrast(1) opacity(1);
+      }
       &_info {
+        &_title {
+          color: $text-brown-hover;
+        }
         &_arrow::after {
-          width: calc(50%);
+          left: 80px;
+          right: 40px;
         }
       }
     }
   }
+}
+.nextWorkLink:hover[data-isprev='true'] .nextWorkLink_info_arrow::after {
+  left: 40px;
+  right: 80px;
 }

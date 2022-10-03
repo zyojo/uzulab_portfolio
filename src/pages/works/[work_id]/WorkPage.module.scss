@@ -2,74 +2,190 @@
 .workPage {
   &_top {
     position: relative;
-    left: calc((#{map-get($body-maxWidth, 'dt')} - 64px - (100vw - 144px)) / 2);
-    width: calc(100vw - 144px);
+    width: calc(100vw - #{map-get($work-top-margin, 'dt')} * 2);
     overflow: hidden;
     border-radius: $br-lg;
     background-color: $content-bg-white;
     padding-bottom: 80px;
     margin-bottom: 120px;
+    margin-left: calc((100vw - #{mainWidth('dt')}) / -2 + #{map-get($work-top-margin, 'dt')});
+    @include media-query('pc') {
+      width: calc(100vw - #{map-get($work-top-margin, 'pc')} * 2);
+      margin-left: calc((100vw - #{mainWidth('pc')}) / -2 + #{map-get($work-top-margin, 'pc')});
+    }
+    @include media-query('tb') {
+      width: calc(100vw - #{map-get($work-top-margin, 'tb')} * 2);
+      margin-left: calc((100vw - #{mainWidth('tb')}) / -2 + #{map-get($work-top-margin, 'tb')});
+    }
+    @include media-query('sp') {
+      width: 100vw;
+      border-radius: 0 0 $br-lg $br-lg;
+      margin-top: -104px;
+      margin-left: calc(#{map-get($column-margin, 'sp') * -1});
+      padding-bottom: 72px;
+      margin-bottom: 88px;
+    }
     &_img {
-      height: 500px;
       position: relative;
       margin-bottom: 64px;
+      height: 500px;
+      @include media-query('tb') {
+        height: 400px;
+        margin-bottom: 40px;
+      }
+      @include media-query('sp') {
+        height: auto;
+        aspect-ratio: 1/1;
+      }
+      img {
+        border-radius: $br-lg $br-lg 0 0;
+      }
     }
     &_info {
       display: flex;
       justify-content: space-between;
-      padding: 0 calc((64px + (100vw - 144px) - #{map-get($body-maxWidth, 'dt')}) / 2);
+      margin: 0 auto;
+      width: columnWidth(12, 'dt');
+      @include media-query('pc') {
+        width: columnWidth(12, 'pc');
+      }
+      @include media-query('tb') {
+        width: columnWidth(12, 'tb');
+        flex-direction: column;
+        padding: 0 24px;
+      }
       &_left {
         width: calc(columnWidth(4, 'dt') - 16px);
+        @include media-query('pc') {
+          width: calc(columnWidth(4, 'pc') - 16px);
+        }
+        @include media-query('tb') {
+          width: 100%;
+        }
         &_title {
           font-size: 34px;
           line-height: 1.2;
           margin-bottom: 16px;
+          word-break: break-all;
+          @include media-query('sp') {
+            font-size: 26px;
+            margin-bottom: 24px;
+          }
         }
         &_details {
+          @include media-query('tb') {
+            display: flex;
+            justify-content: space-between;
+          }
           &_tags {
             margin-bottom: 48px;
+            padding-top: 8px;
+            @include media-query('tb') {
+              margin-bottom: 0;
+              width: calc(columnWidth(4, 'tb') - 24px);
+            }
           }
           &_data {
-            display: flex;
-            padding-bottom: 8px;
-            margin-top: 8px;
-            border-bottom: dotted $border-theme 2px;
-            div {
-              &:nth-of-type(1) {
-                width: 56px;
-                margin-right: 24px;
-              }
-              &:nth-of-type(2) {
-                width: calc(100% - 80px);
+            @include media-query('tb') {
+              width: calc(columnWidth(8, 'tb') - 24px);
+              margin-bottom: 72px;
+            }
+            @include media-query('sp') {
+              margin-bottom: 40px;
+            }
+            &_item {
+              display: flex;
+              padding-bottom: 8px;
+              margin-top: 8px;
+              border-bottom: dotted $border-theme 2px;
+              div {
+                &:nth-of-type(1) {
+                  width: 56px;
+                  margin-right: 24px;
+                }
+                &:nth-of-type(2) {
+                  width: calc(100% - 80px);
+                }
               }
             }
           }
         }
       }
       &_right {
+        &_subtitle {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 24px;
+          @include media-query('tb') {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          @include media-query('sp') {
+            font-size: 14px;
+          }
+        }
+        a {
+          border-bottom: dotted 1px $text-black;
+        }
         line-height: 2.5;
         width: columnWidth(8, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(8, 'pc');
+        }
+        @include media-query('tb') {
+          width: 100%;
+        }
+        @include media-query('sp') {
+          font-size: 13px;
+          line-height: 2.2;
+        }
       }
     }
   }
   &_content {
     width: columnWidth(10, 'dt');
-    margin: 0 auto;
     padding: 80px 0 96px;
+    @include media-query('pc') {
+      width: columnWidth(10, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(10, 'tb');
+    }
+    @include media-query('sp') {
+      width: columnWidth(12, 'sp');
+      padding: 40px 0 56px;
+    }
+    margin: 0 auto;
     background-color: $content-bg-white;
     border-radius: $br-md;
     &_container {
       margin-bottom: 120px;
-      h1,
+      h2,
       p {
         width: columnWidth(8, 'dt');
         margin: 0 auto;
+        @include media-query('pc') {
+          width: columnWidth(8, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(8, 'tb');
+        }
+        @include media-query('sp') {
+          width: calc(100% - 64px);
+        }
       }
-      h1 {
+      h2 {
         font-size: 18px;
         margin-top: 80px;
+        @include media-query('sp') {
+          font-size: 16px;
+          margin-top: 40px;
+        }
         & + p {
           margin-top: 40px;
+          @include media-query('sp') {
+            margin-top: 24px;
+          }
         }
         &:first-of-type {
           margin-top: 0;
@@ -79,20 +195,37 @@
         font-size: 14px;
         line-height: 2.5;
         margin-top: 80px;
+        @include media-query('sp') {
+          font-size: 12px;
+          line-height: 2.2;
+          margin-top: 40px;
+        }
         & + p {
           margin-top: 40px;
         }
       }
-      figure {
+      a {
+        border-bottom: dotted 1px $text-black;
+      }
+      img {
         margin: 80px 0 0;
-        img {
-          width: 100%;
-          height: auto;
-          aspect-ratio: 16 / 9;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        @include media-query('sp') {
+          margin: 40px 0 0;
         }
-        & + div,
-        & + figure {
+        & + img {
           margin: 32px 0 0;
+          @include media-query('sp') {
+            margin: 16px 0 0;
+          }
+        }
+        & + div {
+          margin: 32px 0 0;
+          @include media-query('sp') {
+            margin: 16px 0 0;
+          }
         }
       }
       div {
@@ -100,13 +233,30 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        figure {
+        @include media-query('sp') {
+          margin: 40px 0 0;
+        }
+        img {
           margin: 0;
           width: calc((100% - 16px) / 2);
+          @include media-query('sp') {
+            width: calc((100% - 8px) / 2);
+          }
         }
-        & + div,
-        & + figure {
+        & + img {
           margin: 32px 0 0;
+          @include media-query('pc') {
+            margin: 32px 0 0;
+          }
+          @include media-query('sp') {
+            margin: 16px 0 0;
+          }
+        }
+        & + div {
+          margin: 32px 0 0;
+          @include media-query('sp') {
+            margin: 32px 0 0;
+          }
         }
       }
     }

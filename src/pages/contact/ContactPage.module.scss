@@ -1,10 +1,20 @@
 @import './../../styles/variables';
 .contact {
-  width: columnWidth(8, 'dt');
   background-color: $content-bg-white;
   border-radius: $br-md;
-  padding: 80px 0 96px;
+  padding: 80px 32px 96px;
   margin: 0 auto;
+  width: columnWidth(8, 'dt');
+  @include media-query('pc') {
+    width: columnWidth(10, 'pc');
+  }
+  @include media-query('tb') {
+    width: columnWidth(10, 'tb');
+  }
+  @include media-query('sp') {
+    padding: 80px 24px 96px;
+    width: columnWidth(12, 'sp');
+  }
   &_title {
     font-size: 16px;
     font-weight: bold;
@@ -19,8 +29,17 @@
     text-align: center;
   }
   &_form {
-    width: columnWidth(6, 'dt');
     margin: 0 auto;
+    width: columnWidth(6, 'dt');
+    @include media-query('pc') {
+      width: columnWidth(8, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(8, 'tb');
+    }
+    @include media-query('sp') {
+      width: 100%;
+    }
     &_item {
       margin-bottom: 24px;
       label {
@@ -48,6 +67,15 @@
         padding: 16px;
         font-size: 16px;
         transition: all 0.6s ease-in-out;
+        @include media-query('tb') {
+          padding: 12px 16px;
+        }
+        @include media-query('sp') {
+          padding: calc(12px * (16 / 14)) calc(16px * (16 / 14));
+          transform: scale(calc(14 / 16));
+          width: calc(100% * 16 / 14);
+          margin-left: calc(-100% / 16);
+        }
         &::placeholder {
           color: $theme-gray;
         }
@@ -63,7 +91,7 @@
           display: block;
           cursor: pointer;
           font-size: 14px;
-          background-color: $text-black-hover;
+          background-color: $text-brown-hover;
           color: $theme-white;
           width: 200px;
           margin: 48px auto 0;

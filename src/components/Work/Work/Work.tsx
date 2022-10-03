@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
-import { AppContext } from '@/contexts/AppContext'
-import { translateWorkDuration } from '@/lib/functions'
+import { setLoadFlg, translateWorkDuration } from '@/lib/functions'
+import { AppContext } from '@/providers/AppContext'
 import { WorkType } from '@/types/Work'
 
 type Prop = {
@@ -15,20 +15,24 @@ export const Work = (props: Prop) => {
   const { tags } = useContext(AppContext)
   return (
     <li className={styles.work}>
-      <Link href={'/works/' + props.work.id}>
+      <Link href={'/works/' + props.work.urn}>
         <a className={styles.work_container}>
           <div className={styles.work_thumb}>
             <>
-              {props.work.ACF.work_img !== '' && (
-                <Image
-                  src={props.work.ACF.work_img}
-                  alt={props.work.title.rendered}
-                  layout='fill'
-                />
+              {props.work.thumbnail.url !== '' && (
+                <>
+                  <div className='loader'></div>
+                  <Image
+                    src={props.work.thumbnail.url}
+                    alt={props.work.title}
+                    layout='fill'
+                    onLoad={setLoadFlg}
+                  />
+                </>
               )}
               <div className={styles.work_thumb_tags}>
                 {props.work.tags.map((item, index) => {
-                  const tagObj = tags.find((tag) => tag.id == item)
+                  const tagObj = tags.find((tag) => tag.id == item.id)
                   return (
                     tagObj !== undefined && (
                       <Tag
@@ -45,16 +49,11 @@ export const Work = (props: Prop) => {
             </>
           </div>
           <div className={styles.work_info}>
-            <div className={styles.work_info_title + ' avenir-bold'}>
-              {props.work.title.rendered}
+            <h2 className={styles.work_info_title + ' avenir-bold'}>{props.work.title}</h2>
+            <div className={styles.work_info_duration + ' avenir-italic'}>
+              {translateWorkDuration(props.work.start_date, props.work.end_date)}
             </div>
-            <div className={styles.work_info_date + ' avenir-italic'}>
-              {translateWorkDuration(
-                props.work.ACF.work_start_month,
-                props.work.ACF.work_end_month,
-              )}
-            </div>
-            <div className={styles.work_info_desc}>{props.work.ACF.work_summary_list}</div>
+            <div className={styles.work_info_desc}>{props.work.summary_list}</div>
           </div>
         </a>
       </Link>

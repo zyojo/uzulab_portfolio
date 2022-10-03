@@ -1,53 +1,112 @@
 @import './../../styles/variables';
 .about {
   &_top {
-    width: calc(columnWidth(6, 'dt') + 64px * 2);
     margin: calc(132px + 80px) auto 96px;
     border-radius: $br-md;
     background-color: $content-bg-white;
     padding: 160px 64px 72px;
+    width: calc(columnWidth(6, 'dt') + 64px * 2);
+    @include media-query('pc') {
+      width: calc(columnWidth(6, 'pc') + 64px * 2);
+    }
+    @include media-query('tb') {
+      width: calc(columnWidth(6, 'tb') + 64px * 2);
+    }
+    @include media-query('sp') {
+      padding: 160px 40px 64px;
+      width: columnWidth(12, 'sp');
+      margin: 132px auto 80px;
+    }
     &_img {
       width: 264px;
       height: 264px;
       margin: calc(-132px - 160px) auto 32px;
+      @include media-query('sp') {
+        margin: calc(-132px - 160px) auto 24px;
+        width: 208px;
+        height: 208px;
+      }
     }
     &_title {
       text-align: center;
       font-size: 26px;
+      @include media-query('sp') {
+        font-size: 20px;
+      }
     }
     &_subtitle {
       text-align: center;
       font-size: 16px;
       margin-bottom: 40px;
+      @include media-query('sp') {
+        font-size: 13px;
+        margin-bottom: 32px;
+      }
     }
     &_desc {
       font-size: 14px;
       line-height: calc(32 / 14);
+      @include media-query('sp') {
+        font-size: 13px;
+      }
     }
   }
   &_skills {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: flex-start;
     margin-bottom: 160px;
+    @include media-query('sp') {
+      margin-bottom: 104px;
+    }
   }
   &_flow {
-    width: columnWidth(10, 'dt');
     margin: 0 auto;
     border-radius: $br-md;
     background-color: $content-bg-white;
     padding: 96px 0;
+    width: columnWidth(10, 'dt');
+    @include media-query('pc') {
+      width: columnWidth(10, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(10, 'tb');
+    }
+    @include media-query('sp') {
+      width: 100vw;
+      margin-left: calc(#{map-get($column-margin, 'sp') * -1});
+    }
     &_title {
       text-align: center;
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 48px;
+      @include media-query('sp') {
+        margin-bottom: 32px;
+      }
     }
     &_desc {
       text-align: center;
       font-size: 14px;
       line-height: 2.5;
-      margin-bottom: 96px;
+      margin: 0 auto 96px;
+      padding: 0 32px;
+      @include media-query('tb') {
+        text-align: left;
+        br {
+          display: none;
+        }
+      }
+      @include media-query('sp') {
+        width: columnWidth(12, 'sp');
+        line-height: 2;
+        margin: 0 auto 32px;
+        font-size: 12px;
+      }
+      &_bold {
+        font-weight: bold;
+      }
     }
   }
 }

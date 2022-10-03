@@ -8,7 +8,7 @@ export const ContactLink = () => {
         <Link href={'/contact'}>
           <a>
             <div className={styles.contactLink}>
-              <div className={styles.contactLink_title + ' avenir-bold'}>contact</div>
+              <h2 className={styles.contactLink_title + ' avenir-bold'}>contact</h2>
               <div className={styles.contactLink_desc}>
                 webに関することでも、
                 <br />
