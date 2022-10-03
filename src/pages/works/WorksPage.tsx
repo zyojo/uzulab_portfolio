@@ -24,11 +24,17 @@ const WorksPage: NextPageWithLayout = () => {
   }, [])
 
   return (
-    <>
-      <TagList tags={tags} selectedTagID={selectedTagID} handleSelectedID={handleSelectedID} />
-      <WorkList works={works} isLoading={isLoading} selectedTagID={selectedTagID} />
-      <ContactLink />
-    </>
+    <article>
+      <section>
+        <TagList tags={tags} selectedTagID={selectedTagID} handleSelectedID={handleSelectedID} />
+      </section>
+      <section>
+        <WorkList works={works} isLoading={isLoading} selectedTagID={selectedTagID} />
+      </section>
+      <aside>
+        <ContactLink />
+      </aside>
+    </article>
   )
 }
 

@@ -136,7 +136,7 @@
     border-radius: $br-md;
     &_container {
       margin-bottom: 120px;
-      h1,
+      h2,
       p {
         width: columnWidth(8, 'dt');
         margin: 0 auto;
@@ -150,7 +150,7 @@
           width: calc(100% - 64px);
         }
       }
-      h1 {
+      h2 {
         font-size: 18px;
         margin-top: 80px;
         @include media-query('sp') {

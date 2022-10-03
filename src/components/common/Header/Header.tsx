@@ -20,7 +20,7 @@ export const Header = () => {
           </div>
         </a>
       </Link>
-      <div className={styles.header_links}>
+      <nav className={styles.header_links} aria-label='ヘッダーメニュー'>
         {!(isMobile && router.pathname.includes('about')) && (
           <Link href='/about'>
             <a
@@ -55,7 +55,7 @@ export const Header = () => {
             </a>
           </Link>
         )}
-      </div>
+      </nav>
     </header>
   )
 }

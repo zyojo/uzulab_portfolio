@@ -41,7 +41,7 @@ export const Work = (props: Prop) => {
             </>
           </div>
           <div className={styles.work_info}>
-            <div className={styles.work_info_title + ' avenir-bold'}>{props.work.title}</div>
+            <h2 className={styles.work_info_title + ' avenir-bold'}>{props.work.title}</h2>
             <div className={styles.work_info_duration + ' avenir-italic'}>
               {translateWorkDuration(props.work.start_date, props.work.end_date)}
             </div>
