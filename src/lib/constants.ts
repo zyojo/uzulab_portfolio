@@ -71,3 +71,5 @@ export const metaData = {
   url: 'https://uzulab-portfolio.vercel.app',
   ogp: OGP,
 }
+
+export const MAIN_URL = 'https://www.ryotanakahara.jp/'

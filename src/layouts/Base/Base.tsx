@@ -4,7 +4,7 @@ import { ReactElement, useContext, useRef } from 'react'
 import styles from './Base.module.scss'
 import { Footer } from '@/components/common/Footer/Footer'
 import { Header } from '@/components/common/Header/Header'
-import { metaData } from '@/lib/constants'
+import { MAIN_URL, metaData } from '@/lib/constants'
 import { AppContext } from '@/providers/AppContext'
 
 type LayoutProps = Required<{
@@ -27,6 +27,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
       <Head>
         <title>{metaData.title}</title>
         <link rel='icon' href={metaData.favicon.src} />
+        {router.pathname == '/works' && <link rel='canonical' href={MAIN_URL} />}
         <meta name='description' content={metaData.description} />
         <meta property='og:url' content={metaData.url} />
         <meta property='og:title' content={metaData.title} />
