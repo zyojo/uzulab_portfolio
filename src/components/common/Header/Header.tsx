@@ -13,7 +13,7 @@ export const Header = () => {
   const { isMobile } = useContext(AppContext)
   return (
     <header className={styles.header} data-is-mobile={isMobile}>
-      <Link href='/works'>
+      <Link href='/'>
         <a>
           <div className={styles.header_logo} data-is-mobile={isMobile}>
             <Image src={isMobile ? HEADER_LOGO_LINE : HEADER_LOGO} alt={'uzulab'} layout='fill' />
@@ -31,8 +31,8 @@ export const Header = () => {
             </a>
           </Link>
         )}
-        {!(isMobile && router.pathname.includes('works')) && (
-          <Link href='/works'>
+        {!(isMobile && (router.pathname.includes('works') || router.pathname == '/')) && (
+          <Link href='/'>
             <a
               className={styles.header_links_link + ' avenir-bold'}
               data-here={router.pathname.includes('works') || router.pathname == '/'}
