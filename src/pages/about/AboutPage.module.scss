@@ -21,6 +21,8 @@
       width: 264px;
       height: 264px;
       margin: calc(-132px - 160px) auto 32px;
+      background-color: $disabled-gray;
+      border-radius: 999px;
       @include media-query('sp') {
         margin: calc(-132px - 160px) auto 24px;
         width: 208px;
