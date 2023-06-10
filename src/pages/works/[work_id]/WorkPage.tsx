@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import styles from './WorkPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
 import { Tag } from '@/components/Tag/Tag/Tag'
+import { Loader } from '@/components/common/Loader/Loader'
 import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
 import { AppContext } from '@/providers/AppContext'
 
@@ -19,7 +20,7 @@ const WorkPage = () => {
     <article className={styles.workPage}>
       <section className={styles.workPage_top}>
         <div className={styles.workPage_top_img}>
-          <div className='loader'></div>
+          <Loader />
           {work !== undefined && (
             <Image
               src={isMobile ? work.header_sp.url : work.header_pc.url}

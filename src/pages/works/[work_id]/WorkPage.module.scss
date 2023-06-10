@@ -40,6 +40,9 @@
       }
       img {
         border-radius: $br-lg $br-lg 0 0;
+        @include media-query('sp') {
+          border-radius: 0;
+        }
       }
     }
     &_info {

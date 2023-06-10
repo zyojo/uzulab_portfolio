@@ -14,19 +14,19 @@ export const SKILLS_DATA = [
     title: 'Webサイト・システム開発',
     image: WEB_ICON,
     desc: 'マルチデバイスに対応したデザインから実装までを一貫して行います。WordpressなどのCMSの導入や、ECサイトの立ち上げもお任せください。',
-    skill: 'Javascript (React, React Native, Three.js) / Ruby on Rails / Wordpress / EC-CUBE',
+    skill: 'Javascript (React, React Native, Node.js) / Ruby on Rails / Wordpress / EC-CUBE',
   },
   {
     title: 'グラフィックデザイン',
     image: GRAPHIC_ICON,
     desc: 'ロゴやバナーなど、ディスプレイ上のグラフィックを中心に制作します。シンプルで素材の良さを素直に伝えるスタイルが得意です。印刷物もご相談ください。',
-    skill: 'Adobe Illustrator / Photoshop / Xd / Hand Drawing',
+    skill: 'Figma / Adobe Illustrator / Photoshop / Xd / Hand Drawing',
   },
   {
     title: '新しい表現の実験',
     image: EXPERIMENT_ICON,
-    desc: '３Dプリンタ・Arduinoを使ったIoTプロトタイプの開発やGenerative Artなど、テクノロジーを用いた新しい表現の実験を行います。',
-    skill: 'Rhinoceros / Arduino / Processing',
+    desc: 'Generative Artや３Dプリンタ・Arduinoを使ったIoTプロトタイプの開発など、テクノロジーを用いた新しい表現の実験を行います。',
+    skill: 'Three.js / Rhinoceros / Arduino / Processing',
   },
 ]
 

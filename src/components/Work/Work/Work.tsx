@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
+import { Loader } from '@/components/common/Loader/Loader'
 import { setLoadFlg, translateWorkDuration } from '@/lib/functions'
 import { AppContext } from '@/providers/AppContext'
 import { WorkType } from '@/types/Work'
@@ -18,35 +19,33 @@ export const Work = (props: Prop) => {
       <Link href={'/works/' + props.work.urn}>
         <a className={styles.work_container}>
           <div className={styles.work_thumb}>
-            <>
-              {props.work.thumbnail.url !== '' && (
-                <>
-                  <div className='loader'></div>
-                  <Image
-                    src={props.work.thumbnail.url}
-                    alt={props.work.title}
-                    layout='fill'
-                    onLoad={setLoadFlg}
-                  />
-                </>
-              )}
-              <div className={styles.work_thumb_tags}>
-                {props.work.tags.map((item, index) => {
-                  const tagObj = tags.find((tag) => tag.id == item.id)
-                  return (
-                    tagObj !== undefined && (
-                      <Tag
-                        tag={tagObj}
-                        key={index}
-                        isSelectedStyle={true}
-                        isLabelStyle={true}
-                        styles={{ marginLeft: '8px' }}
-                      />
-                    )
+            {props.work.thumbnail.url !== '' && (
+              <>
+                <Loader />
+                <Image
+                  src={props.work.thumbnail.url}
+                  alt={props.work.title}
+                  layout='fill'
+                  onLoad={setLoadFlg}
+                />
+              </>
+            )}
+            <div className={styles.work_thumb_tags}>
+              {props.work.tags.map((item, index) => {
+                const tagObj = tags.find((tag) => tag.id == item.id)
+                return (
+                  tagObj !== undefined && (
+                    <Tag
+                      tag={tagObj}
+                      key={index}
+                      isSelectedStyle={true}
+                      isLabelStyle={true}
+                      styles={{ marginLeft: '8px' }}
+                    />
                   )
-                })}
-              </div>
-            </>
+                )
+              })}
+            </div>
           </div>
           <div className={styles.work_info}>
             <h2 className={styles.work_info_title + ' avenir-bold'}>{props.work.title}</h2>
