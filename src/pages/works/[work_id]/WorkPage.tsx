@@ -6,6 +6,8 @@ import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { Loader } from '@/components/common/Loader/Loader'
+import { OpenIcon } from '@/image/OpenIcon'
+// import OPEN_ICON from '@/image/open.svg'
 import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
 import { AppContext } from '@/providers/AppContext'
 
@@ -35,7 +37,24 @@ const WorkPage = () => {
         </div>
         <div className={styles.workPage_top_info}>
           <div className={styles.workPage_top_info_left}>
-            <h1 className={styles.workPage_top_info_left_title + ' avenir-bold'}>{work?.title}</h1>
+            <div className={styles.workPage_top_info_left_titleContainer}>
+              <h1 className={styles.workPage_top_info_left_title + ' avenir-bold'}>
+                {work?.title}
+              </h1>
+              {work?.url !== undefined && (
+                <div className={styles.workPage_top_info_left_websiteSP}>
+                  <a
+                    target='_blank'
+                    href={work?.url}
+                    rel='noreferrer'
+                    className={styles.workPage_top_info_left_websiteSP_link}
+                  >
+                    Webサイトを開く
+                    <OpenIcon className={styles.workPage_top_info_left_websiteSP_link_icon} />
+                  </a>
+                </div>
+              )}
+            </div>
             <div className={styles.workPage_top_info_left_details}>
               <div className={styles.workPage_top_info_left_details_tags}>
                 {work?.tags.map((item, index) => {
@@ -57,6 +76,22 @@ const WorkPage = () => {
                     )
                   )
                 })}
+                {work?.url !== undefined && (
+                  <>
+                    <br />
+                    <div className={styles.workPage_top_info_left_website}>
+                      <a
+                        target='_blank'
+                        href={work?.url}
+                        rel='noreferrer'
+                        className={styles.workPage_top_info_left_website_link}
+                      >
+                        Webサイトを開く
+                        <OpenIcon className={styles.workPage_top_info_left_website_link_icon} />
+                      </a>
+                    </div>
+                  </>
+                )}
               </div>
               <div className={styles.workPage_top_info_left_details_data}>
                 <div className={styles.workPage_top_info_left_details_data_item}>

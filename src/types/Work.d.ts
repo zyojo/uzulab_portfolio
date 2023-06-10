@@ -6,6 +6,7 @@ export type WorkType = {
   revisedAt: string
   title: string
   urn: string
+  url: string
   thumbnail: {
     url: string
     height: number
