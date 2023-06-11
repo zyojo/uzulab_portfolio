@@ -79,6 +79,7 @@
           background-color: $disabled-gray;
           img {
             border-radius: $br-sm;
+            transform: translateZ(0); // for safari
           }
         }
       }

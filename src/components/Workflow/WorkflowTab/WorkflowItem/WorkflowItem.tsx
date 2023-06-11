@@ -47,13 +47,13 @@ export const WorkflowItem = (props: Props) => {
               {props.flow.imgs.map((img, imgIndex) => {
                 return (
                   <div className={styles.workflowItem_content_inner_imgs_img} key={imgIndex}>
-                    <Loader />
+                    <Loader size={36} />
                     <Image
                       src={img}
                       alt={props.flow.title}
                       layout='fill'
                       onLoad={setLoadFlg}
-                      style={{ zIndex: 2 }}
+                      style={{ zIndex: 1 }}
                     />
                   </div>
                 )

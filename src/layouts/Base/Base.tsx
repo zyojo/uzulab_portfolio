@@ -41,6 +41,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
         <meta name='twitter:title' content={metaData.title} />
         <meta name='twitter:description' content={metaData.description} />
         <meta property='twitter:image' content={metaData.ogp.src} />
+        <meta name='theme-color' content='#f8f5f1'></meta>
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
