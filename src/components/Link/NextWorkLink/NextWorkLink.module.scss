@@ -66,13 +66,16 @@
       }
       @include media-query('sp') {
         font-size: 16px;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }
     }
     &_arrow {
       text-align: right;
       color: $theme-gray;
       position: relative;
+      @include media-query('sp') {
+        font-size: 11px;
+      }
       &::after {
         content: '';
         display: block;

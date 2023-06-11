@@ -69,6 +69,9 @@
         &_titleContainer {
           margin-bottom: 16px;
           @include media-query('tb') {
+            margin-bottom: 40px;
+          }
+          @include media-query('sp') {
             margin-bottom: 32px;
           }
         }
@@ -99,8 +102,8 @@
               width: calc(columnWidth(8, 'tb') - 24px);
               margin-bottom: 72px;
             }
-            @include media-query('sp') {
-              margin-bottom: 48px;
+            @include media-query('tb') {
+              margin-bottom: 0px;
             }
             &_item {
               display: flex;
@@ -167,16 +170,36 @@
         }
       }
       &_right {
+        &[data-sp='true'] {
+          display: none;
+          @include media-query('tb') {
+            display: block;
+            margin-bottom: 24px;
+          }
+        }
+        &[data-sp='false'] {
+          @include media-query('tb') {
+            display: none;
+          }
+        }
         &_subtitle {
           font-size: 18px;
           font-weight: bold;
           margin-bottom: 24px;
           @include media-query('tb') {
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 16px;
           }
           @include media-query('sp') {
             font-size: 14px;
+          }
+        }
+        &_text {
+          @include media-query('tb') {
+            font-size: 13px;
+          }
+          @include media-query('sp') {
+            font-size: 12px;
           }
         }
         a {
@@ -208,7 +231,7 @@
     }
     @include media-query('sp') {
       width: columnWidth(12, 'sp');
-      padding: 40px 0 56px;
+      padding: 64px 0;
     }
     margin: 0 auto;
     background-color: $content-bg-white;
@@ -233,8 +256,8 @@
         font-size: 18px;
         margin-top: 80px;
         @include media-query('sp') {
-          font-size: 16px;
-          margin-top: 40px;
+          font-size: 14px;
+          margin-top: 64px;
         }
         & + p {
           margin-top: 40px;

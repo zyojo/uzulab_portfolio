@@ -18,6 +18,22 @@ const WorkPage = () => {
   const work = works.find((work) => String(work.urn) == work_id)
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
 
+  const TopDescription = ({ forSP = false }: { forSP?: boolean }) => {
+    return (
+      <>
+        {work !== undefined && (
+          <div className={styles.workPage_top_info_right} data-sp={forSP}>
+            <div className={styles.workPage_top_info_right_subtitle}>{work.summary_list}</div>
+            <div
+              className={styles.workPage_top_info_right_text}
+              dangerouslySetInnerHTML={{ __html: work?.summary_top }}
+            ></div>
+          </div>
+        )}
+      </>
+    )
+  }
+
   return (
     <article className={styles.workPage}>
       <section className={styles.workPage_top}>
@@ -55,6 +71,7 @@ const WorkPage = () => {
                 </div>
               )}
             </div>
+            <TopDescription forSP={true} />
             <div className={styles.workPage_top_info_left_details}>
               <div className={styles.workPage_top_info_left_details_tags}>
                 {work?.tags.map((item, index) => {
@@ -107,12 +124,7 @@ const WorkPage = () => {
               </div>
             </div>
           </div>
-          {work !== undefined && (
-            <div className={styles.workPage_top_info_right}>
-              <div className={styles.workPage_top_info_right_subtitle}>{work.summary_list}</div>
-              <div dangerouslySetInnerHTML={{ __html: work?.summary_top }}></div>
-            </div>
-          )}
+          <TopDescription />
         </div>
       </section>
       <section className={styles.workPage_content}>
