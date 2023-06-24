@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { usePageView } from '@/hooks/usePageView'
 import { EMPTY_TAGS } from '@/lib/stub/dummyTags'
 import { EMPTY_WORKS } from '@/lib/stub/dummyWorks'
 import { handleTags } from '@/repositories/handleTags'
@@ -40,7 +39,6 @@ export const AppProvider = (props: any) => {
   const handleChangeEvent = () => {
     setHasChangedEvent(true)
   }
-  usePageView()
 
   useEffect(() => {
     fetchWorks()
