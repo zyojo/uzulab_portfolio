@@ -2,10 +2,12 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { ReactElement, useContext, useRef } from 'react'
 import styles from './Base.module.scss'
+import GoogleTagManager, { GoogleTagManagerId } from '@/components/GoogleTagManager'
 import { Footer } from '@/components/common/Footer/Footer'
 import { Header } from '@/components/common/Header/Header'
 import { MAIN_URL, metaData } from '@/lib/constants'
 import { AppContext } from '@/providers/AppContext'
+import { googleTagManagerId } from '@/types/gtm'
 
 type LayoutProps = Required<{
   readonly children: ReactElement
@@ -46,6 +48,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         ></script>
+        <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
@@ -55,6 +58,17 @@ export const BaseLayout = ({ children }: LayoutProps) => {
           }}
         />
       </Head>
+      <noscript
+        dangerouslySetInnerHTML={{
+          __html: `
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"
+              />`,
+        }}
+      />
       <Header />
       <main className={styles.main} ref={mainRef}>
         {children}
