@@ -239,8 +239,7 @@
     &_container {
       margin-bottom: 120px;
       h2,
-      p,
-      iframe {
+      p {
         width: columnWidth(8, 'dt');
         margin: 0 auto;
         @include media-query('pc') {

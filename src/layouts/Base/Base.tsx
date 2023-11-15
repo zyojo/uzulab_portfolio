@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Script from 'next/script'
 import { ReactElement, useContext, useRef } from 'react'
 import styles from './Base.module.scss'
 import GoogleTagManager, { GoogleTagManagerId } from '@/components/GoogleTagManager'
@@ -55,7 +54,17 @@ export const BaseLayout = ({ children }: LayoutProps) => {
           }}
         />
       </Head>
-      <Script src='https://platform.twitter.com/widgets.js' strategy='lazyOnload' />
+      <noscript
+        dangerouslySetInnerHTML={{
+          __html: `
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"
+              />`,
+        }}
+      />
       <Header />
       <main className={styles.main} ref={mainRef}>
         {children}
