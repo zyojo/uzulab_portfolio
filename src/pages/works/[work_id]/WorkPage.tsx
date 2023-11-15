@@ -19,7 +19,6 @@ const WorkPage = () => {
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
 
   useEffect(() => {
-    // @ts-expect-error: twttr exists globally
     twttr?.widgets && twttr.widgets.load()
   }, [])
 
