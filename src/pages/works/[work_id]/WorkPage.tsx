@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import styles from './WorkPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
 import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
@@ -17,6 +17,11 @@ const WorkPage = () => {
   const { work_id } = router.query
   const work = works.find((work) => String(work.urn) == work_id)
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
+
+  useEffect(() => {
+    // @ts-expect-error
+    window.twttr?.widgets.load()
+  }, [work_id, works])
 
   const TopDescription = ({ forSP = false }: { forSP?: boolean }) => {
     return (

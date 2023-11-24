@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 import { ReactElement, useContext, useRef } from 'react'
 import styles from './Base.module.scss'
 import GoogleTagManager, { GoogleTagManagerId } from '@/components/GoogleTagManager'
@@ -65,6 +66,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
               />`,
         }}
       />
+      <Script src='https://platform.twitter.com/widgets.js' strategy='lazyOnload' />
       <Header />
       <main className={styles.main} ref={mainRef}>
         {children}
