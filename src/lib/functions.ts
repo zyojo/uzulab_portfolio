@@ -1,26 +1,23 @@
-export const translateWorkDuration: any = (startDate: string, endDate: string) => {
+export const translateWorkDuration: any = (startDateString: string, endDateString: string) => {
   let outputMonth = ''
-  if (startDate !== undefined || endDate !== undefined) {
-    const startDateFormat = new Date(startDate)
-    const endDateFormat = new Date(endDate)
-    const startYear = startDateFormat.getFullYear()
-    const endYear = endDateFormat.getFullYear()
-    const startMonth =
-      startDateFormat.getMonth() < 10
-        ? '0' + startDateFormat.getMonth()
-        : String(startDateFormat.getMonth())
-    const endMonth =
-      endDateFormat.getMonth() < 10
-        ? '0' + endDateFormat.getMonth()
-        : String(endDateFormat.getMonth())
-    if (startYear !== endYear || startMonth !== endMonth) {
+  if (startDateString !== undefined || endDateString !== undefined) {
+    const startDate = new Date(startDateString)
+    const startDateMonth = startDate.getMonth() + 1
+    const endDate = new Date(endDateString)
+    const endDateMonth = endDate.getMonth() + 1
+    const startYear = startDate.getFullYear()
+    const endYear = endDate.getFullYear()
+    const startMonthString = startDateMonth < 10 ? '0' + startDateMonth : String(startDateMonth)
+    console.log('end:', endDate)
+    const endMonthString = endDateMonth < 10 ? '0' + endDateMonth : String(endDateMonth)
+    if (startYear !== endYear || startMonthString !== endMonthString) {
       if (startYear == endYear) {
-        outputMonth = startYear + '.' + startMonth + ' ~ ' + endMonth
+        outputMonth = startYear + '.' + startMonthString + ' ~ ' + endMonthString
       } else {
-        outputMonth = startYear + '.' + startMonth + ' ~ ' + endYear + '.' + endMonth
+        outputMonth = startYear + '.' + startMonthString + ' ~ ' + endYear + '.' + endMonthString
       }
     } else {
-      outputMonth = startYear + '.' + startMonth
+      outputMonth = startYear + '.' + startMonthString
     }
   }
   return outputMonth
