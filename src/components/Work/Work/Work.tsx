@@ -5,6 +5,7 @@ import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { Loader } from '@/components/common/Loader/Loader'
 import { setLoadFlg, translateWorkDuration } from '@/lib/functions'
+import { getWorkLink } from '@/lib/getLinks'
 import { AppContext } from '@/providers/AppContext'
 import { WorkType } from '@/types/Work'
 
@@ -16,7 +17,7 @@ export const Work = (props: Prop) => {
   const { tags } = useContext(AppContext)
   return (
     <li className={styles.work}>
-      <Link href={'/works/' + props.work.urn} className={styles.work_container}>
+      <Link href={getWorkLink(props.work.id)} className={styles.work_container}>
         <div className={styles.work_thumb}>
           {props.work.thumbnail.url !== '' && (
             <>
