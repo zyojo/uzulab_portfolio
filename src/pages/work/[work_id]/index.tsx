@@ -7,15 +7,32 @@ import { NextWorkLink } from '@/components/Link/NextWorkLink/NextWorkLink'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { Loader } from '@/components/common/Loader/Loader'
 import { OpenIcon } from '@/image/OpenIcon'
-// import OPEN_ICON from '@/image/open.svg'
 import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
 import { AppContext } from '@/providers/AppContext'
+import { fetchWork, fetchWorks } from '@/repositories/handleWorks'
+import { WorkType } from '@/types/Work'
 
-const WorkPage = () => {
+export const getStaticPaths = async () => {
+  const works = await fetchWorks()
+  const paths = works.contents.map(({ id }: { id: string }) => ({
+    params: { work_id: id },
+  }))
+  return {
+    paths: paths,
+    fallback: 'blocking',
+  }
+}
+
+export const getStaticProps = async ({ params }: { params: { work_id: string } }) => {
+  const { work_id } = params
+  const work = await fetchWork(work_id)
+  return { props: { work } }
+}
+
+const WorkPage = ({ work }: { work: WorkType }) => {
   const { works, tags, isMobile } = useContext(AppContext)
   const router = useRouter()
   const { work_id } = router.query
-  const work = works.find((work) => String(work.urn) == work_id)
   const workOrder = work !== undefined ? works.indexOf(work) : undefined
 
   useEffect(() => {

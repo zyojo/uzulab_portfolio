@@ -1,9 +1,10 @@
 import { client } from '@/lib/client'
 
-const handleTags = async () => {
-  return client.get({
+const fetchTags = async () => {
+  const res = client.get({
     endpoint: 'tags',
   })
+  return res
 }
 
-export { handleTags }
+export { fetchTags }

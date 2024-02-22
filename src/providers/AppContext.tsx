@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { EMPTY_TAGS } from '@/lib/stub/dummyTags'
 import { EMPTY_WORKS } from '@/lib/stub/dummyWorks'
-import { handleTags } from '@/repositories/handleTags'
-import { handleWorks } from '@/repositories/handleWorks'
+import { fetchTags } from '@/repositories/handleTags'
+import { fetchWorks } from '@/repositories/handleWorks'
 import { TagType } from '@/types/Tag'
 import { WorkType } from '@/types/Work'
 
@@ -24,12 +24,12 @@ export const AppProvider = (props: any) => {
   const [isMobile, setIsMobile] = useState(false)
   const [hasChangedEvent, setHasChangedEvent] = useState(false)
 
-  const fetchWorks = async () => {
-    const data = await handleWorks()
+  const updateWorks = async () => {
+    const data = await fetchWorks()
     setWorks(data.contents)
   }
-  const fetchTags = async () => {
-    const data = await handleTags()
+  const updateTags = async () => {
+    const data = await fetchTags()
     setTags(data.contents)
   }
   const handleWindowResize = () => {
@@ -41,8 +41,8 @@ export const AppProvider = (props: any) => {
   }
 
   useEffect(() => {
-    fetchWorks()
-    fetchTags()
+    updateWorks()
+    updateTags()
     setWindowWidth(window.innerWidth)
     window.innerWidth <= 450 ? setIsMobile(true) : setIsMobile(false)
     window.addEventListener('resize', handleWindowResize)
