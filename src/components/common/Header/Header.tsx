@@ -14,45 +14,40 @@ export const Header = () => {
   return (
     <header className={styles.header} data-is-mobile={isMobile}>
       <Link href='/'>
-        <a>
-          <div className={styles.header_logo} data-is-mobile={isMobile}>
-            <Image src={isMobile ? HEADER_LOGO_LINE : HEADER_LOGO} alt={'uzulab'} layout='fill' />
-          </div>
-        </a>
+        <div className={styles.header_logo} data-is-mobile={isMobile}>
+          <Image src={isMobile ? HEADER_LOGO_LINE : HEADER_LOGO} alt={'uzulab'} layout='fill' />
+        </div>
       </Link>
       <nav className={styles.header_links} aria-label='ヘッダーメニュー'>
         {!(isMobile && router.pathname.includes('about')) && (
-          <Link href='/about'>
-            <a
-              className={styles.header_links_link + ' avenir-bold'}
-              data-here={router.pathname.includes('about')}
-            >
-              about
-            </a>
+          <Link
+            href='/about'
+            className={styles.header_links_link + ' avenir-bold'}
+            data-here={router.pathname.includes('about')}
+          >
+            about
           </Link>
         )}
         {!(isMobile && (router.pathname.includes('works') || router.pathname == '/')) && (
-          <Link href='/'>
-            <a
-              className={styles.header_links_link + ' avenir-bold'}
-              data-here={router.pathname.includes('works') || router.pathname == '/'}
-            >
-              works
-            </a>
+          <Link
+            href='/'
+            className={styles.header_links_link + ' avenir-bold'}
+            data-here={router.pathname.includes('works') || router.pathname == '/'}
+          >
+            works
           </Link>
         )}
         {!(isMobile && router.pathname.includes('contact')) && (
-          <Link href='/contact'>
-            <a
-              className={styles.header_links_link}
-              data-here={router.pathname.includes('contact')}
-              data-is-mobile={isMobile}
-              data-is-contact={true}
-            >
-              <div className={styles.header_links_link_container}>
-                <Image src={CONTACT_ICON} alt={'contact'} layout='fill' />
-              </div>
-            </a>
+          <Link
+            href='/contact'
+            className={styles.header_links_link}
+            data-here={router.pathname.includes('contact')}
+            data-is-mobile={isMobile}
+            data-is-contact={true}
+          >
+            <div className={styles.header_links_link_container}>
+              <Image src={CONTACT_ICON} alt={'contact'} layout='fill' />
+            </div>
           </Link>
         )}
       </nav>
