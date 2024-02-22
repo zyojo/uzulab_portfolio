@@ -1,9 +1,9 @@
 import { MailType } from '@/types/Mail'
 
-export const handleSubmit = (e: React.FormEvent<HTMLInputElement>, form: MailType) => {
+export const handleSubmit = async (e: React.FormEvent<HTMLInputElement>, form: MailType) => {
   e.preventDefault()
 
-  fetch('/api/MailAPI', {
+  await fetch('/api/MailAPI', {
     method: 'POST',
     body: JSON.stringify({
       name: form.name,

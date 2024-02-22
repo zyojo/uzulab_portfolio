@@ -8,7 +8,6 @@ export const translateWorkDuration: any = (startDateString: string, endDateStrin
     const startYear = startDate.getFullYear()
     const endYear = endDate.getFullYear()
     const startMonthString = startDateMonth < 10 ? '0' + startDateMonth : String(startDateMonth)
-    console.log('end:', endDate)
     const endMonthString = endDateMonth < 10 ? '0' + endDateMonth : String(endDateMonth)
     if (startYear !== endYear || startMonthString !== endMonthString) {
       if (startYear == endYear) {
