@@ -16,7 +16,7 @@ const AboutPage: NextPageWithLayout = () => {
     <article className={styles.about}>
       <section className={styles.about_top}>
         <div className={styles.about_top_img}>
-          <Image src={PROFILE_IMG} alt='RyotaNakahara' />
+          <Image src={PROFILE_IMG} alt='RyotaNakahara' layout='fill' />
         </div>
         <h1 className={styles.about_top_title + ' avenir-italic'}>Ryota Nakahara</h1>
         <div className={styles.about_top_subtitle + ' avenir-italic'}>

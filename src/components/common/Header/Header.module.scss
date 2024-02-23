@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  height: $header-height;
   z-index: 5;
   padding: 0 56px 0 48px;
   &[data-is-mobile='true'] {
@@ -22,8 +22,8 @@
     padding: 0 16px 0 24px;
   }
   &_logo {
-    height: 60px;
-    width: 60px;
+    height: $header-height;
+    width: $header-height;
     position: relative;
     &[data-is-mobile='true'] {
       height: 40px;
