@@ -26,11 +26,11 @@ export const AppProvider = (props: any) => {
 
   const updateWorks = async () => {
     const data = await fetchWorks()
-    setWorks(data.contents)
+    setWorks(data)
   }
   const updateTags = async () => {
     const data = await fetchTags()
-    setTags(data.contents)
+    setTags(data)
   }
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth)

@@ -12,7 +12,7 @@ import { WorkType } from '@/types/Work'
 export const getStaticProps = async () => {
   const worksData = await fetchWorks()
   const tagsData = await fetchTags()
-  return { props: { works: worksData.contents, tags: tagsData.contents } }
+  return { props: { works: worksData, tags: tagsData } }
 }
 
 const WorksPage = ({

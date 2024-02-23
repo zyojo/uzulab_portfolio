@@ -10,12 +10,14 @@ import { OpenIcon } from '@/image/OpenIcon'
 import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
 import { getWorkLink } from '@/lib/getLinks'
 import { AppContext } from '@/providers/AppContext'
+import { fetchTags } from '@/repositories/handleTags'
 import { fetchWork, fetchWorks } from '@/repositories/handleWorks'
+import { TagType } from '@/types/Tag'
 import { WorkType } from '@/types/Work'
 
 export const getStaticPaths = async () => {
   const works = await fetchWorks()
-  const paths = works.contents.map(({ id }: { id: string }) => ({
+  const paths = works.map(({ id }: { id: string }) => ({
     params: { work_id: id },
   }))
   return {
@@ -27,19 +29,30 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }: { params: { work_id: string } }) => {
   const { work_id } = params
   const work = await fetchWork(work_id)
-  return { props: { work } }
+  const works = await fetchWorks()
+  const tags = await fetchTags()
+  return { props: { work, works, tags, workId: work_id } }
 }
 
-const WorkPage = ({ work }: { work: WorkType }) => {
-  const { works, tags, isMobile } = useContext(AppContext)
-  const router = useRouter()
-  const { work_id } = router.query
-  const workOrder = work !== undefined ? works.indexOf(work) : undefined
+const WorkPage = ({
+  work,
+  works,
+  tags,
+  workId,
+}: {
+  work: WorkType
+  works: WorkType[]
+  tags: TagType[]
+  workId: string
+}) => {
+  const { isMobile } = useContext(AppContext)
+  const workIds = works.map((work) => work.id)
+  const workOrder = work !== undefined ? workIds.indexOf(workId) : undefined
 
   useEffect(() => {
     // @ts-expect-error
     window.twttr?.widgets.load()
-  }, [work_id, works])
+  }, [workId, works])
 
   const TopDescription = ({ forSP = false }: { forSP?: boolean }) => {
     return (

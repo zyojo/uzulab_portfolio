@@ -4,7 +4,7 @@ const fetchWorks = async () => {
   const res = await client.get({
     endpoint: 'works',
   })
-  return res
+  return res.contents
 }
 
 const fetchWork = async (contentId: string) => {
