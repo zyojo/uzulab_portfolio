@@ -8,6 +8,7 @@ import { Tag } from '@/components/Tag/Tag/Tag'
 import { Loader } from '@/components/common/Loader/Loader'
 import { OpenIcon } from '@/image/OpenIcon'
 import { setLoadFlg, translateEmbeddedEditor, translateWorkDuration } from '@/lib/functions'
+import { getWorkLink } from '@/lib/getLinks'
 import { AppContext } from '@/providers/AppContext'
 import { fetchWork, fetchWorks } from '@/repositories/handleWorks'
 import { WorkType } from '@/types/Work'
@@ -158,11 +159,11 @@ const WorkPage = ({ work }: { work: WorkType }) => {
         )}
 
         {workOrder !== undefined && workOrder + 1 < works.length && (
-          <NextWorkLink link={'/works/' + works[workOrder + 1].urn} work={works[workOrder + 1]} />
+          <NextWorkLink link={getWorkLink(works[workOrder + 1].id)} work={works[workOrder + 1]} />
         )}
         {workOrder !== undefined && workOrder - 1 >= 0 && (
           <NextWorkLink
-            link={'/works/' + works[workOrder - 1].urn}
+            link={getWorkLink(works[workOrder - 1].id)}
             work={works[workOrder - 1]}
             isPrev={true}
             styles={
