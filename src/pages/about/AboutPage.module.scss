@@ -4,7 +4,7 @@
     margin: calc(132px + 80px) auto 96px;
     border-radius: $br-md;
     background-color: $content-bg-white;
-    padding: 160px 64px 72px;
+    padding: 104px 64px 72px;
     width: calc(columnWidth(6, 'dt') + 64px * 2);
     @include media-query('pc') {
       width: calc(columnWidth(6, 'pc') + 64px * 2);
@@ -18,12 +18,13 @@
       margin: 132px auto 80px;
     }
     &_img {
+      position: relative;
       width: 264px;
       height: 264px;
       margin: calc(-132px - 160px) auto 32px;
       background-color: $disabled-gray;
       border-radius: 999px;
-      @include media-query('sp') {
+      @include media-query('tb') {
         margin: calc(-132px - 160px) auto 24px;
         width: 208px;
         height: 208px;
