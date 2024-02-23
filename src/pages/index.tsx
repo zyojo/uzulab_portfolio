@@ -22,7 +22,6 @@ const WorksPage = ({
   works: WorkType[]
   tags: TagType[]
 }) => {
-  console.log('works', works)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedTagID, setSelectedTagID] = useState('all')
   const handleSelectedID = (selectedTagID: string) => {
