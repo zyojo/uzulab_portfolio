@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { Loader } from '@/components/common/Loader/Loader'
@@ -15,8 +15,33 @@ type Prop = {
 
 export const Work = (props: Prop) => {
   const { tags } = useContext(AppContext)
+  const workItemRef = useRef<HTMLLIElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (workItemRef.current === null) {
+        return
+      }
+      const windowHeight = window.innerHeight
+      const workItemTop = workItemRef.current.getBoundingClientRect().top
+      if (workItemTop < windowHeight * 0.6 && windowHeight * -0.15 < workItemTop) {
+        workItemRef.current.setAttribute('data-active', 'true')
+      } else {
+        workItemRef.current.setAttribute('data-active', 'false')
+      }
+    }
+
+    const scrollElement = document.getElementsByTagName('main')[0]
+    scrollElement.addEventListener('scroll', handleScroll)
+
+    // クリーンアップ関数でイベントリスナーを削除
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <li className={styles.work}>
+    <li className={styles.work} ref={workItemRef}>
       <Link href={getWorkLink(props.work.id)} className={styles.work_container}>
         <div className={styles.work_thumb}>
           {props.work.thumbnail.url !== '' && (

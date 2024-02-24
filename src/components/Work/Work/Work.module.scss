@@ -2,13 +2,11 @@
 
 .work {
   display: block;
-  // color: $text-black-hover;
-  background-color: $content-bg-white;
-  color: $text-black;
-  // background-color: $content-bg-white-hover;
+  background-color: $work-item-bg-white;
+  color: $text-brown-unactive;
   border-radius: $br-md;
   cursor: pointer;
-  transition: all 0.3s ease-out, color 0.7s ease-out;
+  transition: all 0.3s ease-out;
   @include media-query('tb') {
     color: $text-black;
   }
@@ -23,10 +21,10 @@
     transform: translateZ(0); // for safari
     img {
       transition: all 0.3s ease-out;
-      filter: saturate(0.9) opacity(0.95);
+      filter: opacity(0.8) grayscale(0.9) sepia(0.05);
       transform: translateZ(0); // for safari
       @include media-query('tb') {
-        filter: saturate(1) opacity(1);
+        filter: opacity(1) grayscale(1) sepia(0);
       }
       @include media-query('sp') {
         margin-bottom: 24px;
@@ -181,12 +179,25 @@
       margin-bottom: 80px;
     }
   }
+  &[data-active='true'] {
+    background-color: $content-bg-white;
+    color: $text-black-hover;
+    @include media-query('tb') {
+      // background-color: $content-bg-white-hover;
+      color: $text-black;
+    }
+    .work_thumb {
+      img {
+        filter: opacity(1) grayscale(0) sepia(0);
+      }
+    }
+  }
   &:hover {
     background-color: $content-bg-white-hover;
     color: $text-black;
     .work_thumb {
       img {
-        filter: saturate(1) opacity(1);
+        filter: opacity(1) grayscale(0) sepia(0);
       }
     }
   }
