@@ -32,9 +32,9 @@ export const Work = (props: Prop) => {
     }
 
     const scrollElement = document.getElementsByTagName('main')[0]
+    handleScroll()
     scrollElement.addEventListener('scroll', handleScroll)
 
-    // クリーンアップ関数でイベントリスナーを削除
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
