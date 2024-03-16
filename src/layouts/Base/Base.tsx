@@ -20,7 +20,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
   const mainRef = useRef<HTMLDivElement>(null)
   const handleChangeRoute = () => {
     handleChangeEvent()
-    mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    mainRef.current?.scrollTo({ top: 0, behavior: 'instant' })
   }
   router.events !== undefined &&
     !hasChangedEvent &&

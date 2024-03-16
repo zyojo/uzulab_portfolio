@@ -41,6 +41,7 @@ body {
   font-size: 14px;
   line-height: 2;
   position: relative;
+  -webkit-font-smoothing: antialiased;
   @include media-query('sp') {
     font-size: 12px;
   }
