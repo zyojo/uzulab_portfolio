@@ -109,7 +109,7 @@ const ContactPage: NextPageWithLayout = () => {
           </div>
           <form className={styles.contact_form}>
             <div className={styles.contact_form_item}>
-              <label className='avenir-bold' data-required={true}>
+              <label className='avenir-bold' data-required={true} htmlFor='name'>
                 お名前
               </label>
               <input
@@ -117,6 +117,7 @@ const ContactPage: NextPageWithLayout = () => {
                   onChangeName(e)
                 }}
                 value={form.name}
+                id='name'
                 name='name'
                 type='text'
                 placeholder='姓名'
@@ -128,24 +129,28 @@ const ContactPage: NextPageWithLayout = () => {
               )}
             </div>
             <div className={styles.contact_form_item}>
-              <label className='avenir-bold'>お勤め先</label>
+              <label className='avenir-bold' htmlFor='company'>
+                お勤め先
+              </label>
               <input
                 onChange={(e) => {
                   onChangeCompany(e)
                 }}
+                id='company'
                 name='company'
                 type='text'
                 placeholder='ウズラボ'
               />
             </div>
             <div className={styles.contact_form_item}>
-              <label className='avenir-bold' data-required={true}>
+              <label className='avenir-bold' data-required={true} htmlFor='customer_email'>
                 メールアドレス
               </label>
               <input
                 onChange={(e) => {
                   onChangeEmail(e)
                 }}
+                id='customer_email'
                 name='customer_email'
                 type='text'
                 placeholder='uzulab@example.com'
@@ -159,14 +164,15 @@ const ContactPage: NextPageWithLayout = () => {
               )}
             </div>
             <div className={styles.contact_form_item}>
-              <label className='avenir-bold' data-required={true}>
+              <label className='avenir-bold' data-required={true} htmlFor='message'>
                 お問い合わせ内容
               </label>
               <textarea
                 onChange={(e) => {
                   onChangeMessage(e)
                 }}
-                name='text'
+                id='message'
+                name='message'
                 rows={5}
                 placeholder='ご要望、ご質問など、お気軽にお問い合わせください。'
                 required={true}
