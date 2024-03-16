@@ -16,6 +16,12 @@
     url('../fonts/AvenirNext-Medium-06.ttf') format('truetype');
 }
 
+:root {
+  --work-item-opacity: 0.8;
+  --work-item-grayscale: 0.7;
+  --work-item-sepia: 0.05;
+}
+
 h1,
 h2,
 h3,

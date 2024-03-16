@@ -3,10 +3,10 @@
 .work {
   display: block;
   background-color: $work-item-bg-white;
-  color: $text-brown-unactive;
+  color: $text-black-hover;
   border-radius: $br-md;
   cursor: pointer;
-  transition: all 0.3s ease-out;
+  transition: all 0.15s ease-out;
   @include media-query('tb') {
     color: $text-black;
   }
@@ -21,11 +21,7 @@
     transform: translateZ(0); // for safari
     img {
       transition: all 0.3s ease-out;
-      filter: opacity(0.8) grayscale(0.9) sepia(0.05);
       transform: translateZ(0); // for safari
-      @include media-query('tb') {
-        filter: opacity(1) grayscale(1) sepia(0);
-      }
       @include media-query('sp') {
         margin-bottom: 24px;
       }
@@ -179,25 +175,23 @@
       margin-bottom: 80px;
     }
   }
-  &[data-active='true'] {
-    background-color: $content-bg-white;
-    color: $text-black-hover;
-    @include media-query('tb') {
-      // background-color: $content-bg-white-hover;
-      color: $text-black;
-    }
+  &:hover {
+    background-color: $content-bg-white-hover !important;
+    color: $text-black !important;
     .work_thumb {
       img {
-        filter: opacity(1) grayscale(0) sepia(0);
+        filter: opacity(1) grayscale(0) sepia(0) !important;
       }
     }
-  }
-  &:hover {
-    background-color: $content-bg-white-hover;
-    color: $text-black;
-    .work_thumb {
-      img {
-        filter: opacity(1) grayscale(0) sepia(0);
+    &_info {
+      &_title {
+        color: $text-black !important;
+      }
+      &_duration {
+        color: $text-black !important;
+      }
+      &_desc {
+        color: $text-black !important;
       }
     }
   }

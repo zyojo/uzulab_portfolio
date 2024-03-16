@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './Work.module.scss'
 import { Tag } from '@/components/Tag/Tag/Tag'
 import { Loader } from '@/components/common/Loader/Loader'
@@ -14,7 +14,8 @@ type Prop = {
 }
 
 export const Work = (props: Prop) => {
-  const { tags } = useContext(AppContext)
+  const { tags, isMobile } = useContext(AppContext)
+  const [grayRate, setGrayRate] = useState(1) // 0: active, 1: inactive(grayed)
   const workItemRef = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
@@ -24,11 +25,7 @@ export const Work = (props: Prop) => {
       }
       const windowHeight = window.innerHeight
       const workItemTop = workItemRef.current.getBoundingClientRect().top
-      if (workItemTop < windowHeight * 0.6 && windowHeight * -0.15 < workItemTop) {
-        workItemRef.current.setAttribute('data-active', 'true')
-      } else {
-        workItemRef.current.setAttribute('data-active', 'false')
-      }
+      setGrayRate(getGrayedRate(workItemTop, windowHeight, isMobile))
     }
 
     const scrollElement = document.getElementsByTagName('main')[0]
@@ -40,8 +37,37 @@ export const Work = (props: Prop) => {
     }
   }, [])
 
+  const getGrayedRate = (workItemTop: number, windowHeight: number, isMobile: boolean = false) => {
+    const activeZoneTop = isMobile ? windowHeight * -0.05 : windowHeight * -0.2
+    const activeZoneBottom = windowHeight * 0.6
+    const speedToActivate = 5
+    if (workItemTop < activeZoneBottom && activeZoneTop < workItemTop) {
+      return 0
+    } else if (activeZoneTop > workItemTop) {
+      const rate = ((activeZoneTop - workItemTop) / windowHeight) * speedToActivate
+      return Math.min(1, rate)
+    } else if (activeZoneBottom < workItemTop) {
+      const rate = ((workItemTop - activeZoneBottom) / windowHeight) * speedToActivate
+      return Math.min(1, rate)
+    } else {
+      return 1
+    }
+  }
+
+  const getThumbGrayedStyles = (rate: number = 0) => ({
+    opacity: 0.6 + (1 - rate) * 0.3,
+    grayscale: rate * 0.5,
+    sepia: rate * 0.05,
+  })
+
   return (
-    <li className={styles.work} ref={workItemRef}>
+    <li
+      className={styles.work}
+      ref={workItemRef}
+      style={{
+        backgroundColor: `rgba(255,255,255,${getThumbGrayedStyles(grayRate).opacity * 0.5})`,
+      }}
+    >
       <Link href={getWorkLink(props.work.id)} className={styles.work_container}>
         <div className={styles.work_thumb}>
           {props.work.thumbnail.url !== '' && (
@@ -52,6 +78,11 @@ export const Work = (props: Prop) => {
                 alt={props.work.title}
                 layout='fill'
                 onLoad={setLoadFlg}
+                style={{
+                  filter: `opacity(${getThumbGrayedStyles(grayRate).opacity}) grayscale(${
+                    getThumbGrayedStyles(grayRate).grayscale
+                  }) sepia(${getThumbGrayedStyles(grayRate).sepia})`,
+                }}
               />
             </>
           )}
@@ -65,7 +96,7 @@ export const Work = (props: Prop) => {
                     key={index}
                     isSelectedStyle={true}
                     isLabelStyle={true}
-                    styles={{ marginLeft: '8px' }}
+                    styles={{ marginLeft: '8px', opacity: getThumbGrayedStyles(grayRate).opacity }}
                   />
                 )
               )
@@ -73,11 +104,21 @@ export const Work = (props: Prop) => {
           </div>
         </div>
         <div className={styles.work_info}>
-          <h2 className={styles.work_info_title + ' avenir-bold'}>{props.work.title}</h2>
-          <div className={styles.work_info_duration + ' avenir-italic'}>
+          <h2
+            className={styles.work_info_title + ' avenir-bold'}
+            style={{ opacity: 1 - grayRate * 0.4 }}
+          >
+            {props.work.title}
+          </h2>
+          <div
+            className={styles.work_info_duration + ' avenir-italic'}
+            style={{ opacity: 1 - grayRate * 0.4 }}
+          >
             {translateWorkDuration(props.work.start_date, props.work.end_date)}
           </div>
-          <div className={styles.work_info_desc}>{props.work.summary_list}</div>
+          <div className={styles.work_info_desc} style={{ opacity: 1 - grayRate * 0.4 }}>
+            {props.work.summary_list}
+          </div>
         </div>
       </Link>
     </li>
