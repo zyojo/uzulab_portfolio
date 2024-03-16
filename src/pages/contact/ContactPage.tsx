@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from 'next'
-import { useContext, useEffect, useState } from 'react'
+import { FormEvent, useContext, useEffect, useState } from 'react'
 import styles from './ContactPage.module.scss'
 import { AppContext } from '@/providers/AppContext'
 import { handleSubmit } from '@/repositories/handleSubmit'
@@ -11,16 +11,82 @@ const ContactPage: NextPageWithLayout = () => {
     customer_email: '',
     message: '',
   })
+  const [error, setError] = useState({
+    name: false,
+    customer_email: false,
+    message: false,
+  })
   const { isMobile } = useContext(AppContext)
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(true)
   const [sent, setSent] = useState(false)
-  const [filled, setFilled] = useState(false)
 
   useEffect(() => {
-    form.name.length == 0 || form.customer_email.length == 0 || form.message.length == 0
-      ? setFilled(false)
-      : setFilled(true)
+    if (form.name === '' || form.customer_email === '' || form.message === '') {
+      setDisabled(true)
+      return
+    }
+    setDisabled(false)
   }, [form.name, form.customer_email, form.message])
+
+  const initForm = () => {
+    setForm({
+      name: '',
+      company: '',
+      customer_email: '',
+      message: '',
+    })
+  }
+
+  const onChangeName = (e: FormEvent<HTMLInputElement>) => {
+    const val = e.currentTarget.value
+    setForm((props) => ({
+      ...props,
+      name: val ? val : '',
+    }))
+    setError((props) => ({
+      ...props,
+      name: val === '',
+    }))
+  }
+
+  const onChangeCompany = (e: FormEvent<HTMLInputElement>) => {
+    const val = e.currentTarget.value
+    setForm((props) => ({
+      ...props,
+      company: val ? val : '',
+    }))
+  }
+
+  const onChangeEmail = (e: FormEvent<HTMLInputElement>) => {
+    const val = e.currentTarget.value
+    setForm((props) => ({
+      ...props,
+      customer_email: val ? val : '',
+    }))
+    setError((props) => ({
+      ...props,
+      customer_email: !val.match(/.+@.+\..+/),
+    }))
+  }
+
+  const onChangeMessage = (e: FormEvent<HTMLTextAreaElement>) => {
+    const val = e.currentTarget.value
+    setForm((props) => ({
+      ...props,
+      message: val ? val : '',
+    }))
+    setError((props) => ({
+      ...props,
+      message: val === '',
+    }))
+  }
+
+  const onClickSubmit = async (e: FormEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    initForm()
+    await handleSubmit(e, form)
+    setSent(true)
+  }
 
   return (
     <section className={styles.contact}>
@@ -41,87 +107,81 @@ const ContactPage: NextPageWithLayout = () => {
           <form className={styles.contact_form}>
             <div className={styles.contact_form_item}>
               <label className='avenir-bold' data-required={true}>
-                Your Name
+                お名前
               </label>
               <input
                 onChange={(e) => {
-                  const val = e.currentTarget.value
-                  setForm((props) => ({
-                    ...props,
-                    name: val !== null ? val : '',
-                  }))
+                  onChangeName(e)
                 }}
                 value={form.name}
                 name='name'
                 type='text'
-                className='feedback-input'
                 placeholder='姓名'
                 required={true}
+                data-error={error.name}
               />
+              {error.name && (
+                <div className={styles.contact_form_item_error}>お名前を入力してください。</div>
+              )}
             </div>
             <div className={styles.contact_form_item}>
-              <label className='avenir-bold'>Company Name</label>
+              <label className='avenir-bold'>お勤め先</label>
               <input
                 onChange={(e) => {
-                  const val = e.currentTarget.value
-                  setForm((props) => ({
-                    ...props,
-                    company: val !== null ? val : '',
-                  }))
+                  onChangeCompany(e)
                 }}
                 name='company'
                 type='text'
-                className='feedback-input'
                 placeholder='ウズラボ'
               />
             </div>
             <div className={styles.contact_form_item}>
               <label className='avenir-bold' data-required={true}>
-                Email
+                メールアドレス
               </label>
               <input
                 onChange={(e) => {
-                  const val = e.currentTarget.value
-                  setForm((props) => ({
-                    ...props,
-                    customer_email: val !== null ? val : '',
-                  }))
+                  onChangeEmail(e)
                 }}
                 name='customer_email'
                 type='text'
-                className='feedback-input'
-                placeholder='example@uzulab.com'
+                placeholder='uzulab@example.com'
                 required={true}
+                data-error={error.customer_email}
               />
+              {error.customer_email && (
+                <div className={styles.contact_form_item_error}>
+                  正しいメールアドレスを入力してください。
+                </div>
+              )}
             </div>
             <div className={styles.contact_form_item}>
               <label className='avenir-bold' data-required={true}>
-                Inquery
+                お問い合わせ内容
               </label>
               <textarea
                 onChange={(e) => {
-                  const val = e.currentTarget.value
-                  setForm((props) => ({
-                    ...props,
-                    message: val !== null ? val : '',
-                  }))
+                  onChangeMessage(e)
                 }}
                 name='text'
                 rows={5}
-                className='feedback-input'
                 placeholder='ご要望、ご質問など、お気軽にお問い合わせください。'
                 required={true}
+                data-error={error.message}
               ></textarea>
+              {error.message && (
+                <div className={styles.contact_form_item_error}>
+                  お問い合わせ内容を入力してください。
+                </div>
+              )}
               <input
                 onClick={async (e) => {
-                  setDisabled(true)
-                  await handleSubmit(e, form)
-                  setSent(true)
+                  onClickSubmit(e)
                 }}
                 className='avenir-bold'
                 type='submit'
-                value='Submit'
-                disabled={!filled || disabled}
+                value='送信する'
+                disabled={disabled}
               />
             </div>
           </form>

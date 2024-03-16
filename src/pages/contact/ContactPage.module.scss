@@ -12,11 +12,11 @@
     width: columnWidth(10, 'tb');
   }
   @include media-query('sp') {
-    padding: 80px 24px 96px;
+    padding: 64px 24px 72px;
     width: columnWidth(12, 'sp');
   }
   &_title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 40px;
@@ -44,6 +44,7 @@
       margin-bottom: 24px;
       label {
         display: inline-block;
+        font-weight: bold;
         padding-left: 4px;
         margin-bottom: 8px;
         position: relative;
@@ -51,22 +52,37 @@
           margin-bottom: 4px;
         }
         &[data-required='true']::after {
-          content: '*';
-          color: $theme-gray;
-          font-weight: bold;
+          content: '必須';
           position: absolute;
-          right: -1rem;
-          top: 0;
+          left: calc(100% + 8px);
+          top: 50%;
+          transform: translateY(-50%);
+          color: $theme-white;
+          background-color: $required-red;
+          font-size: 11px;
+          font-weight: bold;
+          text-align: center;
+          border-radius: 8px;
+          width: 30px;
+          padding: 1px 3px 0;
+          font-weight: bold;
+          @include media-query('tb') {
+            font-size: 10px;
+            width: 26aapx;
+          }
         }
       }
       input,
       textarea {
         width: 100%;
         border-radius: 8px;
-        border: solid 1px $theme-gray;
-        padding: 16px;
+        border: solid 2px $form-border;
+        padding: 16px 12px;
         font-size: 16px;
-        transition: all 0.6s ease-in-out;
+        transition: all 0.15s ease-in-out;
+        &:active {
+          border: solid 2px $text-black;
+        }
         @include media-query('tb') {
           padding: 12px 16px;
         }
@@ -83,24 +99,37 @@
           border-color: $theme-gray-focused;
           outline: 0;
         }
+        &[data-error='true'] {
+          border-color: $required-red;
+        }
         &[type='submit'] {
+          padding: 16px 0;
           border: 0;
-          border-radius: 999px;
+          border-radius: 12px;
           appearance: none;
           -webkit-appearance: none;
           display: block;
           cursor: pointer;
           font-size: 14px;
+          font-weight: bold;
           background-color: $text-brown-hover;
           color: $theme-white;
           width: 200px;
           margin: 48px auto 0;
           transition: all 0.3s ease-in-out;
-          &[disabled] {
+          &:disabled {
             cursor: default;
             color: rgba($color: $theme-white, $alpha: 0.8);
             background-color: $disabled-gray;
           }
+        }
+      }
+      &_error {
+        color: $required-red;
+        font-size: 13px;
+        margin-top: 4px;
+        @include media-query('tb') {
+          margin-top: 0;
         }
       }
     }
