@@ -83,9 +83,12 @@ const ContactPage: NextPageWithLayout = () => {
 
   const onClickSubmit = async (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault()
-    initForm()
-    await handleSubmit(e, form)
-    setSent(true)
+    if (disabled) return
+    if (window.confirm('お問い合わせを送信します。よろしいですか？')) {
+      initForm()
+      await handleSubmit(e, form)
+      setSent(true)
+    }
   }
 
   return (

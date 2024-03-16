@@ -12,7 +12,12 @@ const MailAPI = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   })
 
-  const data = JSON.parse(req.body)
+  const data: {
+    name: string
+    company_name?: string
+    customer_email: string
+    message: string
+  } = JSON.parse(req.body)
   const mailObj = (toEmail: string) => {
     return {
       from: process.env.NEXT_PUBLIC_MAIL_USER,
@@ -27,7 +32,7 @@ const MailAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   ${data.name}
   
   Company Name
-  ${data.name}
+  ${data.company_name ? data.company_name : '記入なし'}
       
   Email
   ${data.customer_email}
@@ -39,7 +44,7 @@ const MailAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   ---
   
   uzulab 中原 良太
-  zyojozyo@gmail.com
+  info@ryotanakahara.jp
       `,
     }
   }
