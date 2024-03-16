@@ -15,7 +15,7 @@ export const Tag = (props: Prop) => {
     <>
       {
         <div
-          className={styles.tag + (props.isLabelStyle ? ' avenir-bold' : ' avenir')}
+          className={styles.tag + ' avenir-bold'}
           data-selected={props.isSelectedStyle}
           data-label={props.isLabelStyle}
           onClick={() => {

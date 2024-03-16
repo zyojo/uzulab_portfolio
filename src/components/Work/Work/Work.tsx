@@ -111,7 +111,7 @@ export const Work = (props: Prop) => {
             {props.work.title}
           </h2>
           <div
-            className={styles.work_info_duration + ' avenir-italic'}
+            className={styles.work_info_duration + ' avenir-bold'}
             style={{ opacity: 1 - grayRate * 0.4 }}
           >
             {translateWorkDuration(props.work.start_date, props.work.end_date)}

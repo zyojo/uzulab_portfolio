@@ -14,7 +14,7 @@ export const TagList = (props: Prop) => {
       <Tag
         isAll={true}
         tag={{ id: '0', name: 'all' }}
-        isSelectedStyle={props.selectedTagID == 'all'}
+        isSelectedStyle={props.selectedTagID === 'all'}
         handleSelectedID={() => {
           props.handleSelectedID('all')
         }}
@@ -24,7 +24,7 @@ export const TagList = (props: Prop) => {
           <Tag
             tag={item}
             key={index}
-            isSelectedStyle={props.selectedTagID == item.id}
+            isSelectedStyle={props.selectedTagID === item.id}
             handleSelectedID={() => {
               props.handleSelectedID(item.id)
             }}

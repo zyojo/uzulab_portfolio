@@ -2,7 +2,7 @@
 
 .tag {
   font-size: 14px;
-  padding: 4px 16px;
+  padding: 4px 12px;
   background-color: $theme-white;
   border-radius: 999px;
   cursor: pointer;
@@ -20,6 +20,9 @@
   }
   &[data-selected='false'] {
     background-color: transparent;
+    &:hover {
+      background-color: rgba($theme-white, 0.6);
+    }
   }
   &[data-label='true'] {
     display: inline-block;

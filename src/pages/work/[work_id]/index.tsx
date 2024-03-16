@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import styles from './WorkPage.module.scss'
 import { ContactLink } from '@/components/Link/ContactLink/ContactLink'
