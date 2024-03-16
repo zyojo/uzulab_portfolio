@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { ReactElement, useContext, useRef } from 'react'
 import styles from './Base.module.scss'
-import GoogleTagManager, { GoogleTagManagerId } from '@/components/GoogleTagManager'
 import { Footer } from '@/components/common/Footer/Footer'
 import { Header } from '@/components/common/Header/Header'
 import { MAIN_URL, metaData } from '@/lib/constants'
@@ -45,27 +44,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
         <meta name='twitter:description' content={metaData.description} />
         <meta property='twitter:image' content={metaData.ogp.src} />
         <meta name='theme-color' content='#f8f5f1'></meta>
-        <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');`,
-          }}
-        />
       </Head>
-      <noscript
-        dangerouslySetInnerHTML={{
-          __html: `
-              <iframe
-                src="https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}"
-                height="0"
-                width="0"
-                style="display:none;visibility:hidden"
-              />`,
-        }}
-      />
       <Script src='https://platform.twitter.com/widgets.js' strategy='lazyOnload' />
       <Header />
       <main className={styles.main} ref={mainRef}>
