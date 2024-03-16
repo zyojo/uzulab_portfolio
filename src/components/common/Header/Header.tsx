@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './Header.module.scss'
 import CONTACT_ICON from '@/image/contact_icon_w.svg'
 import HEADER_LOGO_LINE from '@/image/uzulab_h_w.svg'
@@ -12,8 +12,33 @@ import { AppContext } from '@/providers/AppContext'
 export const Header = () => {
   const router = useRouter()
   const { isMobile } = useContext(AppContext)
+  const [isActive, setIsActive] = useState(true)
+
+  useEffect(() => {
+    if (!isMobile || !router.pathname.includes('work')) {
+      setIsActive(true)
+      return
+    }
+    const scrolledElement = document.getElementsByTagName('main')[0]
+    const handleScroll = () => {
+      const scrollTop = scrolledElement.scrollTop
+      if (scrollTop < 200) {
+        setIsActive(false)
+      } else {
+        setIsActive(true)
+      }
+    }
+
+    handleScroll()
+    scrolledElement.addEventListener('scroll', handleScroll)
+
+    return () => {
+      scrolledElement.removeEventListener('scroll', handleScroll)
+    }
+  }, [router.pathname, isMobile])
+
   return (
-    <header className={styles.header} data-is-mobile={isMobile}>
+    <header className={styles.header} data-is-mobile={isMobile} data-is-active={isActive}>
       <Link href={getHomeLink()}>
         <div className={styles.header_logo} data-is-mobile={isMobile}>
           <Image src={isMobile ? HEADER_LOGO_LINE : HEADER_LOGO} alt={'uzulab'} layout='fill' />
