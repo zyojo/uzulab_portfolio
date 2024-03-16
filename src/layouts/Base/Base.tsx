@@ -30,7 +30,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
       <Head>
         <title>{metaData.title}</title>
         <link rel='icon' href={metaData.favicon.src} />
-        {router.pathname == '/works' && <link rel='canonical' href={MAIN_URL} />}
+        {router.pathname == '/work' && <link rel='canonical' href={MAIN_URL} />}
         <meta name='description' content={metaData.description} />
         <meta property='og:url' content={metaData.url} />
         <meta property='og:title' content={metaData.title} />

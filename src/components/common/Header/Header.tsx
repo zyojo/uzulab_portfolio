@@ -29,13 +29,13 @@ export const Header = () => {
             about
           </Link>
         )}
-        {!(isMobile && (router.pathname.includes('works') || router.pathname == '/')) && (
+        {!(isMobile && (router.pathname.includes('work') || router.pathname == '/')) && (
           <Link
             href={getWorksLink()}
             className={styles.header_links_link + ' avenir-bold'}
-            data-here={router.pathname.includes('works') || router.pathname == '/'}
+            data-here={router.pathname.includes('work') || router.pathname == '/'}
           >
-            works
+            work
           </Link>
         )}
         {!(isMobile && router.pathname.includes('contact')) && (
