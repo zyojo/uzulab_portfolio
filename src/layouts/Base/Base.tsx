@@ -7,7 +7,6 @@ import { Footer } from '@/components/common/Footer/Footer'
 import { Header } from '@/components/common/Header/Header'
 import { MAIN_URL, metaData } from '@/lib/constants'
 import { AppContext } from '@/providers/AppContext'
-import { googleTagManagerId } from '@/types/gtm'
 
 type LayoutProps = Required<{
   readonly children: ReactElement
