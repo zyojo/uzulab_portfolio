@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ryotanakahara.jp
+
+# Sitemaps
+Sitemap: https://ryotanakahara.jp/sitemap.xml
