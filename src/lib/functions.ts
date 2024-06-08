@@ -41,3 +41,6 @@ export const setLoadFlg = (e: any) => {
     e.target.dataset.loaded = 'true'
   }
 }
+export const stripHtmlTags = (inputString: string): string => {
+  return inputString.replace(/<[^>]*>/g, '')
+}
