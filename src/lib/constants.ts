@@ -7,7 +7,6 @@ import FLOW_IMG4 from '@/image/flow4.jpg'
 import FLOW_IMG5 from '@/image/flow5.jpg'
 import WEB_ICON from '@/image/pc_icon.svg'
 import GRAPHIC_ICON from '@/image/stationary_icon.svg'
-import OGP from '@/image/uzulab_ogp.png'
 
 export const SKILLS_DATA = [
   {
@@ -69,7 +68,11 @@ export const metaData = {
     'Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。',
   favicon: FAVICON,
   url: 'https://uzulab-portfolio.vercel.app',
-  ogp: OGP,
+  ogp: {
+    width: 2400,
+    height: 1260,
+    src: 'https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/3c5556e7723d49f5b553a0ca8d379ac3/uzulab_ogp.png',
+  },
 }
 
 export const MAIN_URL = 'https://www.ryotanakahara.jp/'
