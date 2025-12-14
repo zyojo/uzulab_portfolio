@@ -1,5 +1,4 @@
 import EXPERIMENT_ICON from '@/image/experiment_icon.svg'
-import FAVICON from '@/image/favicon.ico'
 import FLOW_IMG1 from '@/image/flow1.jpg'
 import FLOW_IMG2 from '@/image/flow2.jpg'
 import FLOW_IMG3 from '@/image/flow3.jpg'
@@ -66,7 +65,9 @@ export const metaData = {
   title: 'uzulab',
   description:
     'Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。',
-  favicon: FAVICON,
+  favicon: {
+    src: '/favicon.ico',
+  },
   url: 'https://uzulab-portfolio.vercel.app',
   ogp: {
     width: 2400,
