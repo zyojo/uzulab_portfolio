@@ -13,6 +13,8 @@ import Base from '../layouts/Base.astro'
         ご相談・お問い合わせは以下のフォームからご連絡ください。<br />2～3営業日以内にメールにてご返信いたします。
       </div>
       <form class='contact_form' novalidate>
+        <!-- bot 対策: 人間には見えない入力欄（値が入っていればサーバー側で破棄） -->
+        <input class='contact_form_trap' name='website' tabindex='-1' autocomplete='off' aria-hidden='true' />
         <div class='contact_form_item'>
           <label class='avenir-bold' data-required='true' for='name'>お名前</label>
           <input id='name' name='name' type='text' placeholder='姓名' required />
@@ -158,6 +160,13 @@ import Base from '../layouts/Base.astro'
       }
       @include media-query('sp') {
         width: 100%;
+      }
+      &_trap {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
       }
       &_item {
         margin-bottom: 24px;
