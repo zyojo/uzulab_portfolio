@@ -38,7 +38,7 @@ jobs:
         run: |
           pnpm astro build
           pnpm wrangler preview --name "pr-${{ github.event.pull_request.number }}" --json > preview.json
-          cat preview.json
+          grep -o 'https://[^"]*workers\.dev' preview.json
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
@@ -47,14 +47,16 @@ jobs:
         with:
           script: |
             const fs = require('fs')
-            const out = JSON.parse(fs.readFileSync('preview.json', 'utf8'))
+            // --json でも前にログ行が混ざるので、行頭の { 以降だけを読む
+            const text = fs.readFileSync('preview.json', 'utf8')
+            const out = JSON.parse(text.slice(text.search(/^\{/m)))
             const marker = '<!-- worker-preview -->'
             const body = [
               marker,
               '### Preview',
               '',
-              `- 最新: ${out.preview_url ?? out.previewUrl ?? '(URL を取得できませんでした。Actions のログを確認してください)'}`,
-              `- このコミット: ${out.deployment_url ?? out.deploymentUrl ?? '-'}`,
+              `- 最新: ${out.preview?.urls?.[0] ?? '(URL を取得できませんでした。Actions のログを確認してください)'}`,
+              `- このコミット: ${out.deployment?.urls?.[0] ?? '-'}`,
               '',
               'データベースと画像は本番と共通です。',
             ].join('\n')
