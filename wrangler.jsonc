@@ -33,6 +33,7 @@
 	"vars": {
 		"AWS_REGION": "ap-northeast-1",
 		"MAIL_FROM": "info@ryotanakahara.jp",
+		"MAIL_FROM_NAME": "uzulab | 中原 良太",
 		"MAIL_TO": "info@ryotanakahara.jp",
 		"CF_ACCESS_AUDIENCE": "b86fc603784be37c9a7db37e8cf98567c0bfde210123c96c91ae74d250427b5f",
 	},
@@ -68,6 +69,7 @@
 		"vars": {
 			"AWS_REGION": "ap-northeast-1",
 			"MAIL_FROM": "info@ryotanakahara.jp",
+			"MAIL_FROM_NAME": "uzulab | 中原 良太",
 			"MAIL_TO": "info@ryotanakahara.jp",
 			"CF_ACCESS_AUDIENCE": "b86fc603784be37c9a7db37e8cf98567c0bfde210123c96c91ae74d250427b5f",
 		},
