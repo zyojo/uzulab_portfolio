@@ -42,66 +42,32 @@ This template ships with `.mcp.json`, `.cursor/mcp.json`, and `.vscode/mcp.json`
 - When Astro's cache is enabled, pass content-query hints to `Astro.cache.set(cacheHint)`. Use the `WithCacheHint` variants for site settings, menus, taxonomies, and widget areas rendered by cached routes.
 - Taxonomy names in queries must match the seed's `"name"` field exactly (e.g., `"category"` not `"categories"`).
 
-## This Template
+## This Site
 
-A portfolio for showcasing creative work. Editorial, near-monochrome, with photography as the main visual interest. Designed for designers, photographers, illustrators, studios, and other people whose work speaks for itself when laid out with generous whitespace.
+The portfolio of Ryota Nakahara (uzulab), served at ryotanakahara.jp. It started from the EmDash portfolio template, but the template's design was replaced with a port of the previous Next.js site: SCSS (`src/styles/_variables.scss`, `src/styles/global.scss`), the Avenir font in `public/fonts`, and the components in `src/components`. The template's `tokens.css` / `theme.css` system does not exist here. Keep the look identical to the previous site unless asked otherwise.
 
-The design is intentionally restrained. Don't pile on colour, gradients, or decoration -- the work is the decoration.
+Deployment, secrets, and the preview workflow are documented in `README.md`.
 
 ## Pages
 
-| Page           | Path           | What it shows                                                                                          |
-| -------------- | -------------- | ------------------------------------------------------------------------------------------------------ |
-| Home           | `/`            | Centred serif title + tagline, "Selected Work" grid                                                    |
-| Work index     | `/work`        | Heading + summary, tag filter chips, full grid                                                         |
-| Project detail | `/work/[slug]` | Project meta line, big serif title, summary, featured image, Portable Text body, optional gallery, URL |
-| About          | `/about`       | Page content (Portable Text)                                                                           |
-| Contact        | `/contact`     | Direct email call to action                                                                            |
+| Page           | Path           | What it shows                                                                      |
+| -------------- | -------------- | ---------------------------------------------------------------------------------- |
+| Home           | `/`            | All works ordered by `sort_order`, with a client-side tag filter                   |
+| Work detail    | `/work/[slug]` | Header images (PC/SP), meta (duration, responsibility, tags), Portable Text body   |
+| Work index     | `/work`        | 301 redirect to `/`                                                                |
+| About          | `/about`       | Static content defined in `src/lib/about.ts` (not managed in the CMS)              |
+| Contact        | `/contact`     | Contact form posting to `/api/contact`, which sends mail via Amazon SES (`src/lib/mail.ts`) |
 
 ## Schema
 
-- `projects` collection: `title`, `featured_image`, `client`, `year`, `summary` (text), `content` (Portable Text), `gallery` (repeater of media-library image + optional caption), `url`.
-- `pages` collection: `title`, `content` (Portable Text). Used for `/about`.
-- Taxonomy: `tag`. Used for filtering and project metadata on the work index.
-- Single `primary` menu.
+- `projects` collection (`/work/{slug}`): `title`, `featured_image` (card thumbnail), `header_pc`, `header_sp`, `client`, `year`, `summary`, `subtitle`, `start_date`, `end_date`, `responsibility`, `content` (Portable Text), `gallery`, `url`, `sort_order` (integer, display order).
+- `pages` collection: unused for now.
+- Taxonomy `tag` with terms `web`, `app`, `logo`. Tags render in the taxonomy's order (`src/lib/works.ts`).
+- `seed/seed.json` holds the schema, the works converted from microCMS, and 301 redirects from the old microCMS ids.
 
-Site settings have `title` and `tagline` -- both render on the home page (title as the centred serif heading, tagline as italic subtitle).
+## Environment notes
 
-The `gallery` field is a repeater. Each row contains a required `image` selected from the EmDash media library and an optional `caption`. Render gallery images with `<Image>` from `emdash/ui`; do not reduce media values to raw URLs.
-
-The contact page sends visitors to their email app instead of accepting a form submission. Replace the example address in `src/pages/contact.astro` before publishing the site.
-
-## Visual character
-
-Typography is the design. The display face is **Playfair Display** (serif) on the `--font-heading` CSS variable; the body face is the system sans stack on `--font-body`. The serif is used for the site title, hero titles, project titles, page titles, and contact column labels. Everything else is the sans. Serif weight is calm on purpose (`--font-weight-heading` and `--font-weight-display` both default to 500).
-
-The brand colour is barely visible by design -- the only saturated colour on the page should be inside images. The default `--color-brand` (`#7c3aed`) is used sparingly for link hover and focus states.
-
-Whitespace is generous. Sections breathe. Don't fight that.
-
-## Customisation
-
-Design tokens live in `src/styles/tokens.css` with their default values. To restyle the site, override tokens in `src/styles/theme.css` -- declarations there are unlayered, so they always beat the `@layer base` defaults. Don't edit `tokens.css` or `Base.astro` for visual changes.
-
-Colours are defined with `light-dark(<light>, <dark>)`, so each token carries both modes. Overriding with a plain colour changes light and dark at once; use `light-dark()` in the override to keep them distinct. There is no separate dark palette to maintain.
-
-The display face is configured in `astro.config.mjs` under `fonts:` (the Astro Fonts API). To change it, swap the `name:` for any Google Fonts serif and keep `cssVariable: "--font-heading"`. Good pairings: Cormorant Garamond, Fraunces, EB Garamond, DM Serif Display. The body face (`--font-body`) is a plain token in `tokens.css` -- system sans, deliberately quiet; override it in `theme.css` only if you have a reason.
-
-CSS variables worth knowing (see `tokens.css` for the full list):
-
-- `--color-brand`, `--color-on-brand`, `--color-brand-ring` -- the single accent, used very sparingly
-- `--color-bg`, `--color-surface`, `--color-text`, `--color-muted`, `--color-border` -- neutral palette
-- `--color-danger` -- form errors
-- `--font-heading` (Fonts API entry in `astro.config.mjs`), `--font-body` (token)
-- `--font-weight-heading` / `--font-weight-display` (both 500) -- raise for a heavier serif voice
-- `--font-size-4xl` -- the size of the homepage title and project titles
-- `--max-width` (720px), `--wide-width` (1200px) -- column widths
-
-## What not to do
-
-- Don't introduce gradients, drop shadows on cards, or coloured section backgrounds. The template's voice is calm and editorial; those break it.
-- Don't change `--font-body` to a display font. Two display faces fight each other.
-- Don't add more than one accent colour.
-- Don't write generic copy like "Welcome to my portfolio" or "Crafting beautiful experiences". The work should speak; the words should be specific (a client name, a discipline, a year).
-- Don't pack the home page with every project. The "Selected Work" framing is intentional -- 3-6 is plenty.
-- Don't add a `gallery` of small thumbnails on the home page. Use one strong image per project; the gallery field renders on the project detail page only.
+- Admin auth is Cloudflare Access (`access()` in `astro.config.mjs`), not passkeys. Locally, open `/_emdash/api/setup/dev-bypass` to get a dev admin session.
+- Previews share the production D1 / R2 / KV. Anything done on a preview changes production data.
+- Production deploys are manual (`pnpm run deploy`). Never deploy to a Cloudflare account other than the one pinned by `account_id` in `wrangler.jsonc`.
+- Secrets (`EMDASH_ENCRYPTION_KEY`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) live only in Cloudflare and `.dev.vars` / `.env` (gitignored). Never commit their values.
