@@ -1,0 +1,137 @@
+---
+import { createPublicPageContext } from 'emdash/page'
+import { EmDashBodyEnd, EmDashBodyStart, EmDashHead } from 'emdash/ui'
+import OGP_IMAGE from '../assets/images/uzulab_ogp.png'
+import Header from '../components/Header.astro'
+import '../styles/global.scss'
+
+interface Props {
+  title?: string
+  description?: string | null
+  image?: string | null
+  canonical?: string | null
+  robots?: string | null
+  type?: 'website' | 'article'
+  content?: { collection: string; id: string; slug?: string | null }
+  /** ツイートの埋め込みを含むページだけ widgets.js を読み込む */
+  loadTwitter?: boolean
+}
+
+const SITE_NAME = 'uzulab'
+const DEFAULT_DESCRIPTION =
+  'Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。'
+
+const {
+  title,
+  description,
+  image,
+  canonical,
+  robots,
+  type = 'website',
+  content,
+  loadTwitter = false,
+} = Astro.props
+
+const fullTitle = title ? `${SITE_NAME} | ${title}` : SITE_NAME
+const ogImage = image ?? new URL(OGP_IMAGE.src, Astro.url.origin).href
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.url.origin).href
+const gtmId = import.meta.env.PUBLIC_GTM_ID
+
+const pageCtx = createPublicPageContext({
+  Astro,
+  kind: content ? 'content' : 'custom',
+  pageType: type,
+  title: fullTitle,
+  pageTitle: title ?? SITE_NAME,
+  description: description || DEFAULT_DESCRIPTION,
+  canonical: canonicalUrl,
+  image: ogImage,
+  content,
+  seo: { ogImage, robots },
+  siteName: SITE_NAME,
+})
+---
+
+<!doctype html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{fullTitle}</title>
+    <link rel='icon' href='/favicon.ico' />
+    <meta name='theme-color' content='#f8f5f1' />
+    <EmDashHead page={pageCtx} />
+    {
+      import.meta.env.PROD && gtmId && (
+        <script is:inline define:vars={{ gtmId }}>
+          ;(function (w, d, s, l, i) {
+            w[l] = w[l] || []
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : ''
+            j.async = true
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+            f.parentNode.insertBefore(j, f)
+          })(window, document, 'script', 'dataLayer', gtmId)
+        </script>
+      )
+    }
+    {loadTwitter && <script is:inline async src='https://platform.twitter.com/widgets.js' />}
+  </head>
+  <body>
+    {
+      import.meta.env.PROD && gtmId && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+            height='0'
+            width='0'
+            style='display:none;visibility:hidden'
+          />
+        </noscript>
+      )
+    }
+    <EmDashBodyStart page={pageCtx} />
+    <Header />
+    <main class='main'>
+      <slot />
+      <footer class='footer avenir'>© Ryota Nakahara</footer>
+    </main>
+    <EmDashBodyEnd page={pageCtx} />
+  </body>
+</html>
+
+<style lang='scss'>
+  @use '../styles/variables' as *;
+  @use 'sass:map';
+
+  .main {
+    display: block;
+    margin: 0 auto;
+    max-width: #{map.get($body-maxWidth, 'dt')};
+    padding: calc(48px + $header-height) #{map.get($column-margin, 'dt')} 0;
+    @include media-query('pc') {
+      max-width: #{map.get($body-maxWidth, 'pc')};
+      padding: calc(48px + $header-height) #{map.get($column-margin, 'pc')} 0;
+    }
+    @include media-query('tb') {
+      max-width: #{map.get($body-maxWidth, 'tb')};
+      padding: calc(24px + $header-height) #{map.get($column-margin, 'tb')} 0;
+    }
+    @include media-query('sp') {
+      max-width: #{map.get($body-maxWidth, 'sp')};
+      padding: 104px #{map.get($column-margin, 'sp')} 0;
+    }
+  }
+  .footer {
+    padding-top: 216px;
+    padding-bottom: 40px;
+    font-size: 12px;
+    text-align: center;
+    @include media-query('sp') {
+      padding-top: 184px;
+      padding-bottom: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+interface Props {
+  label: string
+  /** 選択中（白背景） */
+  selected?: boolean
+  /** カードや詳細ページに載せる小さいラベル表示 */
+  variant?: 'filter' | 'label'
+  /** フィルタ用ボタンとして描画する場合の値 */
+  value?: string
+}
+
+const { label, selected = true, variant = 'label', value } = Astro.props
+const Tag = variant === 'filter' ? 'button' : 'span'
+---
+
+<Tag
+  class='tag avenir-bold'
+  data-selected={String(selected)}
+  data-label={String(variant === 'label')}
+  data-value={value}
+  type={variant === 'filter' ? 'button' : undefined}>{label}</Tag
+>
+
+<style lang='scss'>
+  @use '../styles/variables' as *;
+
+  .tag {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 2;
+    padding: 4px 12px;
+    background-color: $theme-white;
+    border: 0;
+    border-radius: 999px;
+    color: $text-black;
+    transition: background-color 0.3s ease-in-out;
+    @include media-query('tb') {
+      font-size: 13px;
+      padding: 2px 12px;
+    }
+    &[data-selected='false'] {
+      background-color: transparent;
+      &:hover {
+        background-color: rgba($theme-white, 0.6);
+      }
+    }
+    &[data-label='false'] {
+      cursor: pointer;
+      @include media-query('sp') {
+        margin-right: -6px;
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+    &[data-label='true'] {
+      font-size: 12px;
+      padding: 2px 12px;
+      background-color: rgba($theme-white, 0.8);
+      @include media-query('sp') {
+        padding: 0px 10px;
+      }
+    }
+  }
+</style>

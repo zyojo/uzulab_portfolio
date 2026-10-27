@@ -1,0 +1,183 @@
+---
+import { getTaxonomyTermsWithCacheHint } from 'emdash'
+import ContactLink from '../components/ContactLink.astro'
+import Tag from '../components/Tag.astro'
+import WorkCard from '../components/WorkCard.astro'
+import Base from '../layouts/Base.astro'
+import { getWorks } from '../lib/works'
+
+const [worksResult, tagsResult] = await Promise.all([
+  getWorks(),
+  getTaxonomyTermsWithCacheHint('tag', { includeCounts: false }),
+])
+if (worksResult.error) return new Response('Could not load works', { status: 500 })
+if (Astro.cache?.enabled) {
+  Astro.cache.set(worksResult.cacheHint)
+  Astro.cache.set(tagsResult.cacheHint)
+}
+const tags = tagsResult.data
+---
+
+<Base>
+  <article>
+    <section>
+      <div class='tagList' role='group' aria-label='タグで絞り込む'>
+        <Tag label='all' variant='filter' value='all' />
+        {tags.map((tag) => <Tag label={tag.label} variant='filter' value={tag.slug} selected={false} />)}
+      </div>
+    </section>
+    <section>
+      <ul class='workList'>
+        {
+          worksResult.works.map(({ entry, tags }) => (
+            <WorkCard
+              href={`/work/${entry.id}`}
+              title={entry.data.title}
+              subtitle={entry.data.subtitle}
+              thumbnail={entry.data.featured_image}
+              startDate={entry.data.start_date}
+              endDate={entry.data.end_date}
+              tags={tags}
+            />
+          ))
+        }
+      </ul>
+    </section>
+    <aside>
+      <ContactLink />
+    </aside>
+  </article>
+</Base>
+
+<script>
+  const list = document.querySelector<HTMLUListElement>('.workList')!
+  const allWorks = [...list.querySelectorAll<HTMLLIElement>('.work')]
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tagList .tag')
+
+  // 並び（nth-of-type）でレイアウトしているので、非表示ではなく要素ごと入れ替える
+  const select = (value: string) => {
+    for (const button of buttons) button.dataset.selected = String(button.dataset.value === value)
+    list.dataset.loading = 'true'
+    setTimeout(() => {
+      const works =
+        value === 'all' ? allWorks : allWorks.filter((w) => w.dataset.tags?.split(' ').includes(value))
+      list.replaceChildren(...works)
+      window.dispatchEvent(new Event('scroll'))
+    }, 300)
+    setTimeout(() => {
+      list.dataset.loading = 'false'
+    }, 800)
+  }
+
+  for (const button of buttons) button.addEventListener('click', () => select(button.dataset.value!))
+</script>
+
+<style lang='scss'>
+  @use '../styles/variables' as *;
+  @use 'sass:map';
+
+  .tagList {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 80px;
+    gap: 4px;
+    @include media-query('sp') {
+      margin-top: 0;
+      margin-bottom: 48px;
+    }
+  }
+
+  .workList {
+    transition: opacity 0.3s ease-out;
+    &[data-loading='true'] {
+      opacity: 0;
+    }
+    // 12カラムのグリッド上で、左右交互に大小のカードを互い違いに並べる
+    :global(.work) {
+      &:nth-of-type(2n + 1) {
+        margin-right: auto;
+        margin-left: normalWorksMargin('dt');
+        @include media-query('pc') {
+          margin-left: normalWorksMargin('pc');
+        }
+        @include media-query('tb') {
+          margin-left: normalWorksMargin('tb');
+        }
+      }
+      &:nth-of-type(2n) {
+        margin-right: normalWorksMargin('dt');
+        margin-left: auto;
+        @include media-query('pc') {
+          margin-right: normalWorksMargin('pc');
+        }
+      }
+      &:nth-of-type(4n + 1),
+      &:nth-of-type(4n) {
+        width: columnWidth(6, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(6, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(6, 'tb');
+        }
+      }
+      &:nth-of-type(4n + 2),
+      &:nth-of-type(4n + 3) {
+        width: columnWidth(5, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(5, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(5, 'tb');
+        }
+      }
+      &:nth-of-type(4n + 2) {
+        margin-bottom: 160px;
+        margin-top: -320px;
+      }
+      &:nth-of-type(4n) {
+        margin-bottom: 200px;
+        margin-top: -360px;
+      }
+      &:nth-of-type(1) {
+        width: columnWidth(7, 'dt');
+        margin-right: auto;
+        margin-left: 0;
+        @include media-query('pc') {
+          width: columnWidth(7, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(7, 'tb');
+        }
+      }
+      &:nth-of-type(2) {
+        width: columnWidth(5, 'dt');
+        margin-right: 0;
+        margin-left: calc(#{columnWidth(7, 'dt')} + #{map.get($column-gutter, 'dt')});
+        @include media-query('pc') {
+          width: columnWidth(5, 'pc');
+          margin-left: calc(#{columnWidth(7, 'pc')} + #{map.get($column-gutter, 'pc')});
+        }
+        @include media-query('tb') {
+          width: columnWidth(5, 'tb');
+          margin-left: calc(#{columnWidth(7, 'tb')} + #{map.get($column-gutter, 'tb')});
+        }
+      }
+      @include media-query('sp') {
+        &:nth-of-type(3n + 1) {
+          width: columnWidth(12, 'sp');
+          margin: 0 0 80px;
+        }
+        &:nth-of-type(3n + 2) {
+          width: columnWidth(10, 'sp');
+          margin: 0 auto 16px 0;
+        }
+        &:nth-of-type(3n) {
+          width: columnWidth(10, 'sp');
+          margin: 0 0 80px auto;
+        }
+      }
+    }
+  }
+</style>

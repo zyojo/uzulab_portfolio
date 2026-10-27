@@ -1,0 +1,1749 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "uzulab",
+		"description": "Portfolio of Ryota Nakahara (uzulab)",
+		"author": "Ryota Nakahara"
+	},
+	"settings": {
+		"title": "uzulab",
+		"tagline": "Design & Development by Ryota Nakahara"
+	},
+	"collections": [
+		{
+			"slug": "projects",
+			"label": "Projects",
+			"labelSingular": "Project",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/work/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image",
+					"required": true
+				},
+				{
+					"slug": "header_pc",
+					"label": "Header Image (PC)",
+					"type": "image"
+				},
+				{
+					"slug": "header_sp",
+					"label": "Header Image (SP)",
+					"type": "image"
+				},
+				{
+					"slug": "client",
+					"label": "Client",
+					"type": "string"
+				},
+				{
+					"slug": "year",
+					"label": "Year",
+					"type": "string"
+				},
+				{
+					"slug": "summary",
+					"label": "Summary",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "subtitle",
+					"label": "Subtitle",
+					"type": "string",
+					"searchable": true
+				},
+				{
+					"slug": "start_date",
+					"label": "Start Date",
+					"type": "datetime"
+				},
+				{
+					"slug": "end_date",
+					"label": "End Date",
+					"type": "datetime"
+				},
+				{
+					"slug": "responsibility",
+					"label": "Responsibility",
+					"type": "text"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "gallery",
+					"label": "Gallery",
+					"type": "repeater",
+					"validation": {
+						"maxItems": 24,
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Image",
+								"type": "image",
+								"required": true
+							},
+							{
+								"slug": "caption",
+								"label": "Caption",
+								"type": "text"
+							}
+						]
+					}
+				},
+				{
+					"slug": "url",
+					"label": "Project URL",
+					"type": "url"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "tag",
+			"label": "Tags",
+			"labelSingular": "Tag",
+			"hierarchical": false,
+			"collections": [
+				"projects"
+			],
+			"terms": [
+				{
+					"slug": "web",
+					"label": "web"
+				},
+				{
+					"slug": "app",
+					"label": "app"
+				},
+				{
+					"slug": "logo",
+					"label": "logo"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Work",
+					"url": "/work"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
+			]
+		}
+	],
+	"content": {
+		"projects": [
+			{
+				"id": "work-fotographer_ai",
+				"slug": "fotographer_ai",
+				"status": "published",
+				"data": {
+					"title": "Fotographer.ai",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/5481ec8c630b44ed9ce858c45a317eab/fg_top.webp",
+							"alt": "Fotographer.ai",
+							"filename": "fg_top.webp"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/a96e29eef2444ff989589b684f7aef60/fg_pc.webp",
+							"alt": "Fotographer.ai",
+							"filename": "fg_pc.webp"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/6d6b2d3f173b4f7f9d23bdea19f22f92/fotographer_cover2.webp",
+							"alt": "Fotographer.ai",
+							"filename": "fotographer_cover2.webp"
+						}
+					},
+					"subtitle": "AIによる商品写真生成サービスのUIデザインからフロントエンド実装",
+					"summary": "Fotograper.aiはECサイトなどに掲載可能な商品写真を生成AIにより作成するサービスです。このサービスを開発するスタートアップのプレシード期において、UIデザインやフロントエンド開発、PR動画制作などの役割を担当しました。",
+					"start_date": "2022-10-16T15:00:00.000Z",
+					"end_date": "2023-10-30T15:00:00.000Z",
+					"responsibility": "当初はデザインタスクからフロントエンド実装まで幅広く、後期は主にフロントエンド実装",
+					"url": "https://fotographer.ai/",
+					"sort_order": 1,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k0",
+									"text": "Fotographer.aiのサービス概要",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "Fotographer.aiは、EC事業者がサイト上に掲載する商品写真を簡単にかつ思い通りに作成することができるサービスです。\n従来、顧客の目を惹くような魅力的な商品写真を用意するためにはカメラマンやスタジオを用意する必要があり、それは金銭的にも時間的にも当然コストのかかる作業でした。\n本サービスは画像生成AIであるStable Diffusionをベースに開発され、商品そのものの写真さえあれば、背景やシチュエーションは魔法のように自由に作り出すことができます。テキストやキャンバスで大まかなイメージを伝えることで商品写真を自在に生成可能です。\n私はこの前身のプロジェクトから現在成長中のFotographer.aiにかけて、業務委託の立場で開発に関わらせていただきました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "ka",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/155604ae12f84e3b8f078be3a3abc639/fg_ui1.webp",
+									"alt": "fotographer.ai ui",
+									"filename": "fg_ui1.webp"
+								}
+							},
+							"alt": "fotographer.ai ui"
+						},
+						{
+							"_type": "block",
+							"_key": "kc",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "エンジニア中心の学生ベンチャー",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "ke",
+									"href": "https://www.aip.nagoya-u.ac.jp/venture/entrepreneurship/nu-venture",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "このプロジェクトは",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kf",
+									"text": "名古屋大学発の学生ベンチャー",
+									"marks": [
+										"ke"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "であり、エンジニア中心のメンバーで構成されていました。 チームがFotographer.aiの前のプロダクトを開発していた際、サービスLPの実装をご依頼いただいたことがきっかけで、そこから徐々にプロダクトのUIデザインやフロントエンド実装、PR動画制作にも幅広く関わらせていただくようになりました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kl",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "Fotographer.aiの最初期",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kr",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "前述のプロダクトを数ヶ月検証した後、チームは新しいサービスであるFotographer.aiを開発することとなり、私も最初期のバージョンのデザインからフロントエンド実装まで幅広く関わらせていただきました。\n当初、サービスはクローズドで公開され、限られたユーザーの方々に使っていただきながらサービスの改善を行なっていきました。\n生成AIによるアプリケーションはまだまだ前例が少ないこともあり、この新しいユーザー体験をUIに落とし込むのは大変難しい作業です。プロジェクトは試行錯誤しながらスピード感を持ってリリースと改善のプロセスを繰り返し行なっていきました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "ks",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/7e872bfd81d843b195c6ba9a108fc81f/fg_ui2.webp",
+									"alt": "fotographer.ai ui",
+									"filename": "fg_ui2.webp"
+								}
+							},
+							"alt": "fotographer.ai ui",
+							"caption": "※現在のバージョンのUIとは異なります。"
+						},
+						{
+							"_type": "image",
+							"_key": "kt",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/0d03feef0dea4dd1860eac729ca31691/fg_ui3.webp",
+									"alt": "fotographer.ai ui",
+									"filename": "fg_ui3.webp"
+								}
+							},
+							"alt": "fotographer.ai ui",
+							"caption": "※現在のバージョンのUIとは異なります。"
+						},
+						{
+							"_type": "block",
+							"_key": "kv",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "サービスの改善と成長",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kz",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "商品を持つ「手」を写真に追加する機能や生成履歴の表示など次々機能を拡充させ、また生成の精度や速度、ユーザビリティも日々向上しています。\nFotographer.aiはStability AIの日本公式XにてStable Diffusion活用事例として紹介され、またTHE GUILD代表の深津貴之氏がアドバイザーになるなど、徐々に注目度が上がってきました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "embed",
+							"_key": "k10",
+							"url": "https://twitter.com/StabilityAI_JP/status/1664926291013844992",
+							"provider": "twitter",
+							"html": "<blockquote class=\"twitter-tweet\"><p lang=\"ja\" dir=\"ltr\">誰でも簡単にかっこいい商品写真を生成できます！ECサイト運営者にとってもめっちゃ便利そう♫ <a href=\"https://twitter.com/hashtag/StableDiffusion?src=hash&amp;ref_src=twsrc%5Etfw\">#StableDiffusion</a> 搭載の <a href=\"https://t.co/7K8jmbQcDw\">https://t.co/7K8jmbQcDw</a> です。 <a href=\"https://twitter.com/hashtag/%E7%94%9F%E6%88%90AI?src=hash&amp;ref_src=twsrc%5Etfw\">#生成AI</a> <a href=\"https://t.co/9iR2DiVwh9\">pic.twitter.com/9iR2DiVwh9</a></p>&mdash; Stability AI 日本公式 (@StabilityAI_JP) <a href=\"https://twitter.com/StabilityAI_JP/status/1664926291013844992?ref_src=twsrc%5Etfw\">June 3, 2023</a></blockquote>"
+						},
+						{
+							"_type": "block",
+							"_key": "k12",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k11",
+									"text": "サービスの注目度が上がり開発速度も加速していくにつれ、私は他の案件との兼ね合いが難しくなり残念ながらチームを離れることとなりましたが、優秀なメンバーと共にサービスの成長を１年ほど間近に体験することができ、刺激的で得難い経験をさせていただきました。",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"web",
+						"app"
+					]
+				}
+			},
+			{
+				"id": "work-lac",
+				"slug": "lac",
+				"status": "published",
+				"data": {
+					"title": "LAC",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/3b9a1b02dea14cdeb016a10e518b0700/lac_thumnail.webp",
+							"alt": "LAC",
+							"filename": "lac_thumnail.webp"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/78f170c1bfae4887a264f8f1bea7994c/lac_cover1.webp",
+							"alt": "LAC",
+							"filename": "lac_cover1.webp"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/8d62fc350c314f24bf5ab7b6aecf6c17/lac_cover2.webp",
+							"alt": "LAC",
+							"filename": "lac_cover2.webp"
+						}
+					},
+					"subtitle": "インクルーシブ教育を実践する学習塾のWEBサイトデザイン・実装",
+					"summary": "関東圏に３教室展開する学習塾・LACは、普段の「勉強」だけでなく２ヶ月に１回ほど「課外学習」に行くのが特徴です。海外の大学での研修やキャンプなど、仲間たちと教室を飛び出して普段ではできない経験ができます。また、発達障がいや不登校、脳性麻痺など、普段の学校や塾が苦手な生徒さんも積極的に受け入れたインクルーシブ教育を実践されています。\nそのWEBサイトのリニューアルプロジェクトのデザイン・実装を担当しました。",
+					"start_date": "2023-06-13T15:00:00.000Z",
+					"end_date": "2023-11-29T15:00:00.000Z",
+					"responsibility": "WEBデザインとWordPressテーマ実装の全て",
+					"url": "https://lac.pepper.jp/",
+					"sort_order": 2,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k14",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "分散した情報発信のハブとしてのリニューアル",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k18",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": "これまでLACでは、WEBサイトをWIXで自作されており、そちらのリニューアルをしたいとのことでご依頼をいただきました。\n当時の運用状況をお伺いしたところ、活動報告としてtumblr、Instagram、facebook、FC2ブログなど複数のSNSをこれまで運用されており、やや分散気味の情報を集約し、また動いているメディアのハブとなるようなWEBサイトとして企画を進めました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k19",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/6199892c25d14272bf8481d52def4654/lac_contents1.webp",
+									"alt": "LACのWEBメディアの状況",
+									"filename": "lac_contents1.webp"
+								}
+							},
+							"alt": "LACのWEBメディアの状況"
+						},
+						{
+							"_type": "block",
+							"_key": "k1b",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "インクルーシブなやさしさと子どもの力強さの視覚表現",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1p",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "k1n",
+									"href": "https://lac.pepper.jp/",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "あらゆる学年、あらゆる状況の子どもたちを受け入れ、それぞれの目標に合わせた完全オーダーメイドの指導をしている点で、LACは大変ユニークな学習塾です。たとえ何らかの障がいをもち、通常の学校が苦手な子どもであっても、ここでは仲間と出会い様々な経験を共有することができます。\nまたLACでは、課外学習の企画は子どもたちに任せるなど、生徒の主体性を重視している点も特徴的です。ただ知識を与えるのではなく、生徒それぞれが一人の人間としての自立することを目指し指導されています。\nこういった、",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": "あらゆる状況の生徒を受け入れる懐の深さ",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "や",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "LACに通う子ども達の力強さ",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": "をイメージし、WEBデザインにおいて視覚表現を行いました。\n\n",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "Webサイトを開く",
+									"marks": [
+										"k1n"
+									]
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"web",
+						"logo"
+					]
+				}
+			},
+			{
+				"id": "work-tokyoislands",
+				"slug": "tokyoislands",
+				"status": "published",
+				"data": {
+					"title": "Tokyo Islands",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/e3735a454ed74f31903e58a66bf637ce/ti_top.jpg",
+							"alt": "Tokyo Islands",
+							"filename": "ti_top.jpg"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/7970800e87c7498bbc268c86b1f7351f/ti16_5.jpg",
+							"alt": "Tokyo Islands",
+							"filename": "ti16_5.jpg"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/752a7af7c9d6462bb7f74446f40dfb9b/ti1_1.jpg",
+							"alt": "Tokyo Islands",
+							"filename": "ti1_1.jpg"
+						}
+					},
+					"subtitle": "伊豆諸島のうち９島のインバウンド旅行者向けWEBサイトのデザインと実装",
+					"summary": "太平洋に南北に連なる９つの島・Tokyo Islandsを海外の旅行者に紹介するWEBサイト「tokyoislands.jp」のリニューアルにあたって、デザインから実装・デプロイまでを担当しました。",
+					"start_date": "2022-10-25T15:00:00.000Z",
+					"end_date": "2023-05-23T15:00:00.000Z",
+					"responsibility": "WEBデザインの引き継ぎと実装・デプロイまで",
+					"url": "https://tokyoislands.jp/",
+					"sort_order": 3,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k1r",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": "東京都に属する９島・TOKYO ISLANDS",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "Tokyo Islandsは太平洋に広がる９つの島々（大島、利島、新島、式根島、神津島、三宅島、御蔵島、八丈島、青ヶ島）の総称で、その多くの島に東京から２時間以内で辿り着くことができます。\nこれらの島々は火山活動によって生まれたものであり、大島や三宅島のように未だ活動が活発な島もあります。大地の営みを間近に感じることができる壮大な景色や独自の生態系に囲まれた島々は、旅行者にとっても大変魅力あふれる場所です。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k1x",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/f0f22bf26860487cb2d525267418da79/ti_islands.jpg",
+									"alt": "tokyo islands",
+									"filename": "ti_islands.jpg"
+								}
+							},
+							"alt": "tokyo islands"
+						},
+						{
+							"_type": "block",
+							"_key": "k1z",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "tokyoislands.jpへの参加",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "tokyoislands.jpはインバウンド旅行者に向けて９つの島の魅力を発信するメディアで、2014年から運営されています。メディアを管理されているFujicoさんに出会った時点では、既に9年間の素晴らしい記事と写真が多く蓄積されていました。\nかねてよりリニューアルについては計画され少しずつ進められてきたそうですが、ここ数年間はあまり作業が進んでおらず、僕は前任の開発者の方からバトンタッチする形でこのプロジェクトに参加することとなりました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "情報の整理",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "tokyoislands.jpのリニューアルで目指したことは、どの",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "文化圏の方でも迷いなく情報を得ることができ、ワクワクしながらTokyo Islandsへの旅を思い描いてもらえるようなメディア",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "にすることでした。\n作業開始時点で存在する記事や、今後公開したい記事の方向性について議論をし、まず記事のカテゴリ分けから行いました。また、それぞれのカテゴリに対応するアイコンを作成し、どのカテゴリに属する記事なのかが直感的にわかるように配置しました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k2c",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/5ba40dc5224d4e7c9c4a52a19ec0040c/ti_icons.jpg",
+									"alt": "icons",
+									"filename": "ti_icons.jpg"
+								}
+							},
+							"alt": "icons"
+						},
+						{
+							"_type": "block",
+							"_key": "k2e",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "多様なカラーが調和するデザインに",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2n",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "k2l",
+									"href": "https://tokyoislands.jp/",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2f",
+									"text": "人種・国籍を問わず世界中の旅行者に来ていただきたいという思いをもとに多くの色を配するデザインとしました。また蓄積されている多くの写真素材を活かすために、写真を多く、効果的に取り入れられるレイアウトを心がけました。\n\nこのプロジェクトは、今後も運用のデータを元にサイトのアップデートを継続的に行なっていきます。\n\n",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": "Webサイトを開く",
+									"marks": [
+										"k2l"
+									]
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k2o",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/43495ccb8676430183645497570b0ed0/ti_top.jpg",
+									"alt": "web site top",
+									"filename": "ti_top.jpg"
+								}
+							},
+							"alt": "web site top"
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"web"
+					]
+				}
+			},
+			{
+				"id": "work-juuq",
+				"slug": "juuq",
+				"status": "published",
+				"data": {
+					"title": "JuuQ",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/9ea8bf1a37d446919f5e39130a2c3056/juuq_thumb.jpg",
+							"alt": "JuuQ",
+							"filename": "juuq_thumb.jpg"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/cbda1ea87c2d447f8702f9bfef935414/juuq_header_pc.jpg",
+							"alt": "JuuQ",
+							"filename": "juuq_header_pc.jpg"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/a8fef7cf6c904983af8f4abb6f51e37d/juuq_header_sp.jpg",
+							"alt": "JuuQ",
+							"filename": "juuq_header_sp.jpg"
+						}
+					},
+					"subtitle": "ライバーがより自由にコンテンツを販売できる配信サービスの開発",
+					"summary": "従来のライブ配信における激しい競争にさらされ、消耗が激しいライバーの課題を解決するため、JuuQは価格や内容をライバーが自由に決められるギフト機能がある配信サービスを提供します。開発メンバーの一人として、数ヶ月間Probrem Solution Fitのプロセスでプロトタイプの検証を行いました。",
+					"start_date": "2022-03-31T15:00:00.000Z",
+					"end_date": "2022-08-30T15:00:00.000Z",
+					"responsibility": "グラフィック・フロントエンド実装・顧客開発の一部",
+					"sort_order": 4,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k2q",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": "ライバーという職業の難しさ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2r",
+									"text": "従来のライブ配信において、ライバーは常にランクの上下が伴う競争に組み込まれています。一定の収入を得るためには長時間配信が不可欠なため、心身ともに疲弊してしまいがちです。\nライバーの収入源は主に視聴者からのギフトです。定期的に行われるイベントで上位になるためにファンを焚きつけて、身銭を切ったギフトを送ってもらいます。一方で視聴者が求めるものは、ライバーからの承認であり、名前を覚えてもらっていることや、応援のお礼を言ってもらえることで得られる満足感です。\nただこれは代替可能な価値です。いつも応援しているAちゃんの配信が１週間休みだったら、視聴者はBちゃんのところへ行き、そこで名前を覚えてもらって優しくしてもらえれば、それで満足する視聴者は多くいます。少しでも休んでしまうと、意外なほどファンは残りません。ライバーにとってみれば、自分自身の魅力で視聴者を楽しませているという感覚が乏しくなりがちで、それは精神的な充足感を下げる１つの要因になると考えられます。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k2x",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/510e72590b52483c8021cff7c0786166/juuq_ui.jpg",
+									"alt": "JuuQ",
+									"filename": "juuq_ui.jpg"
+								}
+							},
+							"alt": "JuuQ"
+						},
+						{
+							"_type": "block",
+							"_key": "k2z",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2y",
+									"text": "ガチャ要素の検証",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k35",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k30",
+									"text": "こういった課題を解決するために、「配信のコンテンツ性の向上」とそれに付随した「自由にプライシングが可能なギフト」が効果的と考えました。\nゲーム配信に特化したサービスなどを除けば、従来のライブ配信サービスにおいてコンテンツのほとんどは雑談であり、楽器の演奏や歌を披露するといったスキルを持たない場合は、いわばライバーと視聴者の関係性の確認に終始してしまいます。\nそこでライバーそれぞれの魅力をより引き出せるコンテンツとして、企画やトークテーマをガチャとして提供するサービスを検証することにしました。ライバーは「恋愛トークガチャ」や「強制筋トレガチャ」などたくさん種類があるガチャから自分に合うものを選んで配信に置くことができます。視聴者はポイントを使い、ライバーにやって欲しいこと・話してほしいことが入っているガチャを引きます。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k36",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/217488c8ccc74145a74f5aafe8a3d806/juuq_cards.jpg",
+									"alt": "JuuQ",
+									"filename": "juuq_cards.jpg"
+								}
+							},
+							"alt": "JuuQ"
+						},
+						{
+							"_type": "image",
+							"_key": "k37",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/e485ed671d46404f9bc4ed195be6dfe9/juuq_gachas.jpg",
+									"alt": "JuuQ",
+									"filename": "juuq_gachas.jpg"
+								}
+							},
+							"alt": "JuuQ"
+						},
+						{
+							"_type": "block",
+							"_key": "k39",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k38",
+									"text": "JuuQ α版の特徴",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3a",
+									"text": "ガチャは既存のものを利用する他に、オリジナルも作成可能です。またガチャのプライシングや出現率の調整が自由に行えます。配信の視聴はWEBアプリでログイン不要で見ることができます。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3c",
+									"text": "α版のローンチと集客",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3e",
+									"text": "α版をローンチしたのちサービスLPを作成し、Twitter広告やSNSのDMなどから集客に注力しました。その結果、一定の利用登録や反応をもらったものの、自力で集客可能なレベルのライバーの方からの反応は想定よりは少ないものでした。α版プロダクトは視聴者が回遊するプラットフォームとして機能するものではないので、配信として成り立たせるためにライバーの方が自力で配信に人を呼ぶ力がある程度必要でした。\nそこで、サービスの信用度の向上やプロダクトのフィードバックの獲得を目的に、一定以上ランクのあるライバーの方に有償での配信をお願いし、数人のライバーの方にα版プロダクトでの配信を行なってもらいました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k3i",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/00574e504bec487ab608733f54d7bfe0/juuq_lp.jpg",
+									"alt": "JuuQ",
+									"filename": "juuq_lp.jpg"
+								}
+							},
+							"alt": "JuuQ"
+						},
+						{
+							"_type": "block",
+							"_key": "k3k",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3j",
+									"text": "α版の評価",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3m",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3l",
+									"text": "α版を使ってもらった結果、実際の配信の盛り上がりやガチャの効果を観察することができました。漠然とした配信にガチャは一定の流れをもたらす一方で、何が出るのかわからず視聴者の願望とはなかなかリンクしにくく、もどかしい機能になりがちであることもわかりました。ガチャの盛り上がりは想定よりも汎用性が低く、相性の良いコンテンツは歌のレパートリーガチャなどかなり限定的でした。結果的に、汎用的なガチャ機能がライバーの収益の向上をもたらすとは言えない結果となりました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3o",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3n",
+									"text": "サービスの今後",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3v",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "k3q",
+									"href": "https://prtimes.jp/main/html/rd/p/000000001.000106794.html",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3p",
+									"text": "α版の検証後にサービスはガチャ要素を廃止し、歌やクイズなどの視聴者が楽しめるコンテンツを自由に販売できるエンタメのライブコマースサービスとして",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3r",
+									"text": "β版をリリース",
+									"marks": [
+										"k3q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3s",
+									"text": "しました。\nβ版以降の自分の関わり方としてはフルコミットのサービス開発ではなく、スポットでグラフィックなどのお手伝いをさせてもらっています。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k3w",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/cc4bd8c222ef401cb5a1f7d672f731dc/juuq_beta.jpg",
+									"alt": "JuuQ",
+									"filename": "juuq_beta.jpg"
+								}
+							},
+							"alt": "JuuQ"
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"web",
+						"app"
+					]
+				}
+			},
+			{
+				"id": "work-uzulab",
+				"slug": "uzulab",
+				"status": "published",
+				"data": {
+					"title": "uzulab portfolio",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/62f3c2ac6e9042fd8cafabecd41ebcc5/uzulab_thumb.jpg",
+							"alt": "uzulab portfolio",
+							"filename": "uzulab_thumb.jpg"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/8d3b9973a52248d9a395768dfe6bfe9e/uzulab_header_pc.jpg",
+							"alt": "uzulab portfolio",
+							"filename": "uzulab_header_pc.jpg"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/17fd80290d6249508df9a3390b10baed/uzulab_header_sp.jpg",
+							"alt": "uzulab portfolio",
+							"filename": "uzulab_header_sp.jpg"
+						}
+					},
+					"subtitle": "本ポートフォリオサイトのデザインと実装",
+					"summary": "自分がどのようなことができて、どういった考えで制作を行っているか知ってもらえるようにポートフォリオサイトを制作しました。",
+					"start_date": "2022-06-30T15:00:00.000Z",
+					"end_date": "2022-08-30T15:00:00.000Z",
+					"responsibility": "Webデザイン、実装、ロゴデザイン（個人制作）",
+					"sort_order": 5,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k3y",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3x",
+									"text": "構想",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k43",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3z",
+									"text": "WEB製作者として、これまでどのようなプロジェクトに参加をして、どのような考えで制作を行なってきたのかを知っていただけるようにポートフォリオサイトを作りました。\nサービス開発の一端をご一緒させていただく立場として、普段の制作に至る思考の流れやプロセスの全体像を、より具体的に共有できた方が良いと考え、ある程度文章を読んでいただける構成にしました。\n",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k45",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k44",
+									"text": "デザイン",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k49",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k46",
+									"text": "どのような作品でも違和感なく配置できるような、ニュートラルで自然なデザインを目指しました。\n個人で製作する際はモックアップの制作までは、Figmaで作業をすることが多いです。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4b",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4a",
+									"text": "実装",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4h",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "k4f",
+									"href": "https://github.com/zyojo/uzulab_portfolio",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4c",
+									"text": "作品管理を行うCMSにmicroCMSを利用しています。WEBサイト自体はNext.jsを使い、vercelでホスティングしています。静的生成を事前に行なっており（ISR）、ユーザーはCMSからのデータの取得を待つ必要がありません。\n→ ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4g",
+									"text": "github",
+									"marks": [
+										"k4f"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4j",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4i",
+									"text": "今後",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4k",
+									"text": "まだここに載せていない実績がありますので、徐々に件数を増やしていく予定です。",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"web",
+						"logo"
+					]
+				}
+			},
+			{
+				"id": "work-havreholmgaard",
+				"slug": "havreholmgaard",
+				"status": "published",
+				"data": {
+					"title": "havreholmgård",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/00f0d0663b1c4437bba7ad40b8c000fd/havreholmgaard_thumnail.webp",
+							"alt": "havreholmgård",
+							"filename": "havreholmgaard_thumnail.webp"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/134a9f3b090a44d4aae4a5c1965197a3/havreholmgaard_cover1.webp",
+							"alt": "havreholmgård",
+							"filename": "havreholmgaard_cover1.webp"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/99b5c92985f943d2b67a57885e532482/havreholmgaard_cover2.webp",
+							"alt": "havreholmgård",
+							"filename": "havreholmgaard_cover2.webp"
+						}
+					},
+					"subtitle": "デンマークの歴史的建造物の保存と修復に取り組む農家のプロジェクトのロゴ",
+					"summary": "学生時代に２週間ほどファームステイでお世話になった、デンマークの農家さんのロゴマークをデザインしました。 ここの歴史は深く、かつては中世の封建制度に組み込まれた、地域有数の農家でした。今住んでいる一家は、歴史的価値のあるこの建造物の保存と修復に情熱を注いでおり、旅人たちを無償で受け入れながらその力を借りて活動しています。",
+					"start_date": "2019-02-28T15:00:00.000Z",
+					"end_date": "2019-03-30T15:00:00.000Z",
+					"responsibility": "ロゴデザイン (個人制作)",
+					"sort_order": 6,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k4n",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4m",
+									"text": "Christelとの出会い",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4t",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "k4o",
+									"href": "/work/07a-ri43b",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4p",
+									"text": "TIMEPACK",
+									"marks": [
+										"k4o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k4q",
+									"text": "に参加することを理由に大学４回生の後期から１年間休学していたのですが、１年弱続けても事業は思うように成果は出ず、他のメンバーも就職が近くなり、プロジェクトは一旦休止しようといった感じでした。僕は休学期間が少し残っていたのでヨーロッパを１ヶ月ほどバックパッカーすることにしました。\nお金もなく、安く旅できる方法を探していた時に見つけたのがWorkawayというサービスで、これは働き手を募集しているホストのところで寝食を提供してもらえる代わりに、滞在中はそこである程度決まった時間働くというものです。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k4u",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/2b44ca7b66554300892561fd5ab0af00/havre_ch.jpg",
+									"alt": "havreholmgård",
+									"filename": "havre_ch.jpg"
+								}
+							},
+							"alt": "havreholmgård"
+						},
+						{
+							"_type": "block",
+							"_key": "k4y",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4v",
+									"text": "英語がかなり通じる国であることと、当時見に行ったデンマークデザイン展がかなり良かったことから、なんとなくデンマークに行ってみようかなと考えました。Workawayでデンマークのホストを検索した中でも、レビューが多くてアクティブに見えたHavreholmgårdにメッセージをし、２週間滞在させてもらえることとなりました。\n実際に訪れ、一家の母であるChristelに話を聞くと、とても強い情熱を持った農家さんであることが分かりました。もともと一家はコペンハーゲンに住んでいたいわゆる移住組で、この地域や建造物の持つ歴史に惚れ込んで移住してきたとのことでした。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k4z",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/87072401d1304c39893631b6434e23e6/havre_road.jpg",
+									"alt": "havreholmgård",
+									"filename": "havre_road.jpg"
+								}
+							},
+							"alt": "havreholmgård"
+						},
+						{
+							"_type": "block",
+							"_key": "k51",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k50",
+									"text": "農場のかつての姿",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k57",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k52",
+									"text": "ここは中世の封建制度に組み込まれた有力な農家の１つでした。建物を上空から見下ろすと、直方体の４辺のように細長い家屋が４つあり、かつてはそれぞれに複数の家族が住まい、１つのコミュニティとして農作物や動物を育てていました。\n時代が進み、Christelの１つ前のオーナーは中庭にセメントを流したり、屋根の形を変えてしまったり、強引な改築をたびたび行ったことにより、歴史的建造物の一部が損なわれてしまいました。\nこの地を買い取ったChristelたち一家は、この農場にかつての美しい建造物、当時育てられていた作物や動物を再び取り戻したいと考え、旅人たちの手を借りてそのプロジェクトを進行しています。Christelは毎日僕にこの農場の歴史や建造物について話してくれました。階段の装飾品や中庭に敷き詰められたタイルなど、その１つ１つがこの地に綿々と続く物語の断片でした。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k58",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/7e45e290422440d8883b8aba2dd55c0e/havre_past.jpg",
+									"alt": "havreholmgård",
+									"filename": "havre_past.jpg"
+								}
+							},
+							"alt": "havreholmgård"
+						},
+						{
+							"_type": "block",
+							"_key": "k5a",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k59",
+									"text": "ロゴマークの着想",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5g",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5b",
+									"text": "このプロジェクトを象徴するようなロゴマークがあれば、これからよりたくさんのサポーターを巻き込んで活動する際の手助けになるかと思い制作を始めました。\n母家に入るにはゲートをくぐって、建物に囲まれた中庭を通る必要があります。ゲートになっている建物の屋根には風見鶏があり、それをいつも眺めながら家に入るので印象に残っていました。\nガチョウや羊、ヤギといった動物の飼育をおこなっている農家の象徴としても親しみがあり、ロゴマークのモチーフに風見鶏を取り入れることにしました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "gallery",
+							"_key": "k5j",
+							"columns": 2,
+							"images": [
+								{
+									"_type": "image",
+									"_key": "k5h",
+									"asset": {
+										"$media": {
+											"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/89715ab2c3fe41b0b011110838a2c29a/havre_animals1.jpg",
+											"alt": "havreholmgård",
+											"filename": "havre_animals1.jpg"
+										}
+									},
+									"alt": "havreholmgård"
+								},
+								{
+									"_type": "image",
+									"_key": "k5i",
+									"asset": {
+										"$media": {
+											"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/a198c31ed0ff4dffbb8a75dd33b4cd40/havre_animals2.jpg",
+											"alt": "havreholmgård",
+											"filename": "havre_animals2.jpg"
+										}
+									},
+									"alt": "havreholmgård"
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k5k",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/7684113462c24a4185f7ab7e91882a1e/havre_output.jpg",
+									"alt": "havreholmgård",
+									"filename": "havre_output.jpg"
+								}
+							},
+							"alt": "havreholmgård"
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"logo"
+					]
+				}
+			},
+			{
+				"id": "work-timepack",
+				"slug": "timepack",
+				"status": "published",
+				"data": {
+					"title": "TIMEPACK",
+					"featured_image": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/6df4f34e82044441ab25b1a1e3e363af/timepack_thumb.jpg",
+							"alt": "TIMEPACK",
+							"filename": "timepack_thumb.jpg"
+						}
+					},
+					"header_pc": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/3d370b81d1dd43ad95966f9d260c4a78/timepack_h_pc.jpg",
+							"alt": "TIMEPACK",
+							"filename": "timepack_h_pc.jpg"
+						}
+					},
+					"header_sp": {
+						"$media": {
+							"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/4f0d0f68f39a4a25b738473e642ff54c/timepack_h_sp.jpg",
+							"alt": "TIMEPACK",
+							"filename": "timepack_h_sp.jpg"
+						}
+					},
+					"subtitle": "チームメンバー全員が空いている時間にミーティングをすぐ調整できるアプリの開発",
+					"summary": "TIMEPACKはカレンダーアプリと連携し、チームメンバー全員が空いている時間をリストアップし、５秒でメンバー全員の予定合わせが可能になるアプリです。リモートワークやマルチタスクで動いているチームでの難しいスケジュール調整の課題を解決します。 UI/UXデザインとロゴなどのグラフィック、また一部のフロントエンド実装を行いました。",
+					"start_date": "2018-08-31T15:00:00.000Z",
+					"end_date": "2019-01-30T15:00:00.000Z",
+					"responsibility": "ビジュアル全般（グラフィック・ロゴなど）・UI設計・フロントエンド実装の一部",
+					"sort_order": 7,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k5m",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5l",
+									"text": "学生起業",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5n",
+									"text": "大学２回生くらいの頃から将来の選択肢として、漠然と起業を考えるようになり、学生起業の界隈やサークルに顔を出していました。通っていた大学が理系の単科大学だったので、アプリやデバイスなどの自社製品を作るタイプの起業を志す人が多く、子どもの頃からホームページやロボットを作ってみるのが好きだった自分には性に合っているように感じました。\n４回生に上がるくらいの頃、他大の大学院へ進学していた先輩に誘われ、自社アプリを開発するスタートアップの起業に参加することになりました。チームは自分を入れて４人で、僕以外はエンジニアです。この頃は自分のデザイン能力にもまだまだ自信がなく、そんな中でデザイナーのポストに誘われたことがとても嬉しく、自分の能力を示したいという気持ちでした。\nこの会社では他のスタートアップのプロセスと同様に、サービスのプロトタイプを開発しては検証し、ピボットし、開発し、検証し、を繰り返していたのですが、最後の数ヶ月間に取り組んでいたのがこのTIMEPACKです。\n",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k5u",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/3b956fcde4cc40a08e22eb7b31a61219/tpMotionLogo.gif",
+									"alt": "timepack",
+									"filename": "tpMotionLogo.gif"
+								}
+							},
+							"alt": "timepack"
+						},
+						{
+							"_type": "block",
+							"_key": "k5w",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5v",
+									"text": "サービス概要",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k60",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5x",
+									"text": "たとえチーム内であっても、ミーティングの予定を調整するためにはメッセージを数往復する必要があります。TIMEPACKはこれを解決し、最短５秒でミーティングの予定を決められるスマホアプリです。\nまずグループを作成し、メンバーをURLで招待します。すると、カレンダーアプリとの連携によりグループメンバー全員の空き時間が抽出されリストアップされます。その中からミーティングを行いたい時間を選択すると、他のメンバーに参加のリクエストが送られるという仕組みです。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k61",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/1a1e04905eff4d87a83dc7fd70cb3f79/timepack_ui.jpg",
+									"alt": "timepack",
+									"filename": "timepack_ui.jpg"
+								}
+							},
+							"alt": "timepack"
+						},
+						{
+							"_type": "image",
+							"_key": "k62",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/6476a4c7359e4d5fa177b0bc11ee3641/tutorialfull.gif",
+									"alt": "timepack",
+									"filename": "tutorialfull.gif"
+								}
+							},
+							"alt": "timepack"
+						},
+						{
+							"_type": "block",
+							"_key": "k64",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k63",
+									"text": "トーン＆マナー",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k66",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k65",
+									"text": "ターゲットとしては、主にエンジニアやデザイナーなどのチームで仕事をしている層であり、シンプルかつニュートラルでありながら、少し先進的なイメージのデザインを目指しました。所属しているグループの見分けがつきやすいように、豊富な色とアイコンから選んで設定できるようにしました。",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k67",
+							"asset": {
+								"$media": {
+									"url": "https://images.microcms-assets.io/assets/a7f6beb5ca6e465cabb08c1d9b351ccb/7b703079835349fc807359ac9fb51b4d/timepack_icons.jpg",
+									"alt": "timepack",
+									"filename": "timepack_icons.jpg"
+								}
+							},
+							"alt": "timepack"
+						},
+						{
+							"_type": "block",
+							"_key": "k69",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k68",
+									"text": "その後",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6a",
+									"text": "ローンチ後、２ヶ月ほどアプリの改善と検証を行いましたが、思うようにユーザーを取り込むことができず、PMFを果たさないままサービスは休止しました。また他のチームメンバーも就職する時期になり、TIMEPACKを最後にチームも解散となりました。\nただ僕個人としては、UI/UXデザインはもちろんのこと、プログラミングにも関わらせてもらったことは現在までに至る大きな契機でした。コードを書いてWEBサイトを作ったのはTIMEPACKのサービスLPが初めてでした。",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"taxonomies": {
+					"tag": [
+						"app",
+						"logo"
+					]
+				}
+			}
+		]
+	},
+	"redirects": [
+		{
+			"source": "/work/en1y0-z780",
+			"destination": "/work/fotographer_ai",
+			"type": 301
+		},
+		{
+			"source": "/work/ha2ba2oabn",
+			"destination": "/work/lac",
+			"type": 301
+		},
+		{
+			"source": "/work/z3rb46mnd9ft",
+			"destination": "/work/tokyoislands",
+			"type": 301
+		},
+		{
+			"source": "/work/2-vfwydk5yxg",
+			"destination": "/work/juuq",
+			"type": 301
+		},
+		{
+			"source": "/work/wbunumspam",
+			"destination": "/work/uzulab",
+			"type": 301
+		},
+		{
+			"source": "/work/9-ziw1l753",
+			"destination": "/work/havreholmgaard",
+			"type": 301
+		},
+		{
+			"source": "/work/07a-ri43b",
+			"destination": "/work/timepack",
+			"type": 301
+		}
+	]
+}

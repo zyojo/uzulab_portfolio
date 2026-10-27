@@ -1,0 +1,146 @@
+---
+import CONTACT_ICON from '../assets/images/contact_icon_w.svg'
+import HEADER_LOGO_LINE from '../assets/images/uzulab_h_w.svg'
+import HEADER_LOGO from '../assets/images/uzulab_w.svg'
+
+const path = Astro.url.pathname
+const isAbout = path.startsWith('/about')
+const isContact = path.startsWith('/contact')
+const isWorks = path === '/' || path.startsWith('/work')
+// スマホでは作品詳細の上部を見ている間ヘッダーを隠す
+const hidesOnTop = path.startsWith('/work/')
+---
+
+<header class='header' data-hides-on-top={hidesOnTop} data-active='true'>
+  <a href='/' class='header_logo' aria-label='uzulab'>
+    <img src={HEADER_LOGO.src} alt='uzulab' class='header_logo_full' />
+    <img src={HEADER_LOGO_LINE.src} alt='uzulab' class='header_logo_line' />
+  </a>
+  <nav class='header_links' aria-label='ヘッダーメニュー'>
+    <a href='/about' class='header_links_link avenir-bold' data-here={isAbout}>about</a>
+    <a href='/' class='header_links_link avenir-bold' data-here={isWorks}>work</a>
+    <a
+      href='/contact'
+      class='header_links_link'
+      data-here={isContact}
+      data-is-contact='true'
+      aria-label='contact'
+    >
+      <img src={CONTACT_ICON.src} alt='contact' />
+    </a>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.header')
+  if (header?.dataset.hidesOnTop === 'true') {
+    const mobile = window.matchMedia('(max-width: 450px)')
+    const update = () => {
+      header.dataset.active = String(!mobile.matches || window.scrollY >= 200)
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    mobile.addEventListener('change', update)
+  }
+</script>
+
+<style lang='scss'>
+  @use '../styles/variables' as *;
+
+  .header {
+    mix-blend-mode: exclusion;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $text-black-reverse;
+    position: fixed;
+    top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $header-height;
+    z-index: 5;
+    padding: 0 56px 0 48px;
+    transition: transform 0.3s ease-out;
+    @include media-query('tb') {
+      top: 16px;
+      padding: 0 16px 0 24px;
+    }
+    @include media-query('sp') {
+      height: 40px;
+    }
+    &[data-active='false'] {
+      transform: translate(-50%, -56px);
+    }
+    &_logo {
+      display: block;
+      height: $header-height;
+      width: $header-height;
+      @include media-query('sp') {
+        height: 40px;
+        width: 113px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      &_line {
+        display: none !important;
+        @include media-query('sp') {
+          display: block !important;
+        }
+      }
+      &_full {
+        @include media-query('sp') {
+          display: none !important;
+        }
+      }
+    }
+    &_links {
+      display: flex;
+      align-items: center;
+      &_link {
+        position: relative;
+        font-size: 14px;
+        margin-left: 16px;
+        &[data-here='true']::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 24px;
+          height: 1px;
+          background-color: $text-black-reverse;
+          border-radius: 99px;
+        }
+        // スマホでは今いるページへのリンクを出さない
+        &[data-here='true'] {
+          @include media-query('sp') {
+            display: none;
+          }
+        }
+        &[data-is-contact='true'] {
+          display: inline-block;
+          width: 21px;
+          height: 16px;
+          margin-left: 20px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+          &[data-here='true']::after {
+            bottom: -8px;
+          }
+          @include media-query('sp') {
+            width: 40px;
+            height: 40px;
+            padding: 12px 10px;
+            background-color: rgb(10 12 16 / 70%);
+            border-radius: 999px;
+          }
+        }
+      }
+    }
+  }
+</style>
