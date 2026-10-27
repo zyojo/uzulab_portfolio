@@ -12,8 +12,8 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"typecheck": "astro check",
-		"deploy:stg": "CLOUDFLARE_ENV=stg astro build && wrangler deploy",
-		"deploy:prod": "astro build && wrangler deploy",
+		"deploy": "astro build && wrangler deploy",
+		"preview:pr": "astro build && wrangler preview",
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
