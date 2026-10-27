@@ -1,191 +1,443 @@
 ---
-import { getEmDashEntry, getSeoMeta } from "emdash";
-import { PortableText } from "emdash/ui";
-import Base from "../layouts/Base.astro";
-
-const {
-	entry: page,
-	error,
-	cacheHint,
-} = await getEmDashEntry("pages", "about");
-if (error) return new Response("Could not load the page", { status: 500 });
-if (!page) return Astro.rewrite("/404");
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
-
-const seo = getSeoMeta(page, {
-	siteUrl: Astro.url.origin,
-	path: "/about",
-	defaultDescription: "Learn more about who we are and what we do.",
-});
+import { Image } from 'astro:assets'
+import PROFILE_IMG from '../assets/images/zyojo.png'
+import ContactLink from '../components/ContactLink.astro'
+import Base from '../layouts/Base.astro'
+import { SKILLS_DATA, WORKFLOW_DATA } from '../lib/about'
 ---
 
-<Base
-	title={seo.title}
-	pageTitle={seo.ogTitle}
-	description={seo.description}
-	image={seo.ogImage}
-	canonical={seo.canonical}
-	robots={seo.robots}
-	content={{ collection: "pages", id: page.data.id, slug: "about" }}
->
-	<div class="about-page">
-		<header class="about-header">
-			<h1 class="about-title" {...page.edit.title}>
-				{page.data.title}
-			</h1>
-		</header>
+<Base title='about'>
+  <article class='about'>
+    <section class='about_top'>
+      <div class='about_top_img'>
+        <Image src={PROFILE_IMG} alt='Ryota Nakahara' width={264} height={264} densities={[1, 2]} />
+      </div>
+      <h1 class='about_top_title avenir-italic'>Ryota Nakahara</h1>
+      <div class='about_top_subtitle avenir-italic'>UI/UX Designer, WEB Developer</div>
+      <div class='about_top_desc'>
+        通信技術の進歩やツールの発達により、ユーザー体験の可能性はディスプレイ上にとどまらず日々拡大しています。それを利用することで私たちは、自らの色をより表現しやすく、また共鳴する仲間とより繋がりやすくなりました。
+        <br />
+        Web開発者としての知識とデザインの力を使って、より良い未来の姿を一緒に考え作リ上げるお手伝いをします。
+      </div>
+    </section>
 
-		<div class="about-content" {...page.edit.content}>
-			{
-				page.data.content ? (
-					<PortableText value={page.data.content} />
-				) : (
-					<p>Content coming soon.</p>
-				)
-			}
-		</div>
+    <section class='about_skills'>
+      {
+        SKILLS_DATA.map((skill) => (
+          <div class='skillItem'>
+            <img class='skillItem_img' src={skill.image.src} alt={skill.title} />
+            <h3 class='skillItem_title'>{skill.title}</h3>
+            <div class='skillItem_desc'>{skill.desc}</div>
+            <div class='skillItem_skill avenir-bold'>{skill.skill}</div>
+          </div>
+        ))
+      }
+    </section>
 
-		<aside class="about-sidebar">
-			<div class="sidebar-section">
-				<h3>Services</h3>
-				<ul>
-					<li>Brand Identity</li>
-					<li>Web Design & Development</li>
-					<li>Print Design</li>
-					<li>Photography & Art Direction</li>
-				</ul>
-			</div>
+    <section class='about_flow'>
+      <h2 class='about_flow_title'>制作の流れ</h2>
+      <div class='about_flow_desc'>
+        デザインは、<span class='about_flow_desc_bold'
+          >頭の中に存在する理想を明確な「かたち」へと作り上げていくプロセス</span
+        >です。<br />対話を重ねながら目的を掘り下げ、成果物の解像度を上げていきます。
+      </div>
+      <div class='workflowImg'>
+        {WORKFLOW_DATA.map((flow) => <div class='workflowImg_item'>{flow.title}</div>)}
+      </div>
+      <div class='workflowTab'>
+        {
+          WORKFLOW_DATA.map((flow) => (
+            <div class='workflowItem' data-selected='false'>
+              <button type='button' class='workflowItem_title' aria-expanded='false'>
+                <span class='workflowItem_title_order avenir'>
+                  {flow.index} / {WORKFLOW_DATA.length}
+                </span>
+                <h3 class='workflowItem_title_title'>{flow.title}</h3>
+              </button>
+              <div class='workflowItem_content'>
+                <div class='workflowItem_content_inner'>
+                  {flow.imgs.length > 0 && (
+                    <div class='workflowItem_content_inner_imgs'>
+                      {flow.imgs.map((img) => (
+                        <div class='workflowItem_content_inner_imgs_img'>
+                          <Image src={img} alt={flow.title} height={180} densities={[1, 2]} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div class='workflowItem_content_inner_desc'>{flow.desc}</div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
 
-			<div class="sidebar-section">
-				<h3>Contact</h3>
-				<p>
-					<a href="mailto:hello@studio.example">hello@studio.example</a>
-				</p>
-				<p>
-					<a href="/contact">Send us a message →</a>
-				</p>
-			</div>
-		</aside>
-	</div>
+    <aside>
+      <ContactLink />
+    </aside>
+  </article>
 </Base>
 
-<style>
-	.about-page {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-4xl);
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		grid-template-rows: auto 1fr;
-		gap: var(--spacing-4xl);
-	}
+<script>
+  // 制作の流れ: 1つだけ開くアコーディオン。高さは中身から計算してアニメーションさせる
+  const items = document.querySelectorAll<HTMLElement>('.workflowItem')
+  const close = (item: HTMLElement) => {
+    item.dataset.selected = 'false'
+    item.querySelector('.workflowItem_title')!.setAttribute('aria-expanded', 'false')
+    item.querySelector<HTMLElement>('.workflowItem_content')!.style.height = '0'
+  }
+  for (const item of items) {
+    item.querySelector('.workflowItem_title')!.addEventListener('click', () => {
+      const wasSelected = item.dataset.selected === 'true'
+      items.forEach(close)
+      if (wasSelected) return
+      const content = item.querySelector<HTMLElement>('.workflowItem_content')!
+      const inner = item.querySelector<HTMLElement>('.workflowItem_content_inner')!
+      item.dataset.selected = 'true'
+      item.querySelector('.workflowItem_title')!.setAttribute('aria-expanded', 'true')
+      content.style.height = `${inner.offsetHeight + 50}px`
+    })
+  }
+</script>
 
-	.about-header {
-		grid-column: 1 / -1;
-	}
+<style lang='scss'>
+  @use '../styles/variables' as *;
+  @use 'sass:map';
 
-	.about-title {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
-		line-height: var(--leading-tight);
-	}
+  .about {
+    &_top {
+      margin: calc(132px + 80px) auto 96px;
+      border-radius: $br-md;
+      background-color: $content-bg-white;
+      padding: 104px 64px 72px;
+      width: calc(columnWidth(6, 'dt') + 64px * 2);
+      @include media-query('pc') {
+        width: calc(columnWidth(6, 'pc') + 64px * 2);
+      }
+      @include media-query('tb') {
+        width: calc(columnWidth(6, 'tb') + 64px * 2);
+      }
+      @include media-query('sp') {
+        padding: 160px 40px 64px;
+        width: columnWidth(12, 'sp');
+        margin: 132px auto 80px;
+      }
+      &_img {
+        width: 264px;
+        height: 264px;
+        margin: calc(-132px - 160px) auto 32px;
+        background-color: $disabled-gray;
+        border-radius: 999px;
+        overflow: hidden;
+        @include media-query('tb') {
+          margin: calc(-132px - 160px) auto 24px;
+          width: 208px;
+          height: 208px;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      &_title {
+        text-align: center;
+        font-size: 26px;
+        @include media-query('sp') {
+          font-size: 20px;
+        }
+      }
+      &_subtitle {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 40px;
+        @include media-query('sp') {
+          font-size: 13px;
+          margin-bottom: 32px;
+        }
+      }
+      &_desc {
+        font-size: 14px;
+        line-height: calc(32 / 14);
+        @include media-query('sp') {
+          font-size: 13px;
+        }
+      }
+    }
+    &_skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 160px;
+      @include media-query('sp') {
+        margin-bottom: 104px;
+      }
+    }
+    &_flow {
+      margin: 0 auto;
+      border-radius: $br-md;
+      background-color: $content-bg-white;
+      padding: 96px 0;
+      width: columnWidth(10, 'dt');
+      @include media-query('pc') {
+        width: columnWidth(10, 'pc');
+      }
+      @include media-query('tb') {
+        width: columnWidth(10, 'tb');
+      }
+      @include media-query('sp') {
+        width: 100vw;
+        margin-left: calc(#{map.get($column-margin, 'sp') * -1});
+      }
+      &_title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 48px;
+        @include media-query('sp') {
+          margin-bottom: 32px;
+        }
+      }
+      &_desc {
+        text-align: center;
+        font-size: 14px;
+        line-height: 2.5;
+        margin: 0 auto 96px;
+        padding: 0 32px;
+        @include media-query('tb') {
+          text-align: left;
+          br {
+            display: none;
+          }
+        }
+        @include media-query('sp') {
+          width: columnWidth(12, 'sp');
+          line-height: 2;
+          margin: 0 auto 32px;
+          font-size: 12px;
+        }
+        &_bold {
+          font-weight: bold;
+        }
+      }
+    }
+  }
 
-	.about-content {
-		font-size: var(--font-size-base);
-		line-height: var(--leading-relaxed);
-	}
+  .skillItem {
+    padding: 48px 32px;
+    border-radius: $br-md;
+    background-color: $content-bg-white;
+    width: calc(#{columnWidth(3, 'dt')} + 64px);
+    margin-bottom: 32px;
+    @include media-query('pc') {
+      width: calc(#{columnWidth(3, 'pc')} + 64px);
+    }
+    @media screen and (max-width: 1020px) {
+      width: calc(#{columnWidth(4, 'pc')} + 64px);
+    }
+    @include media-query('tb') {
+      width: columnWidth(6, 'tb');
+    }
+    @include media-query('sp') {
+      width: columnWidth(10, 'sp');
+      padding: 40px 32px 48px;
+    }
+    &_img {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 24px;
+    }
+    &_title {
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 16px;
+      @include media-query('sp') {
+        font-size: 14px;
+      }
+    }
+    &_desc {
+      font-size: 14px;
+      margin-bottom: 16px;
+      @include media-query('sp') {
+        font-size: 12px;
+      }
+    }
+    &_skill {
+      font-size: 12px;
+      color: $theme-gray;
+      @include media-query('sp') {
+        font-size: 10px;
+      }
+    }
+    &:nth-of-type(2) {
+      margin-top: 80px;
+      margin-left: calc(map.get($column-gutter, 'dt') * 2);
+      margin-right: calc(map.get($column-gutter, 'dt') * 2);
+      @media screen and (max-width: 1020px) {
+        margin-top: 0;
+      }
+    }
+  }
 
-	.about-content :global(p) {
-		margin-bottom: 1.5em;
-	}
+  .workflowImg {
+    display: flex;
+    justify-content: center;
+    padding-left: 24px;
+    margin-bottom: 104px;
+    @include media-query('tb') {
+      align-items: center;
+      flex-direction: column;
+    }
+    &_item {
+      font-size: 14px;
+      font-weight: bold;
+      width: 152px;
+      height: 152px;
+      line-height: 152px;
+      margin-left: -24px;
+      text-align: center;
+      border-radius: 999px;
+      border: solid $border-theme 1px;
+      background-color: rgba(#fff, 0.4);
+      @include media-query('tb') {
+        margin-left: unset;
+        margin-bottom: -24px;
+        font-size: 12px;
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+      }
+    }
+  }
 
-	.about-content :global(h2) {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2.5em;
-		margin-bottom: 0.75em;
-	}
+  .workflowTab {
+    width: columnWidth(8, 'dt');
+    margin: 0 auto;
+    border-bottom: solid 1px $border-theme;
+    @include media-query('pc') {
+      width: columnWidth(8, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(8, 'tb');
+    }
+    @include media-query('sp') {
+      width: columnWidth(12, 'sp');
+    }
+  }
 
-	.about-content :global(h3) {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2em;
-		margin-bottom: 0.5em;
-	}
-
-	.about-sidebar {
-		position: sticky;
-		top: var(--spacing-xl);
-		align-self: start;
-	}
-
-	.sidebar-section {
-		margin-bottom: var(--spacing-2xl);
-	}
-
-	.sidebar-section h3 {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-heading);
-		margin-bottom: var(--spacing-md);
-	}
-
-	.sidebar-section ul {
-		list-style: none;
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-	}
-
-	.sidebar-section li {
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.sidebar-section p {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.sidebar-section a {
-		color: var(--color-text);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-
-	.sidebar-section a:hover {
-		color: var(--color-brand);
-	}
-
-	@media (max-width: 768px) {
-		.about-page {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-2xl);
-		}
-
-		.about-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.about-sidebar {
-			position: static;
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: var(--spacing-xl);
-			padding-top: var(--spacing-xl);
-			border-top: 1px solid var(--color-border);
-		}
-
-		.sidebar-section {
-			margin-bottom: 0;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.about-sidebar {
-			grid-template-columns: 1fr;
-		}
-	}
+  .workflowItem {
+    padding: 32px 16px;
+    border-top: solid 1px $border-theme;
+    background-color: transparent;
+    transition: all 0.3s ease-out;
+    &_title {
+      all: unset;
+      box-sizing: border-box;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      font-size: 15px;
+      font-weight: bold;
+      position: relative;
+      line-height: 30px;
+      @include media-query('sp') {
+        font-size: 13px;
+      }
+      &_title {
+        font-size: 16px;
+        @include media-query('sp') {
+          font-size: 13px;
+        }
+      }
+      &_order {
+        font-size: 13px;
+        font-weight: normal;
+        color: $theme-gray;
+        margin-right: 24px;
+        line-height: 30px;
+        @include media-query('sp') {
+          font-size: 11px;
+        }
+      }
+      // ＋／−のアイコン
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 1px;
+        background-color: $theme-gray;
+        border-radius: 99px;
+        right: 12px;
+        top: 50%;
+      }
+      &::before {
+        transform: translateY(-50%) rotate(90deg);
+        transition: transform 0.2s ease-in-out;
+      }
+      &::after {
+        transform: translateY(-50%);
+      }
+    }
+    &_content {
+      width: 100%;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease-in-out;
+      &_inner {
+        margin-top: 32px;
+        padding: 0 24px 0 52px;
+        @include media-query('tb') {
+          margin-top: 16px;
+          padding: 0;
+        }
+        &_imgs {
+          display: flex;
+          height: 180px;
+          overflow: scroll;
+          @include media-query('tb') {
+            height: 150px;
+          }
+          &_img {
+            height: 100%;
+            aspect-ratio: 3/2;
+            margin-right: 16px;
+            border-radius: $br-sm;
+            overflow: hidden;
+            flex-shrink: 0;
+            background-color: $disabled-gray;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+        &_desc {
+          margin-top: 16px;
+          @include media-query('sp') {
+            margin-top: 24px;
+          }
+        }
+      }
+    }
+    &[data-selected='true'] {
+      .workflowItem_title::before {
+        transform: translateY(-50%);
+      }
+      .workflowItem_content {
+        color: $text-black;
+        opacity: 1;
+      }
+    }
+    &:hover {
+      color: $text-brown-hover;
+      background-color: rgba(#fff, 0.3);
+    }
+  }
 </style>

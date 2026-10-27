@@ -1,346 +1,452 @@
 ---
-import {
-	decodeSlug,
-	getEmDashCollection,
-	getEmDashEntry,
-	getSeoMeta,
-} from "emdash";
-import { Image, PortableText } from "emdash/ui";
-import Base from "../../layouts/Base.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
+import { decodeSlug, getEmDashEntry, getSeoMeta } from 'emdash'
+import { Image, PortableText } from 'emdash/ui'
+import ContactLink from '../../components/ContactLink.astro'
+import NextWorkLink from '../../components/NextWorkLink.astro'
+import Tag from '../../components/Tag.astro'
+import Base from '../../layouts/Base.astro'
+import { formatWorkDuration } from '../../lib/format'
+import { getWorks } from '../../lib/works'
 
-const slug = decodeSlug(Astro.params.slug);
+const slug = decodeSlug(Astro.params.slug)
+if (!slug) return Astro.rewrite('/404')
 
-if (!slug) {
-	return Astro.rewrite("/404");
-}
-
-const {
-	entry: project,
-	error,
-	cacheHint: projectCacheHint,
-} = await getEmDashEntry("projects", slug);
-
-if (error) return new Response("Could not load the project", { status: 500 });
-if (!project) {
-	return Astro.rewrite("/404");
-}
-
-// Related projects: order by date in the DB and request a small lookahead
-// so we can drop the current entry without re-querying. Avoids loading
-// every project just to slice off two.
-const relatedResult = await getEmDashCollection("projects", {
-	orderBy: { published_at: "desc" },
-	limit: 3,
-});
-if (relatedResult.error) {
-	return new Response("Could not load related projects", { status: 500 });
-}
-const { entries: relatedProjects, cacheHint: relatedCacheHint } = relatedResult;
-const otherProjects = relatedProjects
-	.filter((p) => p.id !== project.id)
-	.slice(0, 2);
+const [{ entry: work, error, cacheHint }, worksResult] = await Promise.all([
+  getEmDashEntry('projects', slug),
+  getWorks(),
+])
+if (error || worksResult.error) return new Response('Could not load the work', { status: 500 })
+if (!work) return Astro.rewrite('/404')
 if (Astro.cache?.enabled) {
-	Astro.cache.set(projectCacheHint);
-	Astro.cache.set(relatedCacheHint);
+  Astro.cache.set(cacheHint)
+  Astro.cache.set(worksResult.cacheHint)
 }
 
-const gallery = project.data.gallery;
+const works = worksResult.works
+const order = works.findIndex((w) => w.entry.id === work.id)
+const tags = works[order]?.tags ?? []
+const next = works[order + 1]
+const prev = order > 0 ? works[order - 1] : undefined
 
-function safeExternalUrl(value: string | undefined): string | undefined {
-	if (!value) return undefined;
-	try {
-		const url = new URL(value);
-		return url.protocol === "https:" || url.protocol === "http:"
-			? url.href
-			: undefined;
-	} catch {
-		return undefined;
-	}
-}
+const { title, summary, subtitle, url, responsibility } = work.data
+const headerPc = work.data.header_pc ?? work.data.featured_image
+const headerSp = work.data.header_sp ?? work.data.featured_image
+const hasTweet = work.data.content?.some(
+  (block) => block._type === 'embed' && 'provider' in block && block.provider === 'twitter',
+)
 
-const projectUrl = safeExternalUrl(project.data.url);
-const seo = getSeoMeta(project, {
-	siteUrl: Astro.url.origin,
-	path: `/work/${slug}`,
-	defaultDescription: project.data.summary,
-	defaultOgImage: project.data.featured_image?.src,
-});
+const seo = getSeoMeta(work, {
+  siteUrl: Astro.url.origin,
+  path: `/work/${slug}`,
+  defaultDescription: summary,
+  defaultOgImage: work.data.featured_image?.src,
+})
 ---
 
 <Base
-	title={seo.title}
-	pageTitle={seo.ogTitle}
-	description={seo.description}
-	image={seo.ogImage}
-	canonical={seo.canonical}
-	robots={seo.robots}
-	type="article"
-	content={{ collection: "projects", id: project.data.id, slug }}
+  title={title}
+  description={seo.description}
+  image={seo.ogImage}
+  canonical={seo.canonical}
+  robots={seo.robots}
+  type='article'
+  content={{ collection: 'projects', id: work.data.id, slug }}
+  loadTwitter={hasTweet}
 >
-	<article class="project">
-		<header class="project-header">
-			<div class="project-meta">
-				{
-					project.data.client && (
-						<span class="project-client" {...project.edit.client}>
-							{project.data.client}
-						</span>
-					)
-				}
-				{
-					project.data.client && project.data.year && (
-						<span class="meta-separator">·</span>
-					)
-				}
-				{
-					project.data.year && (
-						<span class="project-year" {...project.edit.year}>
-							{project.data.year}
-						</span>
-					)
-				}
-			</div>
-			<h1 class="project-title" {...project.edit.title}>
-				{project.data.title}
-			</h1>
-			{
-				project.data.summary && (
-					<p class="project-summary" {...project.edit.summary}>
-						{project.data.summary}
-					</p>
-				)
-			}
-			{
-				projectUrl && (
-					<a
-						href={projectUrl}
-						class="project-link"
-						target="_blank"
-						rel="noopener noreferrer"
-						{...project.edit.url}
-					>
-						View Live Project →
-					</a>
-				)
-			}
-		</header>
+  <article class='workPage'>
+    <section class='workPage_top'>
+      <div class='workPage_top_img'>
+        <Image image={headerPc} alt={title} priority class='workPage_top_img_pc' />
+        <Image image={headerSp} alt={title} priority class='workPage_top_img_sp' />
+      </div>
+      <div class='workPage_top_info'>
+        <div class='workPage_top_info_left'>
+          <div class='workPage_top_info_left_titleContainer'>
+            <h1 class='workPage_top_info_left_title avenir-bold'>{title}</h1>
+            {
+              url && (
+                <a target='_blank' href={url} rel='noreferrer' class='websiteLink' data-sp='true'>
+                  Webサイトを開く
+                  <svg class='websiteLink_icon' viewBox='0 -960 960 960' aria-hidden='true'>
+                    <path d='M182.152-114.022q-27.599 0-47.865-20.265-20.265-20.266-20.265-47.865v-595.696q0-27.697 20.265-48.033 20.266-20.337 47.865-20.337h242.783q14.424 0 24.244 10.012Q459-826.194 459-811.717q0 14.478-9.821 24.174-9.82 9.695-24.244 9.695H182.152v595.696h595.696v-242.783q0-14.424 9.871-24.244Q797.59-459 812.068-459q14.477 0 24.313 9.821 9.837 9.82 9.837 24.244v242.783q0 27.599-20.337 47.865-20.336 20.265-48.033 20.265H182.152Zm181.609-250q-9.326-9.804-9.826-23.385-.5-13.581 9.695-23.963l366.718-366.478H553.065q-14.424 0-24.244-9.871Q519-797.59 519-812.068q0-14.477 9.821-24.313 9.82-9.837 24.244-9.837h258.848q14.394 0 24.349 9.956 9.956 9.955 9.956 24.349v258.848q0 14.424-10.012 24.244Q826.194-519 811.717-519q-14.478 0-24.174-9.821-9.695-9.82-9.695-24.244v-176.283L411.37-362.63q-9.638 9.195-23.591 9.076-13.953-.12-24.018-10.468Z' />
+                  </svg>
+                </a>
+              )
+            }
+          </div>
+          <div class='workPage_top_info_right' data-sp='true'>
+            {subtitle && <div class='workPage_top_info_right_subtitle'>{subtitle}</div>}
+            {summary && <div class='workPage_top_info_right_text'>{summary}</div>}
+          </div>
+          <div class='workPage_top_info_left_details'>
+            <div class='workPage_top_info_left_details_tags'>
+              {tags.map((tag) => <Tag label={tag.label} />)}
+              {
+                url && (
+                  <div class='workPage_top_info_left_website'>
+                    <a target='_blank' href={url} rel='noreferrer' class='websiteLink' data-sp='false'>
+                      Webサイトを開く
+                      <svg class='websiteLink_icon' viewBox='0 -960 960 960' aria-hidden='true'>
+                        <path d='M182.152-114.022q-27.599 0-47.865-20.265-20.265-20.266-20.265-47.865v-595.696q0-27.697 20.265-48.033 20.266-20.337 47.865-20.337h242.783q14.424 0 24.244 10.012Q459-826.194 459-811.717q0 14.478-9.821 24.174-9.82 9.695-24.244 9.695H182.152v595.696h595.696v-242.783q0-14.424 9.871-24.244Q797.59-459 812.068-459q14.477 0 24.313 9.821 9.837 9.82 9.837 24.244v242.783q0 27.599-20.337 47.865-20.336 20.265-48.033 20.265H182.152Zm181.609-250q-9.326-9.804-9.826-23.385-.5-13.581 9.695-23.963l366.718-366.478H553.065q-14.424 0-24.244-9.871Q519-797.59 519-812.068q0-14.477 9.821-24.313 9.82-9.837 24.244-9.837h258.848q14.394 0 24.349 9.956 9.956 9.955 9.956 24.349v258.848q0 14.424-10.012 24.244Q826.194-519 811.717-519q-14.478 0-24.174-9.821-9.695-9.82-9.695-24.244v-176.283L411.37-362.63q-9.638 9.195-23.591 9.076-13.953-.12-24.018-10.468Z' />
+                      </svg>
+                    </a>
+                  </div>
+                )
+              }
+            </div>
+            <dl class='workPage_top_info_left_details_data'>
+              <div class='workPage_top_info_left_details_data_item'>
+                <dt>作業期間</dt>
+                <dd class='avenir'>{formatWorkDuration(work.data.start_date, work.data.end_date)}</dd>
+              </div>
+              {
+                responsibility && (
+                  <div class='workPage_top_info_left_details_data_item'>
+                    <dt>担当箇所</dt>
+                    <dd>{responsibility}</dd>
+                  </div>
+                )
+              }
+            </dl>
+          </div>
+        </div>
+        <div class='workPage_top_info_right' data-sp='false'>
+          {subtitle && <div class='workPage_top_info_right_subtitle'>{subtitle}</div>}
+          {summary && <div class='workPage_top_info_right_text'>{summary}</div>}
+        </div>
+      </div>
+    </section>
 
-		{
-			project.data.featured_image && (
-				<div class="featured-image" {...project.edit.featured_image}>
-					<Image image={project.data.featured_image} />
-				</div>
-			)
-		}
+    <section class='workPage_content'>
+      <div class='workPage_content_container'>
+        <PortableText value={work.data.content} />
+      </div>
+      {next && <NextWorkLink work={next} />}
+      {prev && <NextWorkLink work={prev} isPrev hasNext={Boolean(next)} />}
+    </section>
 
-		<div class="project-content" {...project.edit.content}>
-			<PortableText value={project.data.content} />
-		</div>
-
-		{
-			gallery && gallery.length > 0 && (
-				<div class="project-gallery" {...project.edit.gallery}>
-					{gallery.map((item) => (
-						<figure class="gallery-item">
-							<Image image={item.image} />
-							{item.caption && <figcaption>{item.caption}</figcaption>}
-						</figure>
-					))}
-				</div>
-			)
-		}
-	</article>
-
-	{
-		otherProjects.length > 0 && (
-			<section class="more-projects">
-				<div class="more-inner">
-					<h2 class="more-title">More Work</h2>
-					<div class="more-grid">
-						{otherProjects.map((p) => (
-							<ProjectCard
-								title={p.data.title}
-								summary={p.data.summary}
-								featuredImage={p.data.featured_image}
-								href={`/work/${p.id}`}
-								client={p.data.client}
-								year={p.data.year}
-								edit={p.edit}
-							/>
-						))}
-					</div>
-				</div>
-			</section>
-		)
-	}
+    <aside>
+      <ContactLink />
+    </aside>
+  </article>
 </Base>
 
-<style>
-	.project {
-		max-width: var(--max-width);
-		margin: 0 auto;
-		padding: 0 var(--spacing-lg) var(--spacing-4xl);
-	}
+<style lang='scss'>
+  @use '../../styles/variables' as *;
+  @use 'sass:map';
 
-	.project-header {
-		margin-bottom: var(--spacing-2xl);
-	}
+  .workPage {
+    &_top {
+      position: relative;
+      width: calc(100vw - #{map.get($work-top-margin, 'dt')} * 2);
+      overflow: hidden;
+      border-radius: $br-lg;
+      background-color: $content-bg-white;
+      padding-bottom: 80px;
+      margin-bottom: 120px;
+      margin-left: calc((100vw - #{mainWidth('dt')}) / -2 + #{map.get($work-top-margin, 'dt')});
+      @include media-query('pc') {
+        width: calc(100vw - #{map.get($work-top-margin, 'pc')} * 2);
+        margin-left: calc((100vw - #{mainWidth('pc')}) / -2 + #{map.get($work-top-margin, 'pc')});
+      }
+      @include media-query('tb') {
+        width: calc(100vw - #{map.get($work-top-margin, 'tb')} * 2);
+        margin-left: calc((100vw - #{mainWidth('tb')}) / -2 + #{map.get($work-top-margin, 'tb')});
+      }
+      @include media-query('sp') {
+        width: 100vw;
+        border-radius: 0 0 $br-lg $br-lg;
+        margin-top: -104px;
+        margin-left: calc(#{map.get($column-margin, 'sp') * -1});
+        padding-bottom: 72px;
+        margin-bottom: 88px;
+      }
+      &_img {
+        margin-bottom: 64px;
+        height: 500px;
+        background-color: $disabled-gray;
+        @include media-query('tb') {
+          height: 400px;
+          margin-bottom: 40px;
+        }
+        @include media-query('sp') {
+          height: auto;
+          aspect-ratio: 1/1;
+        }
+        :global(img) {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        :global(.workPage_top_img_sp) {
+          display: none;
+        }
+        @include media-query('sp') {
+          :global(.workPage_top_img_pc) {
+            display: none;
+          }
+          :global(.workPage_top_img_sp) {
+            display: block;
+          }
+        }
+      }
+      &_info {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: columnWidth(12, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(12, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(12, 'tb');
+          flex-direction: column;
+          padding: 0 24px;
+        }
+        &_left {
+          width: calc(columnWidth(4, 'dt') - 16px);
+          @include media-query('pc') {
+            width: calc(columnWidth(4, 'pc') - 16px);
+          }
+          @include media-query('tb') {
+            width: 100%;
+          }
+          &_titleContainer {
+            margin-bottom: 16px;
+            @include media-query('tb') {
+              margin-bottom: 40px;
+            }
+            @include media-query('sp') {
+              margin-bottom: 32px;
+            }
+          }
+          &_title {
+            font-size: 34px;
+            line-height: 1.2;
+            word-break: break-all;
+            margin-bottom: 8px;
+            @include media-query('sp') {
+              font-size: 28px;
+            }
+          }
+          &_details {
+            @include media-query('tb') {
+              display: flex;
+              justify-content: space-between;
+            }
+            &_tags {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              margin-bottom: 48px;
+              padding-top: 8px;
+              @include media-query('tb') {
+                margin-bottom: 0;
+                width: calc(columnWidth(4, 'tb') - 24px);
+                align-content: flex-start;
+              }
+            }
+            &_data {
+              margin: 0;
+              @include media-query('tb') {
+                width: calc(columnWidth(8, 'tb') - 24px);
+              }
+              &_item {
+                display: flex;
+                padding-bottom: 8px;
+                margin-top: 8px;
+                border-bottom: dotted $border-theme 2px;
+                dt {
+                  width: 56px;
+                  margin-right: 24px;
+                  flex-shrink: 0;
+                }
+                dd {
+                  margin: 0;
+                  width: calc(100% - 80px);
+                }
+              }
+            }
+          }
+          &_website {
+            flex-basis: 100%;
+            margin-top: 8px;
+            @include media-query('tb') {
+              display: none;
+            }
+          }
+        }
+        &_right {
+          line-height: 2.5;
+          width: columnWidth(8, 'dt');
+          @include media-query('pc') {
+            width: columnWidth(8, 'pc');
+          }
+          @include media-query('tb') {
+            width: 100%;
+          }
+          @include media-query('sp') {
+            font-size: 13px;
+            line-height: 2.2;
+          }
+          &[data-sp='true'] {
+            display: none;
+            @include media-query('tb') {
+              display: block;
+              margin-bottom: 24px;
+            }
+          }
+          &[data-sp='false'] {
+            @include media-query('tb') {
+              display: none;
+            }
+          }
+          &_subtitle {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 24px;
+            @include media-query('tb') {
+              font-size: 15px;
+              margin-bottom: 16px;
+            }
+            @include media-query('sp') {
+              font-size: 14px;
+            }
+          }
+          &_text {
+            @include media-query('tb') {
+              font-size: 13px;
+            }
+            @include media-query('sp') {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+    &_content {
+      width: columnWidth(10, 'dt');
+      padding: 80px 0 96px;
+      margin: 0 auto;
+      background-color: $content-bg-white;
+      border-radius: $br-md;
+      @include media-query('pc') {
+        width: columnWidth(10, 'pc');
+      }
+      @include media-query('tb') {
+        width: columnWidth(10, 'tb');
+      }
+      @include media-query('sp') {
+        width: columnWidth(12, 'sp');
+        padding: 64px 0;
+      }
+      // Portable Text の描画結果（EmDash のコンポーネント）に当てるスタイル
+      &_container {
+        margin-bottom: 120px;
+        :global(h2),
+        :global(p) {
+          width: columnWidth(8, 'dt');
+          margin: 0 auto;
+          @include media-query('pc') {
+            width: columnWidth(8, 'pc');
+          }
+          @include media-query('tb') {
+            width: columnWidth(8, 'tb');
+          }
+          @include media-query('sp') {
+            width: calc(100% - 64px);
+          }
+        }
+        :global(h2) {
+          font-size: 18px;
+          margin-top: 80px;
+          @include media-query('sp') {
+            font-size: 14px;
+            margin-top: 64px;
+          }
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+        :global(h2 + p) {
+          margin-top: 40px;
+          @include media-query('sp') {
+            margin-top: 24px;
+          }
+        }
+        :global(p) {
+          font-size: 14px;
+          line-height: 2.5;
+          margin-top: 80px;
+          white-space: pre-line;
+          @include media-query('sp') {
+            font-size: 12px;
+            line-height: 2.2;
+            margin-top: 40px;
+          }
+        }
+        :global(p + p) {
+          margin-top: 40px;
+        }
+        :global(a) {
+          border-bottom: dotted 1px $text-black;
+        }
+        :global(figure),
+        :global(.emdash-gallery) {
+          margin: 80px 0 0;
+          @include media-query('sp') {
+            margin: 40px 0 0;
+          }
+        }
+        :global(figure + figure),
+        :global(figure + .emdash-gallery),
+        :global(.emdash-gallery + figure) {
+          margin-top: 32px;
+          @include media-query('sp') {
+            margin-top: 16px;
+          }
+        }
+        :global(img) {
+          width: 100%;
+          height: auto;
+        }
+        :global(figcaption) {
+          display: block;
+          margin: 8px auto 0;
+          font-size: 12px;
+          text-align: center;
+          color: $text-black-hover;
+        }
+      }
+    }
+  }
 
-	.project-meta {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-sm);
-		text-transform: uppercase;
-		letter-spacing: var(--tracking-wide);
-	}
-
-	.meta-separator {
-		margin: 0 var(--spacing-sm);
-	}
-
-	.project-title {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
-		line-height: var(--leading-tight);
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.project-summary {
-		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.project-link {
-		display: inline-block;
-		font-size: var(--font-size-sm);
-		color: var(--color-brand);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-
-	.project-link:hover {
-		color: var(--color-text);
-	}
-
-	.featured-image {
-		margin-bottom: var(--spacing-3xl);
-	}
-
-	.featured-image img {
-		width: 100%;
-		height: auto;
-		border-radius: var(--radius);
-	}
-
-	.project-content {
-		font-size: var(--font-size-base);
-		line-height: var(--leading-relaxed);
-	}
-
-	.project-content :global(p) {
-		margin-bottom: 1.5em;
-	}
-
-	.project-content :global(h2) {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2.5em;
-		margin-bottom: 0.75em;
-	}
-
-	.project-content :global(h3) {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2em;
-		margin-bottom: 0.5em;
-	}
-
-	.project-content :global(blockquote) {
-		margin: 2em 0;
-		padding-inline-start: var(--spacing-xl);
-		border-inline-start: 2px solid var(--color-brand);
-		color: var(--color-muted);
-		font-family: var(--font-heading);
-		font-style: italic;
-		font-size: var(--font-size-lg);
-	}
-
-	.project-content :global(ul),
-	.project-content :global(ol) {
-		margin-bottom: 1.5em;
-		padding-inline-start: 1.25em;
-	}
-
-	.project-content :global(li) {
-		margin-bottom: 0.5em;
-	}
-
-	.project-content :global(img) {
-		margin: 2em 0;
-		border-radius: var(--radius);
-	}
-
-	.project-gallery {
-		margin-top: var(--spacing-3xl);
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-lg);
-	}
-
-	.gallery-item img {
-		width: 100%;
-		height: auto;
-		border-radius: var(--radius);
-	}
-
-	.gallery-item figcaption {
-		margin-top: var(--spacing-sm);
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-	}
-
-	.more-projects {
-		background: var(--color-surface);
-		padding: var(--spacing-4xl) 0;
-		margin-top: var(--spacing-2xl);
-	}
-
-	.more-inner {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: 0 var(--spacing-lg);
-	}
-
-	.more-title {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
-		margin-bottom: var(--spacing-2xl);
-	}
-
-	.more-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-2xl);
-	}
-
-	@media (max-width: 768px) {
-		.project-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.project-gallery {
-			grid-template-columns: 1fr;
-		}
-
-		.more-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+  .websiteLink {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 13px;
+    color: $text-brown-hover;
+    border-bottom: 2px dotted $border-theme;
+    transition: color 0.3s ease-out;
+    &_icon {
+      margin-left: 4px;
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+    &:hover {
+      color: $text-black-hover;
+    }
+    &[data-sp='true'] {
+      display: none;
+      font-size: 12px;
+      @include media-query('tb') {
+        display: inline-flex;
+      }
+    }
+    &[data-sp='false'] {
+      margin-left: 8px;
+    }
+  }
 </style>

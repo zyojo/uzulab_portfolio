@@ -1,174 +1,183 @@
 ---
-import { getEmDashCollection, getSiteSettings } from "emdash";
-import Base from "../layouts/Base.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import { getTaxonomyTermsWithCacheHint } from 'emdash'
+import ContactLink from '../components/ContactLink.astro'
+import Tag from '../components/Tag.astro'
+import WorkCard from '../components/WorkCard.astro'
+import Base from '../layouts/Base.astro'
+import { getWorks } from '../lib/works'
 
-// Fetch settings + the 4 featured projects in parallel. Limiting and
-// sorting in the database avoids loading every project just to slice
-// off the first 4 in JS (a full-table read on sites with lots of work).
-const [settings, projectsResult] = await Promise.all([
-	getSiteSettings(),
-	getEmDashCollection("projects", {
-		orderBy: { published_at: "desc" },
-		limit: 4,
-	}),
-]);
-if (projectsResult.error) {
-	return new Response("Could not load the portfolio", { status: 500 });
+const [worksResult, tagsResult] = await Promise.all([
+  getWorks(),
+  getTaxonomyTermsWithCacheHint('tag', { includeCounts: false }),
+])
+if (worksResult.error) return new Response('Could not load works', { status: 500 })
+if (Astro.cache?.enabled) {
+  Astro.cache.set(worksResult.cacheHint)
+  Astro.cache.set(tagsResult.cacheHint)
 }
-const { entries: featuredProjects, cacheHint } = projectsResult;
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const tags = tagsResult.data
 ---
 
 <Base>
-	<section class="hero">
-		<h1 class="hero-title">{settings?.title || "Studio"}</h1>
-		<p class="hero-tagline">{settings?.tagline || "Design & Development"}</p>
-	</section>
-
-	{
-		featuredProjects.length > 0 ? (
-			<section class="featured">
-				<header class="section-header">
-					<h2 class="section-title">Selected Work</h2>
-					<a href="/work" class="section-link">
-						View all projects &rarr;
-					</a>
-				</header>
-				<div class="projects-grid">
-					{featuredProjects.map((project) => (
-						<ProjectCard
-							title={project.data.title}
-							summary={project.data.summary}
-							featuredImage={project.data.featured_image}
-							href={`/work/${project.id}`}
-							client={project.data.client}
-							year={project.data.year}
-							edit={project.edit}
-						/>
-					))}
-				</div>
-			</section>
-		) : (
-			<section class="empty-state">
-				<h2>No projects yet</h2>
-				<p>Add your first project in the admin panel.</p>
-				<a href="/_emdash/admin/content/projects/new" class="btn">
-					Add a project
-				</a>
-			</section>
-		)
-	}
+  <article>
+    <section>
+      <div class='tagList' role='group' aria-label='タグで絞り込む'>
+        <Tag label='all' variant='filter' value='all' />
+        {tags.map((tag) => <Tag label={tag.label} variant='filter' value={tag.slug} selected={false} />)}
+      </div>
+    </section>
+    <section>
+      <ul class='workList'>
+        {
+          worksResult.works.map(({ entry, tags }) => (
+            <WorkCard
+              href={`/work/${entry.id}`}
+              title={entry.data.title}
+              subtitle={entry.data.subtitle}
+              thumbnail={entry.data.featured_image}
+              startDate={entry.data.start_date}
+              endDate={entry.data.end_date}
+              tags={tags}
+            />
+          ))
+        }
+      </ul>
+    </section>
+    <aside>
+      <ContactLink />
+    </aside>
+  </article>
 </Base>
 
-<style>
-	.hero {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: var(--spacing-4xl) var(--spacing-lg);
-		text-align: center;
-	}
+<script>
+  const list = document.querySelector<HTMLUListElement>('.workList')!
+  const allWorks = [...list.querySelectorAll<HTMLLIElement>('.work')]
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tagList .tag')
 
-	.hero-title {
-		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
-		margin-bottom: var(--spacing-md);
-		letter-spacing: var(--tracking-tight);
-	}
+  // 並び（nth-of-type）でレイアウトしているので、非表示ではなく要素ごと入れ替える
+  const select = (value: string) => {
+    for (const button of buttons) button.dataset.selected = String(button.dataset.value === value)
+    list.dataset.loading = 'true'
+    setTimeout(() => {
+      const works =
+        value === 'all' ? allWorks : allWorks.filter((w) => w.dataset.tags?.split(' ').includes(value))
+      list.replaceChildren(...works)
+      window.dispatchEvent(new Event('scroll'))
+    }, 300)
+    setTimeout(() => {
+      list.dataset.loading = 'false'
+    }, 800)
+  }
 
-	.hero-tagline {
-		font-size: var(--font-size-xl);
-		color: var(--color-muted);
-		font-family: var(--font-heading);
-		font-style: italic;
-	}
+  for (const button of buttons) button.addEventListener('click', () => select(button.dataset.value!))
+</script>
 
-	.featured {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: 0 var(--spacing-lg) var(--spacing-4xl);
-	}
+<style lang='scss'>
+  @use '../styles/variables' as *;
+  @use 'sass:map';
 
-	.section-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		margin-bottom: var(--spacing-2xl);
-		padding-bottom: var(--spacing-md);
-		border-bottom: 1px solid var(--color-border);
-	}
+  .tagList {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 80px;
+    gap: 4px;
+    @include media-query('sp') {
+      margin-top: 0;
+      margin-bottom: 48px;
+    }
+  }
 
-	.section-title {
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-heading);
-	}
-
-	.section-link {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-
-	.section-link:hover {
-		color: var(--color-text);
-	}
-
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-2xl);
-	}
-
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-4xl) var(--spacing-lg);
-		max-width: 400px;
-		margin: 0 auto;
-	}
-
-	.empty-state h2 {
-		font-size: var(--font-size-xl);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.empty-state p {
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.btn {
-		display: inline-block;
-		padding: var(--spacing-sm) var(--spacing-lg);
-		background: var(--color-text);
-		color: var(--color-bg);
-		text-decoration: none;
-		border-radius: var(--radius);
-		font-size: var(--font-size-sm);
-		transition: opacity var(--transition-fast);
-	}
-
-	.btn:hover {
-		opacity: 0.85;
-	}
-
-	@media (max-width: 768px) {
-		.hero {
-			padding: var(--spacing-3xl) var(--spacing-lg);
-		}
-
-		.hero-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.projects-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.section-header {
-			flex-direction: column;
-			gap: var(--spacing-sm);
-			align-items: flex-start;
-		}
-	}
+  .workList {
+    transition: opacity 0.3s ease-out;
+    &[data-loading='true'] {
+      opacity: 0;
+    }
+    // 12カラムのグリッド上で、左右交互に大小のカードを互い違いに並べる
+    :global(.work) {
+      &:nth-of-type(2n + 1) {
+        margin-right: auto;
+        margin-left: normalWorksMargin('dt');
+        @include media-query('pc') {
+          margin-left: normalWorksMargin('pc');
+        }
+        @include media-query('tb') {
+          margin-left: normalWorksMargin('tb');
+        }
+      }
+      &:nth-of-type(2n) {
+        margin-right: normalWorksMargin('dt');
+        margin-left: auto;
+        @include media-query('pc') {
+          margin-right: normalWorksMargin('pc');
+        }
+      }
+      &:nth-of-type(4n + 1),
+      &:nth-of-type(4n) {
+        width: columnWidth(6, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(6, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(6, 'tb');
+        }
+      }
+      &:nth-of-type(4n + 2),
+      &:nth-of-type(4n + 3) {
+        width: columnWidth(5, 'dt');
+        @include media-query('pc') {
+          width: columnWidth(5, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(5, 'tb');
+        }
+      }
+      &:nth-of-type(4n + 2) {
+        margin-bottom: 160px;
+        margin-top: -320px;
+      }
+      &:nth-of-type(4n) {
+        margin-bottom: 200px;
+        margin-top: -360px;
+      }
+      &:nth-of-type(1) {
+        width: columnWidth(7, 'dt');
+        margin-right: auto;
+        margin-left: 0;
+        @include media-query('pc') {
+          width: columnWidth(7, 'pc');
+        }
+        @include media-query('tb') {
+          width: columnWidth(7, 'tb');
+        }
+      }
+      &:nth-of-type(2) {
+        width: columnWidth(5, 'dt');
+        margin-right: 0;
+        margin-left: calc(#{columnWidth(7, 'dt')} + #{map.get($column-gutter, 'dt')});
+        @include media-query('pc') {
+          width: columnWidth(5, 'pc');
+          margin-left: calc(#{columnWidth(7, 'pc')} + #{map.get($column-gutter, 'pc')});
+        }
+        @include media-query('tb') {
+          width: columnWidth(5, 'tb');
+          margin-left: calc(#{columnWidth(7, 'tb')} + #{map.get($column-gutter, 'tb')});
+        }
+      }
+      @include media-query('sp') {
+        &:nth-of-type(3n + 1) {
+          width: columnWidth(12, 'sp');
+          margin: 0 0 80px;
+        }
+        &:nth-of-type(3n + 2) {
+          width: columnWidth(10, 'sp');
+          margin: 0 auto 16px 0;
+        }
+        &:nth-of-type(3n) {
+          width: columnWidth(10, 'sp');
+          margin: 0 0 80px auto;
+        }
+      }
+    }
+  }
 </style>

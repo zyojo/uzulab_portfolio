@@ -1,125 +1,260 @@
 ---
-import Base from "../layouts/Base.astro";
-
-const contactEmail = "hello@studio.example";
+import Base from '../layouts/Base.astro'
 ---
 
-<Base title="Contact" description="Get in touch about your next project.">
-	<div class="contact-page">
-		<header class="contact-header">
-			<p class="contact-eyebrow">Start a conversation</p>
-			<h1 class="contact-title">Tell us about your project</h1>
-			<p class="contact-intro">
-				Share what you are making, the problem you need to solve, and any timing
-				you have in mind. We will reply by email.
-			</p>
-		</header>
-
-		<section class="contact-card" aria-labelledby="contact-email-heading">
-			<div>
-				<h2 id="contact-email-heading">Email the studio</h2>
-				<p>Use your email app to send the project details directly.</p>
-			</div>
-			<a class="contact-link" href={`mailto:${contactEmail}`}>
-				{contactEmail}
-				<span aria-hidden="true">→</span>
-			</a>
-		</section>
-
-	</div>
+<Base title='contact'>
+  <section class='contact'>
+    <h1 class='contact_title'>お問い合わせ<span class='contact_title_done' hidden>完了</span></h1>
+    <div class='contact_complete' hidden>
+      お客様のメールアドレスに間違いがなければ、送信完了メールが届きます。<br />お問合せいただきありがとうございました。
+    </div>
+    <div class='contact_body'>
+      <div class='contact_desc'>
+        ご相談・お問い合わせは以下のフォームからご連絡ください。<br />2～3営業日以内にメールにてご返信いたします。
+      </div>
+      <form class='contact_form' novalidate>
+        <div class='contact_form_item'>
+          <label class='avenir-bold' data-required='true' for='name'>お名前</label>
+          <input id='name' name='name' type='text' placeholder='姓名' required />
+          <div class='contact_form_item_error' data-error-for='name' hidden>
+            お名前を入力してください。
+          </div>
+        </div>
+        <div class='contact_form_item'>
+          <label class='avenir-bold' for='company'>お勤め先</label>
+          <input id='company' name='company' type='text' placeholder='ウズラボ' />
+        </div>
+        <div class='contact_form_item'>
+          <label class='avenir-bold' data-required='true' for='customer_email'>メールアドレス</label>
+          <input
+            id='customer_email'
+            name='customer_email'
+            type='email'
+            placeholder='uzulab@example.com'
+            required
+          />
+          <div class='contact_form_item_error' data-error-for='customer_email' hidden>
+            正しいメールアドレスを入力してください。
+          </div>
+        </div>
+        <div class='contact_form_item'>
+          <label class='avenir-bold' data-required='true' for='message'>お問い合わせ内容</label>
+          <textarea
+            id='message'
+            name='message'
+            rows='5'
+            placeholder='ご要望、ご質問など、お気軽にお問い合わせください。'
+            required></textarea>
+          <div class='contact_form_item_error' data-error-for='message' hidden>
+            お問い合わせ内容を入力してください。
+          </div>
+          <div class='contact_form_item_error' data-error-for='submit' hidden>
+            送信に失敗しました。時間をおいて再度お試しください。
+          </div>
+          <input class='avenir-bold' type='submit' value='送信する' disabled />
+        </div>
+      </form>
+    </div>
+  </section>
 </Base>
 
-<style>
-	.contact-page {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
-	}
+<script>
+  const form = document.querySelector<HTMLFormElement>('.contact_form')!
+  const submit = form.querySelector<HTMLInputElement>('[type="submit"]')!
+  const EMAIL_PATTERN = /.+@.+\..+/
 
-	.contact-header {
-		max-width: var(--max-width);
-		margin-bottom: var(--spacing-3xl);
-	}
+  const validators: Record<string, (value: string) => boolean> = {
+    name: (v) => v !== '',
+    customer_email: (v) => EMAIL_PATTERN.test(v),
+    message: (v) => v !== '',
+  }
+  const showError = (name: string, show: boolean) => {
+    form.querySelector<HTMLElement>(`[data-error-for="${name}"]`)!.hidden = !show
+    form.elements.namedItem(name) instanceof HTMLElement &&
+      ((form.elements.namedItem(name) as HTMLElement).dataset.error = String(show))
+  }
+  const value = (name: string) =>
+    (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement).value
 
-	.contact-eyebrow {
-		margin-bottom: var(--spacing-md);
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		text-transform: uppercase;
-		letter-spacing: var(--tracking-wide);
-	}
+  form.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement
+    if (validators[target.name]) showError(target.name, !validators[target.name](target.value))
+    submit.disabled = !Object.entries(validators).every(([name, valid]) => valid(value(name)))
+  })
 
-	.contact-title {
-		margin-bottom: var(--spacing-lg);
-		font-family: var(--font-heading);
-		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
-		line-height: var(--leading-tight);
-	}
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    if (submit.disabled) return
+    if (!window.confirm('お問い合わせを送信します。よろしいですか？')) return
+    submit.disabled = true
+    showError('submit', false)
+    const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) }).catch(
+      () => null,
+    )
+    if (!res?.ok) {
+      showError('submit', true)
+      submit.disabled = false
+      return
+    }
+    document.querySelector<HTMLElement>('.contact_body')!.hidden = true
+    document.querySelector<HTMLElement>('.contact_complete')!.hidden = false
+    document.querySelector<HTMLElement>('.contact_title_done')!.hidden = false
+  })
+</script>
 
-	.contact-intro {
-		font-size: var(--font-size-lg);
-		color: var(--color-muted);
-		line-height: var(--leading-normal);
-	}
+<style lang='scss'>
+  @use '../styles/variables' as *;
 
-	.contact-card {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--spacing-2xl);
-		padding: var(--spacing-2xl);
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-	}
-
-	.contact-card h2 {
-		margin-bottom: var(--spacing-xs);
-		font-family: var(--font-heading);
-		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-heading);
-	}
-
-	.contact-card p {
-		color: var(--color-muted);
-	}
-
-	.contact-link {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--spacing-sm);
-		padding: var(--spacing-md) var(--spacing-xl);
-		color: var(--color-bg);
-		background: var(--color-text);
-		text-decoration: none;
-		border-radius: var(--radius);
-		transition:
-			background var(--transition-fast),
-			transform var(--transition-fast);
-	}
-
-	.contact-link:hover {
-		color: var(--color-on-brand);
-		background: var(--color-brand);
-		transform: translateY(-1px);
-	}
-
-	@media (max-width: 768px) {
-		.contact-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.contact-card {
-			align-items: flex-start;
-			flex-direction: column;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.contact-link {
-			width: 100%;
-			justify-content: space-between;
-		}
-	}
+  .contact {
+    background-color: $content-bg-white;
+    border-radius: $br-md;
+    padding: 80px 32px 96px;
+    margin: 0 auto;
+    width: columnWidth(8, 'dt');
+    @include media-query('pc') {
+      width: columnWidth(10, 'pc');
+    }
+    @include media-query('tb') {
+      width: columnWidth(10, 'tb');
+    }
+    @include media-query('sp') {
+      padding: 64px 24px 72px;
+      width: columnWidth(12, 'sp');
+    }
+    [hidden] {
+      display: none !important;
+    }
+    &_title {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    &_desc {
+      text-align: center;
+      margin-bottom: 80px;
+      @include media-query('sp') {
+        br {
+          display: none;
+        }
+      }
+    }
+    &_complete {
+      text-align: center;
+      @include media-query('sp') {
+        br {
+          display: none;
+        }
+      }
+    }
+    &_form {
+      margin: 0 auto;
+      width: columnWidth(6, 'dt');
+      @include media-query('pc') {
+        width: columnWidth(8, 'pc');
+      }
+      @include media-query('tb') {
+        width: columnWidth(8, 'tb');
+      }
+      @include media-query('sp') {
+        width: 100%;
+      }
+      &_item {
+        margin-bottom: 24px;
+        label {
+          display: inline-block;
+          font-weight: bold;
+          padding-left: 4px;
+          margin-bottom: 8px;
+          position: relative;
+          @include media-query('sp') {
+            margin-bottom: 4px;
+          }
+          &[data-required='true']::after {
+            content: '必須';
+            position: absolute;
+            left: calc(100% + 8px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: $theme-white;
+            background-color: $required-red;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+            width: 30px;
+            padding: 1px 3px 0;
+            @include media-query('tb') {
+              font-size: 10px;
+              width: 26px;
+            }
+          }
+        }
+        input,
+        textarea {
+          width: 100%;
+          border-radius: 8px;
+          border: solid 2px $form-border;
+          padding: 16px 12px;
+          font-size: 16px;
+          transition: all 0.15s ease-in-out;
+          &:active {
+            border: solid 2px $text-black;
+          }
+          @include media-query('tb') {
+            padding: 12px 16px;
+          }
+          @include media-query('sp') {
+            padding: calc(12px * (16 / 14)) calc(16px * (16 / 14));
+            transform: scale(calc(14 / 16));
+            width: calc(100% * 16 / 14);
+            margin-left: calc(-100% / 16);
+          }
+          &::placeholder {
+            color: $theme-gray;
+          }
+          &:focus {
+            border-color: $theme-gray-focused;
+            outline: 0;
+          }
+          &[data-error='true'] {
+            border-color: $required-red;
+          }
+          &[type='submit'] {
+            padding: 16px 0;
+            border: 0;
+            border-radius: 12px;
+            appearance: none;
+            -webkit-appearance: none;
+            display: block;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: $text-brown-hover;
+            color: $theme-white;
+            width: 200px;
+            margin: 48px auto 0;
+            transition: all 0.3s ease-in-out;
+            @include media-query('sp') {
+              transform: none;
+              margin: 48px auto 0;
+            }
+            &:disabled {
+              cursor: default;
+              color: rgba($color: $theme-white, $alpha: 0.8);
+              background-color: $disabled-gray;
+            }
+          }
+        }
+        &_error {
+          color: $required-red;
+          font-size: 13px;
+          margin-top: 4px;
+          @include media-query('tb') {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
 </style>
