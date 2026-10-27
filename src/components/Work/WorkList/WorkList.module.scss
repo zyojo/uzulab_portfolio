@@ -1,9 +1,0 @@
-@import './../../../styles/variables';
-
-.workList {
-  transition: opacity 0.3s ease-out;
-  opacity: 0;
-  &[data-load='true'] {
-    opacity: 1;
-  }
-}
