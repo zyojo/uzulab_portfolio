@@ -9,8 +9,11 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"workers_dev": false,
 	"preview_urls": true,
-	// 移行中の仮ドメイン（Access で保護）。切り替え時に ryotanakahara.jp / www に差し替える
-	"routes": [{ "pattern": "new.ryotanakahara.jp", "custom_domain": true }],
+	// www は src/worker.ts で ryotanakahara.jp に 301 する
+	"routes": [
+		{ "pattern": "ryotanakahara.jp", "custom_domain": true },
+		{ "pattern": "www.ryotanakahara.jp", "custom_domain": true },
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -31,6 +34,8 @@
 		},
 	],
 	"vars": {
+		// サイトの URL（sitemap・メール内のリンクなど）。Previews では設定しない
+		"EMDASH_SITE_URL": "https://ryotanakahara.jp",
 		"AWS_REGION": "ap-northeast-1",
 		"MAIL_FROM": "info@ryotanakahara.jp",
 		"MAIL_FROM_NAME": "uzulab | 中原 良太",
