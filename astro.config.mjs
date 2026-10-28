@@ -1,11 +1,16 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import { access, d1, r2 } from "@emdash-cms/cloudflare";
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 
 export default defineConfig({
 	output: "server",
+	// 作品などのコンテンツは日本語だけ（EmDash はこの設定から既定の言語を読む）
+	i18n: {
+		defaultLocale: "ja",
+		locales: ["ja"],
+	},
 	adapter: cloudflare(),
 	image: {
 		layout: "constrained",
@@ -24,15 +29,6 @@ export default defineConfig({
 				defaultRole: 50,
 			}),
 		}),
-	],
-	fonts: [
-		{
-			provider: fontProviders.google(),
-			name: "Playfair Display",
-			cssVariable: "--font-heading",
-			weights: [400, 500, 600, 700],
-			fallbacks: ["serif"],
-		},
 	],
 	devToolbar: { enabled: false },
 });
