@@ -15,7 +15,8 @@
 | データベース | Cloudflare D1 `uzulab-portfolio` |
 | 画像 | Cloudflare R2 `uzulab-portfolio-media` |
 | セッション | Cloudflare KV `uzulab-portfolio-session` |
-| 管理画面のログイン | Cloudflare Access（ワンタイムコード） |
+| ドメイン | `ryotanakahara.jp`（`www` は Worker で `ryotanakahara.jp` に 301） |
+| 管理画面のログイン | Cloudflare Access（ワンタイムコード）。`/_emdash/*` だけを保護し、画像の `/_emdash/api/media/*` は公開 |
 | メール送信 | Amazon SES v2（送信元 `info@ryotanakahara.jp`） |
 
 Cloudflare は個人アカウント（`info@ryotanakahara.jp`）を使う。`wrangler.jsonc` に `account_id` を固定している。
@@ -84,12 +85,3 @@ Cloudflare ダッシュボードの Worker → 設定 → 変数とシークレ�
 
 - ドメイン `ryotanakahara.jp` を SES に登録済み（Easy DKIM、MAIL FROM `bounce.ryotanakahara.jp`、DMARC `p=none`）
 - DNS は Cloudflare で管理。受信メールは iCloud+（MX は iCloud）なので、SPF・DKIM のレコードは iCloud 用と SES 用が両方ある
-
-## 移行メモ
-
-旧サイト（Next.js + microCMS、Vercel）からの移行で使ったもの。
-
-- `scripts/microcms-export.mjs`: microCMS の作品・タグを `.migration/microcms/` に書き出す（`node --env-file=.env scripts/microcms-export.mjs`、`.env` に `MICROCMS_API_KEY` が必要）
-- `scripts/microcms-to-seed.mjs`: 書き出した JSON を `seed/seed.json` に変換する
-- 旧 URL（`/work/<microCMS の id>`）は seed の `redirects` で新 URL に 301 する
-- `vercel.json` は移行中に Vercel の自動デプロイを止めるためのもの。ドメインを切り替えたら Vercel のプロジェクトごと削除する
