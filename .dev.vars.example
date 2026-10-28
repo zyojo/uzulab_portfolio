@@ -1,3 +1,5 @@
 # ローカルでお問い合わせメールを実際に送るときだけ .dev.vars にコピーして値を入れる（.dev.vars は git 管理外）
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
+# Turnstile（お問い合わせフォームの bot 対策）のシークレットキー。Cloudflare ダッシュボードの Turnstile で確認できる
+TURNSTILE_SECRET=

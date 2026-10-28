@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { env } from 'cloudflare:workers'
 import { sendMail } from '../../lib/mail'
+import { verifyTurnstile } from '../../lib/turnstile'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAX_LENGTH = { name: 100, company: 100, customer_email: 254, message: 5000 }
@@ -14,6 +15,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   // bot 対策のダミー項目。人間には見えないので、値が入っていたら送信したことにして捨てる
   if (form.get('website')) return Response.json({ success: true })
+
+  if (!(await verifyTurnstile(request, form.get('cf-turnstile-response'), 'contact'))) {
+    return Response.json({ success: false }, { status: 403 })
+  }
 
   const name = field(form, 'name')
   const company = field(form, 'company')

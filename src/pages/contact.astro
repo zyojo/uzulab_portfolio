@@ -53,6 +53,8 @@ import Base from '../layouts/Base.astro'
           <div class='contact_form_item_error' data-error-for='submit' hidden>
             送信に失敗しました。時間をおいて再度お試しください。
           </div>
+          <!-- Cloudflare Turnstile（bot 対策）。確認が必要なときだけ表示される -->
+          <div class='contact_form_item_turnstile' data-sitekey='0x4AAAAAAFpfw8ztA3y_Z63G'></div>
           <input class='avenir-bold' type='submit' value='送信する' disabled />
         </div>
       </form>
@@ -78,10 +80,45 @@ import Base from '../layouts/Base.astro'
   const value = (name: string) =>
     (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement).value
 
+  // Turnstile のトークン（1回しか使えないので、送信に失敗したらウィジェットをリセットして取り直す）
+  type Turnstile = {
+    render: (el: HTMLElement, options: Record<string, unknown>) => string
+    reset: (widgetId: string) => void
+  }
+  const widget = form.querySelector<HTMLElement>('.contact_form_item_turnstile')!
+  let token = ''
+  let widgetId: string | undefined
+  const setToken = (value: string) => {
+    token = value
+    updateSubmit()
+  }
+  const script = document.createElement('script')
+  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+  script.onload = () => {
+    widgetId = (window as unknown as { turnstile: Turnstile }).turnstile.render(widget, {
+      sitekey: widget.dataset.sitekey,
+      action: 'contact',
+      appearance: 'interaction-only',
+      callback: setToken,
+      'expired-callback': () => setToken(''),
+      'error-callback': () => setToken(''),
+    })
+  }
+  document.head.appendChild(script)
+  const resetTurnstile = () => {
+    setToken('')
+    if (widgetId !== undefined) (window as unknown as { turnstile: Turnstile }).turnstile.reset(widgetId)
+  }
+
+  const updateSubmit = () => {
+    submit.disabled =
+      !token || !Object.entries(validators).every(([name, valid]) => valid(value(name)))
+  }
+
   form.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement
     if (validators[target.name]) showError(target.name, !validators[target.name](target.value))
-    submit.disabled = !Object.entries(validators).every(([name, valid]) => valid(value(name)))
+    updateSubmit()
   })
 
   form.addEventListener('submit', async (e) => {
@@ -95,7 +132,7 @@ import Base from '../layouts/Base.astro'
     )
     if (!res?.ok) {
       showError('submit', true)
-      submit.disabled = false
+      resetTurnstile()
       return
     }
     document.querySelector<HTMLElement>('.contact_body')!.hidden = true
@@ -254,6 +291,10 @@ import Base from '../layouts/Base.astro'
               background-color: $disabled-gray;
             }
           }
+        }
+        &_turnstile {
+          display: flex;
+          justify-content: center;
         }
         &_error {
           color: $required-red;
