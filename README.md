@@ -16,7 +16,7 @@
 | 画像 | Cloudflare R2 `uzulab-portfolio-media` |
 | セッション | Cloudflare KV `uzulab-portfolio-session` |
 | ドメイン | `ryotanakahara.jp`（`www` は Worker で `ryotanakahara.jp` に 301） |
-| 管理画面のログイン | Cloudflare Access（ワンタイムコード）。`/_emdash/*` だけを保護し、画像の `/_emdash/api/media/*` は公開 |
+| 管理画面のログイン | Cloudflare Access（ワンタイムコード）。`/_emdash/*` だけを保護し、画像の `/_emdash/api/media/*` と MCP 関連のパスは公開 |
 | メール送信 | Amazon SES v2（送信元 `info@ryotanakahara.jp`） |
 
 Cloudflare は個人アカウント（`info@ryotanakahara.jp`）を使う。`wrangler.jsonc` に `account_id` を固定している。
@@ -43,6 +43,19 @@ pnpm dev
 ```bash
 pnpm typecheck
 ```
+
+## MCP（AI から作品を編集する）
+
+EmDash の MCP サーバー（`https://ryotanakahara.jp/_emdash/api/mcp`）に Claude Code などからつなぐと、作品・画像・タグを会話で読み書きできる。編集は本番のデータにそのまま反映される。
+
+```bash
+claude mcp add -s user --transport http uzulab https://ryotanakahara.jp/_emdash/api/mcp
+```
+
+Claude Code の `/mcp` で `uzulab` を選んで認証する。ブラウザで Access のワンタイムコードでログインし、EmDash の許可画面で必要な権限だけ残して許可する。
+
+- MCP 本体（`/_emdash/api/mcp`）と OAuth のトークン発行・クライアント登録（`/_emdash/api/oauth/token`、`/_emdash/api/oauth/register`）は Access を Bypass にしている。どれも EmDash 側でトークンや PKCE を検証する
+- 許可画面（`/_emdash/oauth/authorize`）と管理画面は Access で保護したまま
 
 ## デプロイ
 
